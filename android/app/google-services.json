@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "827808614853",
+    "project_id": "flavorfusion-74d39",
+    "storage_bucket": "flavorfusion-74d39.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827808614853:android:e1be907c0d9584873ee3ac",
+        "android_client_info": {
+          "package_name": "com.example.flavorfusion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrwrpjeZ867GENIn-N_zJaPegBrufbZmI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
