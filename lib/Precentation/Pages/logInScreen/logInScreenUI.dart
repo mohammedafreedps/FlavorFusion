@@ -3,7 +3,7 @@ import 'package:flavorfusion/Precentation/Pages/AuthenticationBloc/auth_State.da
 import 'package:flavorfusion/Precentation/Pages/createAccount/createAccountUI.dart';
 import 'package:flavorfusion/Precentation/Pages/AuthenticationBloc/auth_Bloc.dart';
 import 'package:flavorfusion/Precentation/Pages/AuthenticationBloc/auth_Event.dart';
-import 'package:flavorfusion/Precentation/Pages/homeScreen/homeScreenUI.dart';
+import 'package:flavorfusion/Precentation/Pages/startingScreen/startingScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -83,7 +83,7 @@ class LogInScreenUI extends StatelessWidget {
                         context,
                         _emailController.text,
                         _passwordController.text,
-                        HomeScreenUI()),
+                        StartingScreenUI()),
                     SizedBox(
                       height: _screenSize.width * 0.06,
                     ),

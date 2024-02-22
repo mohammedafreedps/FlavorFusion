@@ -5,7 +5,9 @@ import 'package:flavorfusion/Precentation/Pages/SplashScreen/splashScreenUI.dart
 import 'package:flavorfusion/Precentation/Pages/AuthenticationBloc/auth_Bloc.dart';
 import 'package:flavorfusion/Precentation/Pages/AuthenticationBloc/auth_Event.dart';
 import 'package:flavorfusion/Precentation/Pages/AuthenticationBloc/auth_State.dart';
-import 'package:flavorfusion/Precentation/Pages/homeScreen/homeScreenUI.dart';
+import 'package:flavorfusion/Precentation/Pages/discoverScreen/bloc/discover_bloc.dart';
+import 'package:flavorfusion/Precentation/Pages/discoverScreen/bloc/discover_event.dart';
+import 'package:flavorfusion/Precentation/Pages/startingScreen/startingScreen.dart';
 import 'package:flavorfusion/Precentation/Pages/logInScreen/logInScreenUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +33,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<AuthenticationBloc>(
             create: (context) => AuthenticationBloc()..add(CheckLoginEvent())),
+        BlocProvider<DiscoverBloc>(create: (context) => DiscoverBloc()..add(FechDataEvent())),
       ],
       child: MaterialApp(
         theme: ThemeData(
@@ -45,7 +48,7 @@ class MyApp extends StatelessWidget {
               return const IntroPageOneUI();
             }
             if (state is LoggedInState) {
-              return const HomeScreenUI();
+              return const StartingScreenUI();
             }
             if (state is LoggedOutState) {
               return LogInScreenUI();
