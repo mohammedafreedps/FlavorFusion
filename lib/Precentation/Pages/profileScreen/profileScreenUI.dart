@@ -27,10 +27,6 @@ class ProfileScreenUI extends StatelessWidget {
             preferredSize: Size.fromHeight(48.0),
             child: Column(
               children: [
-                Text(
-                  'Your additional text goes here',
-                  style: TextStyle(color: Colors.red),
-                ),
                 TabBar(
                   labelColor: secondaryColor,
                   dividerColor: primaryColor,
@@ -60,50 +56,44 @@ class ProfileScreenUI extends StatelessWidget {
           width: _screenSize.width * 0.5,
           child: Padding(
             padding: EdgeInsets.all(_screenSize.width * 0.1),
-            child: Expanded(
-              child: ListView(
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        overflow: TextOverflow.ellipsis,
-                        _user!.email!,
-                        style: TextStyle(color: secondaryColor),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  overflow: TextOverflow.ellipsis,
+                  _user!.email!,
+                  style: TextStyle(color: secondaryColor),
+                ),
+                // SizedBox(height: _screenSize.height * 0.66),
+                Column(
+                  children: [
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Privacy Policy',
+                        style: TextStyle(
+                          color: secondaryColor,
+                          fontWeight: FontWeight.w300,
+                        ),
                       ),
-                      SizedBox(height: _screenSize.height * 0.66),
-                      Column(
-                        children: [
-                          TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              'Privacy Policy',
-                              style: TextStyle(
-                                color: secondaryColor,
-                                fontWeight: FontWeight.w300,
-                              ),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              context
-                                  .read<AuthenticationBloc>()
-                                  .add(LogginOutEvent());
-                            },
-                            child: Text(
-                              'Logout',
-                              style: TextStyle(
-                                color: secondaryColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  )
-                ],
-              ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        context
+                            .read<AuthenticationBloc>()
+                            .add(LogginOutEvent());
+                      },
+                      child: Text(
+                        'Logout',
+                        style: TextStyle(
+                          color: secondaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
             ),
           ),
         ),

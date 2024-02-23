@@ -1,4 +1,5 @@
 import 'package:flavorfusion/Constants/colors.dart';
+import 'package:flavorfusion/Precentation/Pages/detailsScreen/detailsScreenUI.dart';
 import 'package:flavorfusion/Precentation/Pages/discoverScreen/bloc/discover_bloc.dart';
 import 'package:flavorfusion/Precentation/Pages/discoverScreen/bloc/discover_event.dart';
 import 'package:flavorfusion/Precentation/Pages/discoverScreen/bloc/discover_state.dart';
@@ -65,7 +66,7 @@ class DiscoverScreenUI extends StatelessWidget {
                         itemCount: state.mealAPIModels.length,
                         itemBuilder: (BuildContext context, index) {
                           return GestureDetector(
-                              onTap: () {},
+                              onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreenUI(index: index)));},
                               child: _discoverTile(
                                   state.mealAPIModels[index].strMealThumb,
                                   state.mealAPIModels[index].strMeal,

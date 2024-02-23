@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<DiscoverBloc>(create: (context) => DiscoverBloc()..add(FechDataEvent())),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           scaffoldBackgroundColor: primaryColor,
         ),
