@@ -1,4 +1,5 @@
 import 'package:flavorfusion/Constants/colors.dart';
+import 'package:flavorfusion/Precentation/styleManager/textStyleManager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,7 +15,7 @@ AppBar appBar({required String title,bool? needAction,String? assetPath,Function
     backgroundColor: primaryColor,
     title: Text(
       title,
-      style: TextStyle(color: secondaryColor, fontWeight: FontWeight.bold),
+      style: appBarTextStyle(),
     ),
   );
 }

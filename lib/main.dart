@@ -1,14 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flavorfusion/Constants/colors.dart';
-import 'package:flavorfusion/Precentation/Pages/IntroPageOne/introPageOneUI.dart';
-import 'package:flavorfusion/Precentation/Pages/SplashScreen/splashScreenUI.dart';
-import 'package:flavorfusion/Precentation/Pages/AuthenticationBloc/auth_Bloc.dart';
-import 'package:flavorfusion/Precentation/Pages/AuthenticationBloc/auth_Event.dart';
-import 'package:flavorfusion/Precentation/Pages/AuthenticationBloc/auth_State.dart';
-import 'package:flavorfusion/Precentation/Pages/discoverScreen/bloc/discover_bloc.dart';
-import 'package:flavorfusion/Precentation/Pages/discoverScreen/bloc/discover_event.dart';
-import 'package:flavorfusion/Precentation/Pages/startingScreen/startingScreen.dart';
-import 'package:flavorfusion/Precentation/Pages/logInScreen/logInScreenUI.dart';
+import 'package:flavorfusion/Precentation/Screens/IntroPageOneScreen/introPageOneUI.dart';
+import 'package:flavorfusion/Precentation/Screens/createAccountScreen/bloc/signup_validation_bloc.dart';
+import 'package:flavorfusion/Precentation/Screens/createAccountScreen/createAccountUI.dart';
+import 'package:flavorfusion/Precentation/Screens/logInScreen/bloc/login_validation_bloc.dart';
+import 'package:flavorfusion/Precentation/Screens/splashScreen/splashScreenUI.dart';
+import 'package:flavorfusion/Precentation/AuthenticationBloc/auth_Bloc.dart';
+import 'package:flavorfusion/Precentation/AuthenticationBloc/auth_Event.dart';
+import 'package:flavorfusion/Precentation/AuthenticationBloc/auth_State.dart';
+import 'package:flavorfusion/Precentation/Screens/discoverScreen/bloc/discover_bloc.dart';
+import 'package:flavorfusion/Precentation/Screens/discoverScreen/bloc/discover_event.dart';
+import 'package:flavorfusion/Precentation/Screens/startingScreen/startingScreen.dart';
+import 'package:flavorfusion/Precentation/Screens/logInScreen/logInScreenUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,7 +36,12 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<AuthenticationBloc>(
             create: (context) => AuthenticationBloc()..add(CheckLoginEvent())),
-        BlocProvider<DiscoverBloc>(create: (context) => DiscoverBloc()..add(FechDataEvent())),
+        BlocProvider<DiscoverBloc>(
+            create: (context) => DiscoverBloc()..add(FechDataEvent())),
+        BlocProvider<LoginValidationBloc>(
+            create: (context) => LoginValidationBloc()),
+        BlocProvider<SignupValidationBloc>(
+            create: (context) => SignupValidationBloc())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -42,6 +50,7 @@ class MyApp extends StatelessWidget {
         ),
         home: BlocBuilder<AuthenticationBloc, AuthenticationBlocState>(
           builder: (context, state) {
+            print(state);
             if (state is SplashState) {
               return const SplashScreenUI();
             }
@@ -53,6 +62,9 @@ class MyApp extends StatelessWidget {
             }
             if (state is LoggedOutState) {
               return LogInScreenUI();
+            }
+            if (state is NavigateToSigninPageState){
+              return CreateAccountUI();
             }
             return Scaffold(
               body: Center(
