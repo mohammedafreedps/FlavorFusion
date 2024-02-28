@@ -1,21 +1,22 @@
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flavorfusion/constants/colors.dart';
-import 'package:flavorfusion/precentation/Screens/IntroPageOneScreen/introPageOneUI.dart';
-import 'package:flavorfusion/precentation/Screens/createAccountScreen/bloc/signup_validation_bloc.dart';
-import 'package:flavorfusion/precentation/Screens/createAccountScreen/createAccountUI.dart';
-import 'package:flavorfusion/precentation/Screens/forgetPasswrodScreen/bloc/forget_password_bloc.dart';
-import 'package:flavorfusion/precentation/Screens/logInScreen/bloc/login_validation_bloc.dart';
-import 'package:flavorfusion/precentation/Screens/splashScreen/splashScreenUI.dart';
-import 'package:flavorfusion/precentation/AuthenticationBloc/auth_Bloc.dart';
-import 'package:flavorfusion/precentation/AuthenticationBloc/auth_Event.dart';
-import 'package:flavorfusion/precentation/AuthenticationBloc/auth_State.dart';
-import 'package:flavorfusion/precentation/Screens/discoverScreen/bloc/discover_bloc.dart';
-import 'package:flavorfusion/precentation/Screens/discoverScreen/bloc/discover_event.dart';
-import 'package:flavorfusion/precentation/Screens/startingScreen/startingScreen.dart';
-import 'package:flavorfusion/precentation/Screens/logInScreen/logInScreenUI.dart';
+import 'package:flavorfusion/precentation/Screens/create_account_screen/bloc/signup_validation_bloc.dart';
+import 'package:flavorfusion/precentation/authentication_bloc/auth_Bloc.dart';
+import 'package:flavorfusion/precentation/authentication_bloc/auth_Event.dart';
+import 'package:flavorfusion/precentation/authentication_bloc/auth_State.dart';
+import 'package:flavorfusion/precentation/screens/Intro_page_one_screen/intro_page_one_UI.dart';
+import 'package:flavorfusion/precentation/screens/create_account_screen/create_account_UI.dart';
+import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_bloc.dart';
+import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_event.dart';
+import 'package:flavorfusion/precentation/screens/forget_passwrod_screen/bloc/forget_password_bloc.dart';
+import 'package:flavorfusion/precentation/screens/log_in_screen/bloc/login_validation_bloc.dart';
+import 'package:flavorfusion/precentation/screens/log_in_screen/log_In_screen_UI.dart';
+import 'package:flavorfusion/precentation/screens/splash_screen/splash_screen_ui.dart';
+import 'package:flavorfusion/precentation/screens/starting_screen/starting_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
