@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavorfusion/Constants/colors.dart';
-import 'package:flavorfusion/Precentation/AuthenticationBloc/auth_Bloc.dart';
-import 'package:flavorfusion/Precentation/AuthenticationBloc/auth_Event.dart';
+import 'package:flavorfusion/precentation/AuthenticationBloc/auth_Bloc.dart';
+import 'package:flavorfusion/precentation/AuthenticationBloc/auth_Event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

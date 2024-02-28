@@ -1,15 +1,16 @@
-import 'package:flavorfusion/Precentation/AuthenticationBloc/auth_Event.dart';
-import 'package:flavorfusion/Precentation/AuthenticationBloc/auth_State.dart';
-import 'package:flavorfusion/Precentation/AuthenticationBloc/auth_Bloc.dart';
-import 'package:flavorfusion/Precentation/Widgets/bottomSheet.dart';
-import 'package:flavorfusion/Precentation/Screens/logInScreen/Widgets/loginButton.dart';
-import 'package:flavorfusion/Precentation/Screens/logInScreen/Widgets/loginWithGoogleButton.dart';
-import 'package:flavorfusion/Precentation/Screens/logInScreen/Widgets/textButton.dart';
-import 'package:flavorfusion/Precentation/Screens/logInScreen/Widgets/textFieldText.dart';
-import 'package:flavorfusion/Precentation/Screens/logInScreen/bloc/login_validation_bloc.dart';
-import 'package:flavorfusion/Precentation/Screens/logInScreen/bloc/login_validation_state.dart';
-import 'package:flavorfusion/Precentation/Screens/startingScreen/startingScreen.dart';
-import 'package:flavorfusion/Precentation/styleManager/textStyleManager.dart';
+import 'package:flavorfusion/precentation/AuthenticationBloc/auth_Event.dart';
+import 'package:flavorfusion/precentation/AuthenticationBloc/auth_State.dart';
+import 'package:flavorfusion/precentation/AuthenticationBloc/auth_Bloc.dart';
+import 'package:flavorfusion/precentation/Screens/forgetPasswrodScreen/forgetPasswordScreenUi.dart';
+import 'package:flavorfusion/precentation/Widgets/bottomSheet.dart';
+import 'package:flavorfusion/precentation/Screens/logInScreen/Widgets/loginButton.dart';
+import 'package:flavorfusion/precentation/Screens/logInScreen/Widgets/loginWithGoogleButton.dart';
+import 'package:flavorfusion/precentation/Screens/logInScreen/Widgets/textButton.dart';
+import 'package:flavorfusion/precentation/Screens/logInScreen/Widgets/textFieldText.dart';
+import 'package:flavorfusion/precentation/Screens/logInScreen/bloc/login_validation_bloc.dart';
+import 'package:flavorfusion/precentation/Screens/logInScreen/bloc/login_validation_state.dart';
+import 'package:flavorfusion/precentation/Screens/startingScreen/startingScreen.dart';
+import 'package:flavorfusion/precentation/styleManager/textStyleManager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,6 +47,9 @@ class LogInScreenUI extends StatelessWidget {
             bottomSheet(
                 state.vMessage, context, _screenSize.width, _screenSize.height);
           }
+          if (state is NavigatePageToForgetPasswordScreenEvent){
+            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>ForgetPasswordScreenUI()));
+          }
         },
         child: Scaffold(
           resizeToAvoidBottomInset: false,
@@ -81,7 +85,7 @@ class LogInScreenUI extends StatelessWidget {
                       SizedBox(
                         height: _screenSize.width * 0.06,
                       ),
-                      textButton('Forget Password?', _screenSize.width),
+                      textButton('Forget Password?', _screenSize.width,page: 'forgetPassword',context: context),
                     ],
                   ),
                   Column(

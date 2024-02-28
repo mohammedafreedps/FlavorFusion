@@ -4,3 +4,5 @@ String introPageTwoText =
 String createPageText =
     "You have the option to either enter the ingredients, Additional notes and instructions in a document file or directly input them in the text fields provided.";
 bool testing = false;
+
+String forgetPasswordText = 'Please enter your email address to receive a reset password email.';

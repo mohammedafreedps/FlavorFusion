@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
-import 'package:flavorfusion/Data/Repository/mealApiModel.dart';
-import 'package:flavorfusion/Precentation/Screens/discoverScreen/bloc/discover_event.dart';
-import 'package:flavorfusion/Precentation/Screens/discoverScreen/bloc/discover_state.dart';
+import 'package:flavorfusion/data/repository/mealApiModel.dart';
+import 'package:flavorfusion/precentation/Screens/discoverScreen/bloc/discover_event.dart';
+import 'package:flavorfusion/precentation/Screens/discoverScreen/bloc/discover_state.dart';
 import 'package:http/http.dart' as http;
 
 class DiscoverBloc extends Bloc<DiscoverEvent, DiscoverState> {

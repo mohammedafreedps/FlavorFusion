@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flavorfusion/Constants/colors.dart';
-import 'package:flavorfusion/Constants/textes.dart';
+import 'package:flavorfusion/constants/colors.dart';
+import 'package:flavorfusion/constants/textes.dart';
 import 'package:flavorfusion/Precentation/Screens/logInScreen/logInScreenUI.dart';
 import 'package:flutter/material.dart';
 

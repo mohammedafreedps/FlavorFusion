@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavorfusion/Constants/textes.dart';
-import 'package:flavorfusion/Precentation/AuthenticationBloc/auth_Event.dart';
-import 'package:flavorfusion/Precentation/AuthenticationBloc/auth_State.dart';
+import 'package:flavorfusion/precentation/AuthenticationBloc/auth_Event.dart';
+import 'package:flavorfusion/precentation/AuthenticationBloc/auth_State.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationBloc

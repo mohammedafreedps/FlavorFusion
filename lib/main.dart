@@ -1,19 +1,21 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flavorfusion/Constants/colors.dart';
-import 'package:flavorfusion/Precentation/Screens/IntroPageOneScreen/introPageOneUI.dart';
-import 'package:flavorfusion/Precentation/Screens/createAccountScreen/bloc/signup_validation_bloc.dart';
-import 'package:flavorfusion/Precentation/Screens/createAccountScreen/createAccountUI.dart';
-import 'package:flavorfusion/Precentation/Screens/logInScreen/bloc/login_validation_bloc.dart';
-import 'package:flavorfusion/Precentation/Screens/splashScreen/splashScreenUI.dart';
-import 'package:flavorfusion/Precentation/AuthenticationBloc/auth_Bloc.dart';
-import 'package:flavorfusion/Precentation/AuthenticationBloc/auth_Event.dart';
-import 'package:flavorfusion/Precentation/AuthenticationBloc/auth_State.dart';
-import 'package:flavorfusion/Precentation/Screens/discoverScreen/bloc/discover_bloc.dart';
-import 'package:flavorfusion/Precentation/Screens/discoverScreen/bloc/discover_event.dart';
-import 'package:flavorfusion/Precentation/Screens/startingScreen/startingScreen.dart';
-import 'package:flavorfusion/Precentation/Screens/logInScreen/logInScreenUI.dart';
+import 'package:flavorfusion/constants/colors.dart';
+import 'package:flavorfusion/precentation/Screens/IntroPageOneScreen/introPageOneUI.dart';
+import 'package:flavorfusion/precentation/Screens/createAccountScreen/bloc/signup_validation_bloc.dart';
+import 'package:flavorfusion/precentation/Screens/createAccountScreen/createAccountUI.dart';
+import 'package:flavorfusion/precentation/Screens/forgetPasswrodScreen/bloc/forget_password_bloc.dart';
+import 'package:flavorfusion/precentation/Screens/logInScreen/bloc/login_validation_bloc.dart';
+import 'package:flavorfusion/precentation/Screens/splashScreen/splashScreenUI.dart';
+import 'package:flavorfusion/precentation/AuthenticationBloc/auth_Bloc.dart';
+import 'package:flavorfusion/precentation/AuthenticationBloc/auth_Event.dart';
+import 'package:flavorfusion/precentation/AuthenticationBloc/auth_State.dart';
+import 'package:flavorfusion/precentation/Screens/discoverScreen/bloc/discover_bloc.dart';
+import 'package:flavorfusion/precentation/Screens/discoverScreen/bloc/discover_event.dart';
+import 'package:flavorfusion/precentation/Screens/startingScreen/startingScreen.dart';
+import 'package:flavorfusion/precentation/Screens/logInScreen/logInScreenUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +43,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<LoginValidationBloc>(
             create: (context) => LoginValidationBloc()),
         BlocProvider<SignupValidationBloc>(
-            create: (context) => SignupValidationBloc())
+            create: (context) => SignupValidationBloc()),
+        BlocProvider<ForgetPasswordBloc>(create: (context) => ForgetPasswordBloc())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

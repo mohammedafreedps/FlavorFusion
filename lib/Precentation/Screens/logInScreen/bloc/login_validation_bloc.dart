@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:flavorfusion/Precentation/Screens/logInScreen/bloc/login_validation_event.dart';
-import 'package:flavorfusion/Precentation/Screens/logInScreen/bloc/login_validation_state.dart';
+import 'package:flavorfusion/precentation/Screens/logInScreen/bloc/login_validation_event.dart';
+import 'package:flavorfusion/precentation/Screens/logInScreen/bloc/login_validation_state.dart';
 
 class LoginValidationBloc
     extends Bloc<LoginValidationEvent, LoginValidationState> {
@@ -27,6 +27,9 @@ class LoginValidationBloc
           emit(EmailnotFormattedState());
         }
       }
+    });
+    on<ForgetPasswordButtonClickedEvent>((event, emit) {
+      emit(NavigatePageToForgetPasswordScreenEvent());
     });
   }
 }

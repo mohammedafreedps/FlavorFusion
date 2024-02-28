@@ -1,7 +1,7 @@
 import 'package:flavorfusion/Constants/colors.dart';
-import 'package:flavorfusion/Precentation/Screens/discoverScreen/bloc/discover_bloc.dart';
-import 'package:flavorfusion/Precentation/Screens/discoverScreen/bloc/discover_state.dart';
-import 'package:flavorfusion/Precentation/Widgets/appBars.dart';
+import 'package:flavorfusion/precentation/Screens/discoverScreen/bloc/discover_bloc.dart';
+import 'package:flavorfusion/precentation/Screens/discoverScreen/bloc/discover_state.dart';
+import 'package:flavorfusion/precentation/Widgets/appBars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

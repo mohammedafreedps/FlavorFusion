@@ -1,5 +1,5 @@
 
-import 'package:flavorfusion/Data/Repository/mealApiModel.dart';
+import 'package:flavorfusion/data/repository/mealApiModel.dart';
 
 sealed class DiscoverState {}
 

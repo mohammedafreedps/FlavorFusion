@@ -1,7 +1,7 @@
-import 'package:flavorfusion/Constants/colors.dart';
-import 'package:flavorfusion/Precentation/Screens/createIngredientsScreen/createIngredientsScreenUI.dart';
-import 'package:flavorfusion/Precentation/Widgets/appBars.dart';
-import 'package:flavorfusion/Precentation/styleManager/textStyleManager.dart';
+import 'package:flavorfusion/constants/colors.dart';
+import 'package:flavorfusion/precentation/Screens/createIngredientsScreen/createIngredientsScreenUI.dart';
+import 'package:flavorfusion/precentation/Widgets/appBars.dart';
+import 'package:flavorfusion/precentation/styleManager/textStyleManager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

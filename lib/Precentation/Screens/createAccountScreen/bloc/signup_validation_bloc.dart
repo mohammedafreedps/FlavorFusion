@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:flavorfusion/Precentation/Screens/createAccountScreen/bloc/signup_validation_event.dart';
-import 'package:flavorfusion/Precentation/Screens/createAccountScreen/bloc/signup_validation_state.dart';
+import 'package:flavorfusion/precentation/Screens/createAccountScreen/bloc/signup_validation_event.dart';
+import 'package:flavorfusion/precentation/Screens/createAccountScreen/bloc/signup_validation_state.dart';
 
 class SignupValidationBloc
     extends Bloc<SignupValidationEvent, SignupValidationState> {

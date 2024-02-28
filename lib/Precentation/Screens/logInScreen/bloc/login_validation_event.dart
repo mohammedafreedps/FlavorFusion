@@ -6,3 +6,5 @@ class LoginButtonPressForValidationEvent extends LoginValidationEvent {
   String password;
   LoginButtonPressForValidationEvent({required this.email, required this.password});
 }
+
+class ForgetPasswordButtonClickedEvent extends LoginValidationEvent{}

@@ -1,13 +1,13 @@
-import 'package:flavorfusion/Constants/colors.dart';
-import 'package:flavorfusion/Precentation/AuthenticationBloc/auth_Bloc.dart';
-import 'package:flavorfusion/Precentation/AuthenticationBloc/auth_Event.dart';
-import 'package:flavorfusion/Precentation/AuthenticationBloc/auth_State.dart';
-import 'package:flavorfusion/Precentation/Screens/createAccountScreen/bloc/signup_validation_bloc.dart';
-import 'package:flavorfusion/Precentation/Screens/createAccountScreen/bloc/signup_validation_event.dart';
-import 'package:flavorfusion/Precentation/Screens/createAccountScreen/bloc/signup_validation_state.dart';
-import 'package:flavorfusion/Precentation/Widgets/appBars.dart';
-import 'package:flavorfusion/Precentation/Widgets/bottomSheet.dart';
-import 'package:flavorfusion/Precentation/styleManager/textStyleManager.dart';
+import 'package:flavorfusion/constants/colors.dart';
+import 'package:flavorfusion/precentation/AuthenticationBloc/auth_Bloc.dart';
+import 'package:flavorfusion/precentation/AuthenticationBloc/auth_Event.dart';
+import 'package:flavorfusion/precentation/AuthenticationBloc/auth_State.dart';
+import 'package:flavorfusion/precentation/Screens/createAccountScreen/bloc/signup_validation_bloc.dart';
+import 'package:flavorfusion/precentation/Screens/createAccountScreen/bloc/signup_validation_event.dart';
+import 'package:flavorfusion/precentation/Screens/createAccountScreen/bloc/signup_validation_state.dart';
+import 'package:flavorfusion/precentation/Widgets/appBars.dart';
+import 'package:flavorfusion/precentation/Widgets/bottomSheet.dart';
+import 'package:flavorfusion/precentation/styleManager/textStyleManager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

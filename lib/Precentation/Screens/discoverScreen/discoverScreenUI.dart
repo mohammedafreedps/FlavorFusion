@@ -1,9 +1,9 @@
 import 'package:flavorfusion/Constants/colors.dart';
-import 'package:flavorfusion/Precentation/Screens/detailsScreen/detailsScreenUI.dart';
-import 'package:flavorfusion/Precentation/Screens/discoverScreen/bloc/discover_bloc.dart';
-import 'package:flavorfusion/Precentation/Screens/discoverScreen/bloc/discover_event.dart';
-import 'package:flavorfusion/Precentation/Screens/discoverScreen/bloc/discover_state.dart';
-import 'package:flavorfusion/Precentation/Widgets/appBars.dart';
+import 'package:flavorfusion/precentation/Screens/detailsScreen/detailsScreenUI.dart';
+import 'package:flavorfusion/precentation/Screens/discoverScreen/bloc/discover_bloc.dart';
+import 'package:flavorfusion/precentation/Screens/discoverScreen/bloc/discover_event.dart';
+import 'package:flavorfusion/precentation/Screens/discoverScreen/bloc/discover_state.dart';
+import 'package:flavorfusion/precentation/Widgets/appBars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

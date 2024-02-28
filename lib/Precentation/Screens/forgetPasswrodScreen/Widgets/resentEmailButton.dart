@@ -1,17 +1,16 @@
 import 'package:flavorfusion/constants/colors.dart';
-import 'package:flavorfusion/precentation/Screens/logInScreen/bloc/login_validation_bloc.dart';
-import 'package:flavorfusion/precentation/Screens/logInScreen/bloc/login_validation_event.dart';
+import 'package:flavorfusion/precentation/Screens/forgetPasswrodScreen/bloc/forget_password_bloc.dart';
+import 'package:flavorfusion/precentation/Screens/forgetPasswrodScreen/bloc/forget_password_event.dart';
 import 'package:flavorfusion/precentation/styleManager/textStyleManager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-Widget loginButton(String text, double screenWidth, BuildContext context,
-    String email, String password, Widget page) {
+Widget resetEmailButton(BuildContext context,String email,double screenWidth) {
   return ClipRRect(
     borderRadius: BorderRadius.circular(70),
     child: GestureDetector(
       onTap: () {
-        context.read<LoginValidationBloc>().add(LoginButtonPressForValidationEvent(email: email, password: password));
+        context.read<ForgetPasswordBloc>().add(SentEmailButtonClickedEvent(email: email));
       },
       child: Container(
         width: screenWidth * 0.3,
@@ -19,7 +18,7 @@ Widget loginButton(String text, double screenWidth, BuildContext context,
         color: baseColor,
         child: Center(
             child: Text(
-          text,
+          'Sent',
           style: titleMidiumTextStyle(screenWidth),
         )),
       ),

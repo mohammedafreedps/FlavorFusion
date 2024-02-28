@@ -1,4 +1,4 @@
-import 'package:flavorfusion/Constants/colors.dart';
+import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/Precentation/styleManager/textStyleManager.dart';
 import 'package:flutter/material.dart';
 

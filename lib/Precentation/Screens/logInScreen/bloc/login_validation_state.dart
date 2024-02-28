@@ -20,3 +20,5 @@ class ValidatedState extends LoginValidationState{}
 class EmailnotFormattedState extends LoginValidationState{
  final String vMessage = 'Enter Format Not Correct'; 
 }
+
+class NavigatePageToForgetPasswordScreenEvent extends LoginValidationState{}
