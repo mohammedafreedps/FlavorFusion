@@ -7,6 +7,7 @@ import 'package:flavorfusion/precentation/authentication_bloc/auth_Event.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_State.dart';
 import 'package:flavorfusion/precentation/screens/Intro_page_one_screen/intro_page_one_UI.dart';
 import 'package:flavorfusion/precentation/screens/create_account_screen/create_account_UI.dart';
+import 'package:flavorfusion/precentation/screens/create_ingredients_screen/bloc/create_ingredients_count_bloc.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_bloc.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_event.dart';
 import 'package:flavorfusion/precentation/screens/forget_passwrod_screen/bloc/forget_password_bloc.dart';
@@ -45,7 +46,8 @@ class MyApp extends StatelessWidget {
             create: (context) => LoginValidationBloc()),
         BlocProvider<SignupValidationBloc>(
             create: (context) => SignupValidationBloc()),
-        BlocProvider<ForgetPasswordBloc>(create: (context) => ForgetPasswordBloc())
+        BlocProvider<ForgetPasswordBloc>(create: (context) => ForgetPasswordBloc()),
+        BlocProvider<CreateIngredientsCountBloc>(create: (context)=> CreateIngredientsCountBloc())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
