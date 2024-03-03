@@ -27,13 +27,7 @@ class CreatePageUI extends StatelessWidget {
               style: titleMidiumTextStyle(_screenSize.width)
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              button(screenWidth: _screenSize.width, text: 'Doc',page: Placeholder(),context: context),
-              button(screenWidth: _screenSize.width, text: 'Fill in',page: CreateFIllinScreenUI(),context: context)
-            ],
-          )
+          button(screenWidth: _screenSize.width, text: 'Fill in',page: CreateFIllinScreenUI(),context: context)
         ],
       ),
     ));

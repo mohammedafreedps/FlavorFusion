@@ -103,7 +103,7 @@ class DetailsScreenUI extends StatelessWidget {
 }
 
 List<Widget> _ingredientsList(
-    List ingredients, List measure, double screenWidth) {
+  List ingredients, List measure, double screenWidth) {
   List<Widget> ingredientsWidgets = [];
   for (var i = 0; i < ingredients.length; i++) {
     Widget row = Column(

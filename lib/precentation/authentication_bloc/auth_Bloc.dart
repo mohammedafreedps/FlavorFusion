@@ -55,6 +55,7 @@ class AuthenticationBloc
         AuthCredential creadential = GoogleAuthProvider.credential(
             accessToken: googleAuth!.accessToken, idToken: googleAuth.idToken);
         await FirebaseAuth.instance.signInWithCredential(creadential);
+        emit(LoggedInState());
       } on FirebaseAuthException catch (e) {
         print(e);
       }

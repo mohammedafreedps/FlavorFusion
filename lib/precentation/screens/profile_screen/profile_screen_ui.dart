@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_Bloc.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_Event.dart';
+import 'package:flavorfusion/precentation/screens/activity_screen/activity_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,9 +50,7 @@ class ProfileScreenUI extends StatelessWidget {
             Center(
               child: Text('Tab 1 Content'),
             ),
-            Center(
-              child: Text('Tab 2 Content'),
-            ),
+            ActivityScreenUI()
           ],
         ),
         endDrawer: Drawer(

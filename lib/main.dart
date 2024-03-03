@@ -1,4 +1,3 @@
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/precentation/Screens/create_account_screen/bloc/signup_validation_bloc.dart';
@@ -6,11 +5,18 @@ import 'package:flavorfusion/precentation/authentication_bloc/auth_Bloc.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_Event.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_State.dart';
 import 'package:flavorfusion/precentation/screens/Intro_page_one_screen/intro_page_one_UI.dart';
+import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_bloc.dart';
+import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_event.dart';
 import 'package:flavorfusion/precentation/screens/create_account_screen/create_account_UI.dart';
-import 'package:flavorfusion/precentation/screens/create_ingredients_screen/bloc/create_ingredients_count_bloc.dart';
+import 'package:flavorfusion/precentation/screens/create_cooking_time_screen/bloc/create_cooking_time_bloc.dart';
+import 'package:flavorfusion/precentation/screens/create_fillIn_screen/bloc/create_fillin_bloc.dart';
+import 'package:flavorfusion/precentation/screens/create_ingredients_screen/bloc/create_ingredients_bloc.dart';
+import 'package:flavorfusion/precentation/screens/create_instructions_screen/bloc/create_instructions_bloc.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_bloc.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_event.dart';
 import 'package:flavorfusion/precentation/screens/forget_passwrod_screen/bloc/forget_password_bloc.dart';
+import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
+import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
 import 'package:flavorfusion/precentation/screens/log_in_screen/bloc/login_validation_bloc.dart';
 import 'package:flavorfusion/precentation/screens/log_in_screen/log_In_screen_UI.dart';
 import 'package:flavorfusion/precentation/screens/splash_screen/splash_screen_ui.dart';
@@ -26,7 +32,8 @@ void main() async {
           apiKey: 'AIzaSyCrwrpjeZ867GENIn-N_zJaPegBrufbZmI',
           appId: '1:827808614853:android:e1be907c0d9584873ee3ac',
           messagingSenderId: '827808614853',
-          projectId: 'flavorfusion-74d39'));
+          projectId: 'flavorfusion-74d39',
+          storageBucket: 'gs://flavorfusion-74d39.appspot.com'));
   // await Firebase.initializeApp();
   runApp(const MyApp());
 }
@@ -46,8 +53,20 @@ class MyApp extends StatelessWidget {
             create: (context) => LoginValidationBloc()),
         BlocProvider<SignupValidationBloc>(
             create: (context) => SignupValidationBloc()),
-        BlocProvider<ForgetPasswordBloc>(create: (context) => ForgetPasswordBloc()),
-        BlocProvider<CreateIngredientsCountBloc>(create: (context)=> CreateIngredientsCountBloc())
+        BlocProvider<ForgetPasswordBloc>(
+            create: (context) => ForgetPasswordBloc()),
+        BlocProvider<CreateIngredientsCountBloc>(
+            create: (context) => CreateIngredientsCountBloc()),
+        BlocProvider<CreateInstructionsBloc>(
+            create: (context) => CreateInstructionsBloc()),
+        BlocProvider<CreateCookingTimeBloc>(
+            create: (context) => CreateCookingTimeBloc()),
+        BlocProvider<CreateFillinBloc>(create: (context) => CreateFillinBloc()),
+        BlocProvider<HomeScreenBloc>(
+            create: ((context) =>
+                HomeScreenBloc()..add(FechDataFromFirebaseEvent()))),
+        BlocProvider<ActivityBloc>(
+            create: (context) => ActivityBloc()..add(SortAndSetValueEvent()))
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -69,7 +88,7 @@ class MyApp extends StatelessWidget {
             if (state is LoggedOutState) {
               return LogInScreenUI();
             }
-            if (state is NavigateToSigninPageState){
+            if (state is NavigateToSigninPageState) {
               return CreateAccountUI();
             }
             return Scaffold(
