@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flavorfusion/apiKey.dart';
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/precentation/Screens/create_account_screen/bloc/signup_validation_bloc.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_Bloc.dart';
@@ -14,6 +15,7 @@ import 'package:flavorfusion/precentation/screens/create_ingredients_screen/bloc
 import 'package:flavorfusion/precentation/screens/create_instructions_screen/bloc/create_instructions_bloc.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_bloc.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_event.dart';
+import 'package:flavorfusion/precentation/screens/edit_screen/bloc/edit_bloc.dart';
 import 'package:flavorfusion/precentation/screens/forget_passwrod_screen/bloc/forget_password_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
@@ -29,7 +31,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       options: const FirebaseOptions(
-          apiKey: 'AIzaSyCrwrpjeZ867GENIn-N_zJaPegBrufbZmI',
+          apiKey: apiKey,
           appId: '1:827808614853:android:e1be907c0d9584873ee3ac',
           messagingSenderId: '827808614853',
           projectId: 'flavorfusion-74d39',
@@ -66,7 +68,8 @@ class MyApp extends StatelessWidget {
             create: ((context) =>
                 HomeScreenBloc()..add(FechDataFromFirebaseEvent()))),
         BlocProvider<ActivityBloc>(
-            create: (context) => ActivityBloc()..add(SortAndSetValueEvent()))
+            create: (context) => ActivityBloc()..add(SortAndSetValueEvent())),
+        BlocProvider<EditBloc>(create: (context)=>EditBloc())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

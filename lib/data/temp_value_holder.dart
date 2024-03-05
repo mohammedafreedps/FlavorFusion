@@ -9,3 +9,4 @@ List<String> hcreatedIngredents = [];
   String? htotalTime ='';
   String? himagePath;
   List<RecipeFromFireBaseModel> hrecipies = [];
+  List<RecipeFromFireBaseModel> hposterRecipes = [];

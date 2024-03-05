@@ -12,9 +12,7 @@ import 'package:image_picker/image_picker.dart';
 class CreateFillinBloc extends Bloc<CreateFillinEvent, CreateFillinState> {
   ImagePicker picker = ImagePicker();
   CreateFillinBloc() : super(CreateFillinInitial()) {
-    on<CreateFillinEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<CreateFillinEvent>((event, emit) {});
 
     on<CookingTimeSettedEvent>((event, emit) {
       print(hprepTime! + 'fillin');

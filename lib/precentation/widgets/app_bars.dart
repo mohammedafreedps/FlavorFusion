@@ -26,7 +26,7 @@ AppBar appBar(
           if (function != null){
             function();
           }
-        }, icon: icon!):Text('error')],
+        }, icon: icon!):Text('')],
         
     backgroundColor: primaryColor,
     title: Text(

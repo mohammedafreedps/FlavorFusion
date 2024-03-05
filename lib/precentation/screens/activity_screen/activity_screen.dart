@@ -3,6 +3,7 @@ import 'package:flavorfusion/data/repository/recipe_from_firebase_model.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_bloc.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_event.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_state.dart';
+import 'package:flavorfusion/precentation/screens/edit_option_screen/edit_opiton_screen_ui.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_state.dart';
@@ -22,6 +23,7 @@ class ActivityScreenUI extends StatelessWidget {
       body: BlocListener<HomeScreenBloc, HomeScreenState>(
         listener: (context, state) {
           if (state is AllDatasLoadedState) {
+            print('add data loadied get in activity page');
             context.read<ActivityBloc>().add(SortAndSetValueEvent());
           }
         },
@@ -117,6 +119,9 @@ Widget activityTile(BuildContext context, double screenWidth, String src,
                         context.read<ActivityBloc>().add(
                             DeletePostButtonClickedEvent(
                                 index: index, recipes: recipes));
+                      }
+                      if (value == '1'){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>EditOptionScreenUI(index: index)));
                       }
                     },
                     color: secondaryColor,
