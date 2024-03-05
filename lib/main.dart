@@ -1,5 +1,4 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flavorfusion/apiKey.dart';
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/precentation/Screens/create_account_screen/bloc/signup_validation_bloc.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_Bloc.dart';
@@ -23,8 +22,8 @@ import 'package:flavorfusion/precentation/screens/log_in_screen/bloc/login_valid
 import 'package:flavorfusion/precentation/screens/log_in_screen/log_In_screen_UI.dart';
 import 'package:flavorfusion/precentation/screens/splash_screen/splash_screen_ui.dart';
 import 'package:flavorfusion/precentation/screens/starting_screen/starting_screen.dart';
+import 'package:flavorfusion/constants/key.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
@@ -32,7 +31,7 @@ void main() async {
   await Firebase.initializeApp(
       options: const FirebaseOptions(
           apiKey: apiKey,
-          appId: '1:827808614853:android:e1be907c0d9584873ee3ac',
+          appId: appId,
           messagingSenderId: '827808614853',
           projectId: 'flavorfusion-74d39',
           storageBucket: 'gs://flavorfusion-74d39.appspot.com'));
