@@ -5,6 +5,7 @@ import 'package:flavorfusion/precentation/screens/details_screen/details_screen_
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_bloc.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_event.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_state.dart';
+import 'package:flavorfusion/precentation/screens/discover_screen/widgets/discover_tile.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,7 +68,7 @@ class DiscoverScreenUI extends StatelessWidget {
                         itemBuilder: (BuildContext context, index) {
                           return GestureDetector(
                               onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreenUI(index: index)));},
-                              child: _discoverTile(
+                              child: discoverTile(
                                   state.mealAPIModels[index].strMealThumb,
                                   state.mealAPIModels[index].strMeal,
                                   _screenSize.width));
@@ -95,46 +96,3 @@ class DiscoverScreenUI extends StatelessWidget {
   }
 }
 
-Widget _discoverTile(String src, String title, double screenWidth) {
-  return Padding(
-    padding: const EdgeInsets.only(bottom: 10),
-    child: AspectRatio(
-      aspectRatio: 1 / 1,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(screenWidth * 0.06),
-        child: Container(
-          padding: EdgeInsets.all(30),
-          height: 100,
-          color: baseColor,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AspectRatio(
-                aspectRatio: 1.2,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(screenWidth * 0.06),
-                  child: Container(
-                    color: baseColor,
-                    child: Image.network(
-                      src,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-              Text(
-                overflow: TextOverflow.ellipsis,
-                title,
-                style: TextStyle(
-                    color: secondaryColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: screenWidth * 0.04),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ),
-  );
-}

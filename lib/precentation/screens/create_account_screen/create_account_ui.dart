@@ -1,17 +1,15 @@
-
-
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/precentation/Screens/create_account_screen/bloc/signup_validation_bloc.dart';
-import 'package:flavorfusion/precentation/Screens/create_account_screen/bloc/signup_validation_event.dart';
 import 'package:flavorfusion/precentation/Screens/create_account_screen/bloc/signup_validation_state.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_Bloc.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_Event.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_State.dart';
-import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
+import 'package:flavorfusion/precentation/screens/create_account_screen/widgets/button.dart';
+import 'package:flavorfusion/precentation/screens/create_account_screen/widgets/login_text_button.dart';
+import 'package:flavorfusion/precentation/screens/log_in_screen/Widgets/textFieldText.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flavorfusion/precentation/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreateAccountUI extends StatelessWidget {
@@ -46,20 +44,20 @@ class CreateAccountUI extends StatelessWidget {
                       password: _passwordController.text));
             }
             if (state is SignupEmailNotCorrectState) {
-              bottomSheet(state.vMessage, context, screenSize.width,
-                  screenSize.height);
+              bottomSheet(
+                  state.vMessage, context, screenSize.width, screenSize.height);
             }
             if (state is SignupPassowrdNotMatchState) {
-              bottomSheet(state.vMessage, context, screenSize.width,
-                  screenSize.height);
+              bottomSheet(
+                  state.vMessage, context, screenSize.width, screenSize.height);
             }
             if (state is SignupPasswordAndEmailNotenterdState) {
-              bottomSheet(state.vMessage, context, screenSize.width,
-                  screenSize.height);
+              bottomSheet(
+                  state.vMessage, context, screenSize.width, screenSize.height);
             }
             if (state is SignupFailedState) {
-              bottomSheet(state.vMessage, context, screenSize.width,
-                  screenSize.height);
+              bottomSheet(
+                  state.vMessage, context, screenSize.width, screenSize.height);
             }
           },
           child: Padding(
@@ -82,21 +80,21 @@ class CreateAccountUI extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontSize: screenSize.width * 0.1),
                       ),
-                      _midLevelTextField(
+                      midLevelTextField(
                           'Email', screenSize.width, false, _emailController),
-                      _midLevelTextField('Password', screenSize.width, true,
+                      midLevelTextField('Password', screenSize.width, true,
                           _passwordController),
-                      _midLevelTextField('Re-enter Password', screenSize.width,
+                      midLevelTextField('Re-enter Password', screenSize.width,
                           true, _rePasswordController),
-                      _button(
+                      button(
                           'Create',
                           screenSize.width,
                           context,
                           _emailController.text,
                           _passwordController.text,
                           _rePasswordController.text),
-
-                     _loginTextButton('Login', screenSize.width,context: context,page: 'login'),
+                      loginTextButton('Login', screenSize.width,
+                          context: context, page: 'login'),
                     ],
                   ),
                 ),
@@ -107,69 +105,4 @@ class CreateAccountUI extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _midLevelTextField(String text, double screenWidth, bool isTextObscure,
-    TextEditingController controller) {
-  return Column(
-    children: [
-      Text(
-        text,
-        style: TextStyle(
-            color: secondaryColor,
-            fontWeight: FontWeight.w300,
-            fontSize: screenWidth * 0.04),
-      ),
-      TextField(
-        controller: controller,
-        keyboardType: TextInputType.emailAddress,
-        obscureText: isTextObscure,
-        style: TextStyle(color: baseColor),
-        cursorColor: baseColor,
-        decoration: InputDecoration(
-            enabledBorder:
-                UnderlineInputBorder(borderSide: BorderSide(color: baseColor)),
-            focusedBorder:
-                UnderlineInputBorder(borderSide: BorderSide(color: baseColor))),
-      )
-    ],
-  );
-}
-
-Widget _button(String text, double screenSize, BuildContext context,
-    String email, String password, String repassword) {
-  return ClipRRect(
-    borderRadius: BorderRadius.circular(70),
-    child: GestureDetector(
-      onTap: () {
-        context.read<SignupValidationBloc>().add(SignUpButtonClickForValidation(
-            email: email, password: password, repassword: repassword));
-      },
-      child: Container(
-        width: screenSize * 0.3,
-        height: screenSize * 0.12,
-        color: baseColor,
-        child: Center(
-            child: Text(
-          text,
-          style: TextStyle(
-              color: acsentColor,
-              fontSize: screenSize * 0.04,
-              fontWeight: FontWeight.w400),
-        )),
-      ),
-    ),
-  );
-}
-
-Widget _loginTextButton(String text, double screenWidth,
-    {BuildContext? context, String? page,Function? function,required}) {
-  return GestureDetector(
-      onTap: () {
-        if(function != null){
-          function();
-        }else if(context != null && page == 'login'){
-          context.read<AuthenticationBloc>().add(BackToLoginButtonClickedEvent());
-        }
-      }, child: Text(text, style: titleSmallTextStyle(screenWidth)));
 }

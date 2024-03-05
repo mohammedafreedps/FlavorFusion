@@ -1,10 +1,10 @@
+import 'package:flavorfusion/precentation/screens/edit_option_screen/widgets/option_button.dart';
 import 'package:flavorfusion/precentation/screens/edit_screen/edit_screen_ui.dart';
-import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flutter/material.dart';
 
 class EditOptionScreenUI extends StatelessWidget {
-  int index;
+  final int index;
   EditOptionScreenUI({super.key, required this.index});
 
   @override
@@ -37,16 +37,4 @@ class EditOptionScreenUI extends StatelessWidget {
   }
 }
 
-Widget optionButton(
-    BuildContext context, String text, double screenWidth, Widget page) {
-  return GestureDetector(
-    onTap: () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (BuildContext context) => page));
-    },
-    child: Text(
-      text,
-      style: titleMidiumTextStyle(screenWidth),
-    ),
-  );
-}
+

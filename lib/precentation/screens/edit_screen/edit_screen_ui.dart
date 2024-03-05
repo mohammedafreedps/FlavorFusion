@@ -15,8 +15,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditScreenUI extends StatefulWidget {
-  int index;
-  String editIn;
+  final int index;
+  final String editIn;
   EditScreenUI({super.key, required this.index, required this.editIn});
 
   @override

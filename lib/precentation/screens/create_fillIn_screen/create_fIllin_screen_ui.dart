@@ -8,6 +8,9 @@ import 'package:flavorfusion/precentation/screens/create_cooking_time_screen/cre
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/bloc/create_fillin_bloc.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/bloc/create_fillin_event.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/bloc/create_fillin_state.dart';
+import 'package:flavorfusion/precentation/screens/create_fillIn_screen/widgets/create_button_one.dart';
+import 'package:flavorfusion/precentation/screens/create_fillIn_screen/widgets/create_button_two.dart';
+import 'package:flavorfusion/precentation/screens/create_fillIn_screen/widgets/create_text_field.dart';
 import 'package:flavorfusion/precentation/screens/create_ingredients_screen/create_ingredients_screen_UI.dart';
 import 'package:flavorfusion/precentation/screens/create_instructions_screen/create_instructions_screen_ui.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
@@ -221,71 +224,4 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
       ),
     );
   }
-}
-
-Widget createButtonOne(String text, BuildContext context, double screenWidth,
-    {Function? function}) {
-  return ClipRRect(
-    borderRadius: BorderRadius.circular(70),
-    child: GestureDetector(
-      onTap: () {
-        if (function != null) {
-          function();
-        }
-      },
-      child: Container(
-        width: screenWidth * 0.3,
-        height: screenWidth * 0.12,
-        color: baseColor,
-        child: Center(
-            child: Text(
-          text,
-          style: TextStyle(
-              color: acsentColor,
-              fontSize: screenWidth * 0.04,
-              fontWeight: FontWeight.w400),
-        )),
-      ),
-    ),
-  );
-}
-
-Widget createButtonTwo(String text, BuildContext context, double screenWidth,
-    {Widget? page}) {
-  return ClipRRect(
-    borderRadius: BorderRadius.circular(70),
-    child: GestureDetector(
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => page!));
-      },
-      child: Container(
-        width: screenWidth * 0.4,
-        height: screenWidth * 0.12,
-        color: baseColor,
-        child: Center(
-            child: Text(
-          text,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-              color: acsentColor,
-              fontSize: screenWidth * 0.04,
-              fontWeight: FontWeight.w400),
-        )),
-      ),
-    ),
-  );
-}
-
-Widget createTextField(TextEditingController controller) {
-  return TextField(
-    controller: controller,
-    keyboardType: TextInputType.emailAddress,
-    style: TextStyle(color: baseColor),
-    cursorColor: baseColor,
-    decoration: InputDecoration(
-        enabledBorder:
-            UnderlineInputBorder(borderSide: BorderSide(color: baseColor)),
-        focusedBorder:
-            UnderlineInputBorder(borderSide: BorderSide(color: baseColor))),
-  );
 }

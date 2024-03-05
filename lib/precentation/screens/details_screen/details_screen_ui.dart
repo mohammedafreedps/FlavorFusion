@@ -1,6 +1,6 @@
-
-
 import 'package:flavorfusion/constants/colors.dart';
+import 'package:flavorfusion/precentation/screens/details_screen/widgets/ingredients_list.dart';
+import 'package:flavorfusion/precentation/screens/details_screen/widgets/preparation_list.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_bloc.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_state.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
@@ -66,7 +66,7 @@ class DetailsScreenUI extends StatelessWidget {
                       height: _screenSize.width * 0.02,
                     ),
                     Column(
-                      children: _ingredientsList(
+                      children: ingredientsList(
                           state.mealAPIModels[index].strIngredients,
                           state.mealAPIModels[index].strMeasures,
                           _screenSize.width),
@@ -85,7 +85,7 @@ class DetailsScreenUI extends StatelessWidget {
                       height: _screenSize.width * 0.02,
                     ),
                     Column(
-                        children: _preparationList(
+                        children: preparationList(
                             state.mealAPIModels[index].strInstructions,
                             _screenSize.width))
                   ],
@@ -102,88 +102,4 @@ class DetailsScreenUI extends StatelessWidget {
   }
 }
 
-List<Widget> _ingredientsList(
-  List ingredients, List measure, double screenWidth) {
-  List<Widget> ingredientsWidgets = [];
-  for (var i = 0; i < ingredients.length; i++) {
-    Widget row = Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              ingredients[i],
-              style: TextStyle(
-                  color: secondaryColor,
-                  fontWeight: FontWeight.w300,
-                  fontSize: screenWidth * 0.03),
-            ),
-            Text(
-              measure[i],
-              style: TextStyle(
-                  color: secondaryColor,
-                  fontWeight: FontWeight.w300,
-                  fontSize: screenWidth * 0.03),
-            ),
-          ],
-        ),
-        Divider()
-      ],
-    );
-    ingredientsWidgets.add(row);
-  }
-  return ingredientsWidgets;
-}
 
-List<Widget> _preparationList(String preparations, double screenWidth) {
-  List<Widget> steps = [];
-  bool check = false;
-  List<String> step = preparations.split('\r\n');
-  for (var i = 0; i < step.length; i++) {
-    if(check == false){
-      if(step[i].startsWith('STEP')){
-      check = true;
-     }else{
-      steps.add(ClipRRect(
-        borderRadius: BorderRadius.circular(screenWidth * 0.02),
-        child: Container(
-          width: screenWidth,
-          padding: EdgeInsets.all(10),
-          color: baseColor,
-          child: Text(
-            'STEP '+(i+1).toString(),
-            style: TextStyle(
-                color: secondaryColor,
-                fontWeight: FontWeight.w300,
-                fontSize: screenWidth * 0.03),
-          ),
-        ),
-      ));
-      steps.add(SizedBox(height: screenWidth * 0.01));
-     }
-    }
-    
-    
-    if (step[i].isNotEmpty ) {
-      Widget st = ClipRRect(
-        borderRadius: BorderRadius.circular(screenWidth * 0.02),
-        child: Container(
-          width: screenWidth,
-          padding: EdgeInsets.all(10),
-          color: baseColor,
-          child: Text(
-            step[i],
-            style: TextStyle(
-                color: secondaryColor,
-                fontWeight: FontWeight.w300,
-                fontSize: screenWidth * 0.03),
-          ),
-        ),
-      );
-      steps.add(st);
-      steps.add(SizedBox(height: screenWidth * 0.04));
-    }
-  }
-
-  return steps;
-}
