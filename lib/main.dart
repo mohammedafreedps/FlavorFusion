@@ -14,7 +14,6 @@ import 'package:flavorfusion/precentation/screens/create_ingredients_screen/bloc
 import 'package:flavorfusion/precentation/screens/create_instructions_screen/bloc/create_instructions_bloc.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_bloc.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_event.dart';
-import 'package:flavorfusion/precentation/screens/edit_screen/bloc/edit_bloc.dart';
 import 'package:flavorfusion/precentation/screens/forget_passwrod_screen/bloc/forget_password_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
@@ -68,7 +67,6 @@ class MyApp extends StatelessWidget {
                 HomeScreenBloc()..add(FechDataFromFirebaseEvent()))),
         BlocProvider<ActivityBloc>(
             create: (context) => ActivityBloc()..add(SortAndSetValueEvent())),
-        BlocProvider<EditBloc>(create: (context)=>EditBloc())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

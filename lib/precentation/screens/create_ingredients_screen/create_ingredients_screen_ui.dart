@@ -1,5 +1,7 @@
 import 'package:flavorfusion/constants/colors.dart';
+import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:flavorfusion/precentation/screens/create_ingredients_screen/bloc/create_ingredients_bloc.dart';
+import 'package:flavorfusion/precentation/screens/create_ingredients_screen/bloc/create_ingredients_event.dart';
 import 'package:flavorfusion/precentation/screens/create_ingredients_screen/bloc/create_ingredients_state.dart';
 import 'package:flavorfusion/precentation/screens/create_ingredients_screen/widgets/entered_ingredients_and_quantity.dart';
 import 'package:flavorfusion/precentation/screens/create_ingredients_screen/widgets/ingredients_add.dart';
@@ -9,7 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreateIngredientsScreenUI extends StatefulWidget {
-  CreateIngredientsScreenUI({super.key});
+  final bool isEditing;
+  final int? index;
+  CreateIngredientsScreenUI({super.key, required this.isEditing, this.index});
 
   @override
   State<CreateIngredientsScreenUI> createState() =>
@@ -19,6 +23,18 @@ class CreateIngredientsScreenUI extends StatefulWidget {
 class _CreateIngredientsScreenUIState extends State<CreateIngredientsScreenUI> {
   final _ingredientController = TextEditingController();
   final _quantityController = TextEditingController();
+
+  @override
+  void initState() {
+    if (widget.isEditing == true && widget.index != null) {
+      context.read<CreateIngredientsCountBloc>().add(
+          EditIngredientsAndQuantityEvent(
+              ingredient: hposterRecipes[widget.index!].ingredients,
+              quantity: hposterRecipes[widget.index!].quantitys));
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
@@ -60,6 +76,18 @@ class _CreateIngredientsScreenUIState extends State<CreateIngredientsScreenUI> {
                               _screenSize.width);
                         }));
                   }
+                  if (state is EditIngredientsAndQuantityState) {
+                    return ListView.builder(
+                        itemCount: state.ingredient.length,
+                        itemBuilder: ((context, index) {
+                          return enteredIngredientsAndQuantity(
+                              context,
+                              index,
+                              state.ingredient[index],
+                              state.quantity[index],
+                              _screenSize.width);
+                        }));
+                  }
                   return ListView.builder(
                       itemCount: 1,
                       itemBuilder: (BuildContext context, intex) {
@@ -86,9 +114,3 @@ class _CreateIngredientsScreenUIState extends State<CreateIngredientsScreenUI> {
     );
   }
 }
-
-
-
-
-
-

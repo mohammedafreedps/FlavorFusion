@@ -2,7 +2,8 @@ import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/data/repository/recipe_from_firebase_model.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_bloc.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_event.dart';
-import 'package:flavorfusion/precentation/screens/edit_option_screen/edit_opiton_screen_ui.dart';
+import 'package:flavorfusion/precentation/screens/create_fillIn_screen/create_fIllin_screen_ui.dart';
+
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,7 +57,7 @@ Widget activityTile(BuildContext context, double screenWidth, String src,
                                 index: index, recipes: recipes));
                       }
                       if (value == '1'){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>EditOptionScreenUI(index: index)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateFIllinScreenUI(index: index,isEditing: true,)));
                       }
                     },
                     color: secondaryColor,

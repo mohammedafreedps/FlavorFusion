@@ -23,5 +23,11 @@ class CreateIngredientsCountBloc extends Bloc<CreateIngredientsCountEvent, Creat
       hcreatedQuantitys.removeAt(event.index);
       emit(ShowIngredientAndQuantityState(ingredients: hcreatedIngredents, quantitys: hcreatedQuantitys));
     });
+
+    on<EditIngredientsAndQuantityEvent>((event, emit) {
+      hcreatedIngredents = event.ingredient;
+      hcreatedQuantitys = event.quantity;
+      emit(EditIngredientsAndQuantityState(ingredient: hcreatedIngredents, quantity: hcreatedQuantitys));
+    });
   }
 }

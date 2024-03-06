@@ -22,7 +22,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreateFIllinScreenUI extends StatefulWidget {
-  const CreateFIllinScreenUI({super.key});
+  final bool? isEditing;
+  final int? index;
+  CreateFIllinScreenUI({super.key, this.isEditing, this.index});
 
   @override
   State<CreateFIllinScreenUI> createState() => _CreateFIllinScreenUIState();
@@ -32,6 +34,29 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
   double _currentSliderValue = 0;
   final _recipeTitleController = TextEditingController();
   final _additionalNotesController = TextEditingController();
+
+  @override
+  void initState() {
+    if (widget.isEditing == true && widget.index != null) {
+      context.read<CreateFillinBloc>().add(EditPreviewImageEvent(
+          imagePath: hposterRecipes[widget.index!].imageURL));
+      _recipeTitleController.text = hposterRecipes[widget.index!].recipeTitle;
+      _additionalNotesController.text =
+          hposterRecipes[widget.index!].additionalNotes;
+      _currentSliderValue =
+          hposterRecipes[widget.index!].difficultyLevel.toDouble();
+      hcreatedIngredents = hposterRecipes[widget.index!].ingredients;
+      hcreatedQuantitys = hposterRecipes[widget.index!].quantitys;
+      hinstructionsSteps = hposterRecipes[widget.index!].instructions;
+      hprepTime = hposterRecipes[widget.index!].prepTime;
+      hcookTime = hposterRecipes[widget.index!].cookTime;
+      htotalTime = hposterRecipes[widget.index!].totalTime;
+    } else {
+      context.read<CreateFillinBloc>().add(SelectImageEvent());
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size _screenSize = MediaQuery.of(context).size;
@@ -45,6 +70,14 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
           }
           if (state is RecipieUploadedStete) {
             bottomSheet('Recipie Uploaded Succesfully', context,
+                _screenSize.width, _screenSize.height);
+            context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
+            Timer(Duration(seconds: 1), () {
+              context.read<ActivityBloc>().add(SortAndSetValueEvent());
+            });
+          }
+          if (state is EditRecipieUploadedState) {
+            bottomSheet('Updated Recipie Uploaded Succesfully', context,
                 _screenSize.width, _screenSize.height);
             context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
             Timer(Duration(seconds: 1), () {
@@ -77,6 +110,18 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
                               return AspectRatio(
                                 aspectRatio: 10 / 3,
                                 child: Image.file(File(himagePath!)),
+                              );
+                            }
+                            if (state is EditPreviewImageState) {
+                              return AspectRatio(
+                                aspectRatio: 10 / 3,
+                                child: Image.network(state.imagePath),
+                              );
+                            }
+                            if (state is SelectImageState) {
+                              return Text(
+                                'Select Image',
+                                style: titleMidiumTextStyle(_screenSize.width),
                               );
                             }
                             return Text(
@@ -112,32 +157,24 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
                         ),
                         createButtonTwo(
                             'Ingredients >', context, _screenSize.width,
-                            page: CreateIngredientsScreenUI()),
+                            page: CreateIngredientsScreenUI(
+                              isEditing: widget.isEditing != null
+                                  ? widget.isEditing!
+                                  : false,
+                              index: widget.index,
+                            )),
                         createButtonTwo(
                             'Instructions >', context, _screenSize.width,
-                            page: CreateInstructionsScreenUI()),
-                        BlocBuilder<CreateFillinBloc, CreateFillinState>(
-                          builder: (context, state) {
-                            if (state is CookingTimesState) {
-                              return createButtonTwo(
-                                  'P:' +
-                                      ' ' +
-                                      state.prpTime +
-                                      ' C:' +
-                                      ' ' +
-                                      state.cookingTime +
-                                      ' T: ' +
-                                      ' ' +
-                                      state.totalTime,
-                                  context,
-                                  _screenSize.width,
-                                  page: CreateCookingTimeScreenUI());
-                            }
-                            return createButtonTwo(
-                                'Cooking Time >', context, _screenSize.width,
-                                page: CreateCookingTimeScreenUI());
-                          },
-                        ),
+                            page: CreateInstructionsScreenUI(
+                              isEditing: widget.isEditing,
+                              index: widget.index,
+                            )),
+                        createButtonTwo(
+                            'Cooking Time >', context, _screenSize.width,
+                            page: CreateCookingTimeScreenUI(
+                              isEditing: widget.isEditing,
+                              index: widget.index,
+                            )),
                         Column(
                           children: [
                             Text(
@@ -192,21 +229,41 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
                             if (_additionalNotesController.text.isEmpty) {
                               _additionalNotesController.text = 'Nil';
                             }
-                            context.read<CreateFillinBloc>().add(
-                                UploadRecipieButtonClickedEvent(
-                                    imagePath: himagePath!,
-                                    imageName: 'recipe $_imageName',
-                                    recipeTitle: _recipeTitleController.text,
-                                    ingredients: hcreatedIngredents,
-                                    instructions: hinstructionsSteps,
-                                    quantitys: hcreatedQuantitys,
-                                    prepTime: hprepTime!,
-                                    cookTime: hcookTime!,
-                                    totalTime: htotalTime!,
-                                    additionalNotes:
-                                        _additionalNotesController.text,
-                                    difficultyLevel:
-                                        _currentSliderValue.round()));
+                            if (widget.isEditing == true &&
+                                widget.index != null) {
+                              context.read<CreateFillinBloc>().add(
+                                  EditedRecipieUploadButtonClickedEvent(
+                                      index: widget.index!,
+                                      imagePath: himagePath!,
+                                      imageName: 'up',
+                                      recipeTitle: _recipeTitleController.text,
+                                      ingredients: hcreatedIngredents,
+                                      quantitys: hcreatedQuantitys,
+                                      instructions: hinstructionsSteps,
+                                      prepTime: hprepTime!,
+                                      cookTime: hcookTime!,
+                                      totalTime: htotalTime!,
+                                      difficultyLevel:
+                                          _currentSliderValue.round(),
+                                      additionalNotes:
+                                          _additionalNotesController.text));
+                            } else {
+                              context.read<CreateFillinBloc>().add(
+                                  UploadRecipieButtonClickedEvent(
+                                      imagePath: himagePath!,
+                                      imageName: 'recipe $_imageName',
+                                      recipeTitle: _recipeTitleController.text,
+                                      ingredients: hcreatedIngredents,
+                                      instructions: hinstructionsSteps,
+                                      quantitys: hcreatedQuantitys,
+                                      prepTime: hprepTime!,
+                                      cookTime: hcookTime!,
+                                      totalTime: htotalTime!,
+                                      additionalNotes:
+                                          _additionalNotesController.text,
+                                      difficultyLevel:
+                                          _currentSliderValue.round()));
+                            }
                           } else {
                             context
                                 .read<CreateFillinBloc>()

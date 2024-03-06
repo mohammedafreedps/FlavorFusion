@@ -28,3 +28,17 @@ class NotFilledAllFieldsState extends CreateFillinState{}
 class RecipieUploadingStete extends CreateFillinState{}
 
 class RecipieUploadedStete extends CreateFillinState{}
+
+class EditPreviewImageState extends CreateFillinState{
+  String imagePath;
+  EditPreviewImageState({required this.imagePath});
+}
+
+class SelectImageState extends CreateFillinState{}
+
+class EditRecipieUploadedState extends CreateFillinState{}
+
+class EditRecipieUploadFailState extends CreateFillinState{
+  String message;
+  EditRecipieUploadFailState({required this.message});
+}

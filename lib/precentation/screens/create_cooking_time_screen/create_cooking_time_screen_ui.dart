@@ -1,3 +1,4 @@
+import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:flavorfusion/precentation/screens/create_cooking_time_screen/bloc/create_cooking_time_bloc.dart';
 import 'package:flavorfusion/precentation/screens/create_cooking_time_screen/bloc/create_cooking_time_state.dart';
 import 'package:flavorfusion/precentation/screens/create_cooking_time_screen/widgets/cooking_time_add.dart';
@@ -6,11 +7,31 @@ import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CreateCookingTimeScreenUI extends StatelessWidget {
+class CreateCookingTimeScreenUI extends StatefulWidget {
+  final bool? isEditing;
+  final int? index;
+  CreateCookingTimeScreenUI({super.key, this.isEditing,this.index});
+
+  @override
+  State<CreateCookingTimeScreenUI> createState() => _CreateCookingTimeScreenUIState();
+}
+
+class _CreateCookingTimeScreenUIState extends State<CreateCookingTimeScreenUI> {
   final _prepTimeController = TextEditingController();
+
   final _cookTimeController = TextEditingController();
+
   final _totalTimeController = TextEditingController();
-  CreateCookingTimeScreenUI({super.key});
+  
+  @override
+  void initState() {
+    if(widget.isEditing == true && widget.index != null){
+      _prepTimeController.text = hposterRecipes[widget.index!].prepTime;
+      _cookTimeController.text = hposterRecipes[widget.index!].cookTime;
+      _totalTimeController.text = hposterRecipes[widget.index!].totalTime;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

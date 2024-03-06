@@ -11,3 +11,9 @@ class DeleteIngredientButtonClickedEvent extends CreateIngredientsCountEvent{
   int index;
   DeleteIngredientButtonClickedEvent({required this.index});
 }
+
+class EditIngredientsAndQuantityEvent extends CreateIngredientsCountEvent{
+  List<String> ingredient;
+  List<String> quantity;
+  EditIngredientsAndQuantityEvent({required this.ingredient,required this.quantity});
+}

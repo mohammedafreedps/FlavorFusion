@@ -19,5 +19,12 @@ class CreateCookingTimeBloc extends Bloc<CreateCookingTimeEvent, CreateCookingTi
       print(hcookTime);
       emit(AllTimeSettedState());
     });
+
+    // on<EditCookingTimeEvent>((event, emit) {
+    //   hprepTime = event.prepTime;
+    //   hcookTime = event.cookingTime;
+    //   htotalTime = event.totalTime;
+    //   emit(EditCookingTimeState(prepTime: hprepTime!, cookingTime: hcookTime!, totalTime: htotalTime!));
+    // });
   }
 }

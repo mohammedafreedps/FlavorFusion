@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/bloc/create_fillin_event.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/bloc/create_fillin_state.dart';
@@ -75,6 +76,47 @@ class CreateFillinBloc extends Bloc<CreateFillinEvent, CreateFillinState> {
 
     on<FieldFilledCheckErrorEvent>((event, emit) {
       emit(NotFilledAllFieldsState());
+    });
+
+    on<EditPreviewImageEvent>((event, emit) {
+      emit(EditPreviewImageState(imagePath: event.imagePath));
+    });
+
+    on<SelectImageEvent>((event, emit) {
+      emit(SelectImageState());
+    });
+
+    on<EditedRecipieUploadButtonClickedEvent>((event, emit) async {
+      emit(RecipieUploadingStete());
+      final storage = FirebaseStorage.instance;
+      String imgPath = hposterRecipes[event.index].imageURL;
+      File imgFile = File(event.imagePath);
+      String docId = hposterRecipes[event.index].docId;
+      String imageName = DateTime.now().toString();
+      final colRef =
+          FirebaseFirestore.instance.collection('recipes').doc(docId);
+      final imageRef = FirebaseStorage.instance.refFromURL(imgPath);
+      try {
+        await imageRef.delete();
+        await storage.ref('thumbnails/$imageName').putFile(imgFile);
+        String downlordURL =
+            await storage.ref('thumbnails/$imageName').getDownloadURL();
+        colRef.update({
+          'imageURL': downlordURL,
+          'recipeTitle': event.recipeTitle,
+          'ingredients': event.ingredients,
+          'quantitys': event.quantitys,
+          'instructions': event.instructions,
+          'prepTime': event.prepTime,
+          'cookTime': event.cookTime,
+          'totalTime': event.totalTime,
+          'difficultyLevel': event.difficultyLevel,
+          'additionalNotes': event.additionalNotes
+        });
+        emit(EditRecipieUploadedState());
+      } on FirebaseAuthException catch (e) {
+        emit(EditRecipieUploadFailState(message: e.message.toString()));
+      }
     });
   }
 }

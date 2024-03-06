@@ -1,4 +1,6 @@
+import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:flavorfusion/precentation/screens/create_instructions_screen/bloc/create_instructions_bloc.dart';
+import 'package:flavorfusion/precentation/screens/create_instructions_screen/bloc/create_instructions_event.dart';
 import 'package:flavorfusion/precentation/screens/create_instructions_screen/bloc/create_instructions_state.dart';
 import 'package:flavorfusion/precentation/screens/create_instructions_screen/widgets/instructions_add.dart';
 import 'package:flavorfusion/precentation/screens/create_instructions_screen/widgets/show_entered_instructions.dart';
@@ -9,9 +11,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CreateInstructionsScreenUI extends StatelessWidget {
+class CreateInstructionsScreenUI extends StatefulWidget {
+  final bool? isEditing;
+  final int? index;
+  CreateInstructionsScreenUI({super.key, this.isEditing, this.index});
+
+  @override
+  State<CreateInstructionsScreenUI> createState() =>
+      _CreateInstructionsScreenUIState();
+}
+
+class _CreateInstructionsScreenUIState
+    extends State<CreateInstructionsScreenUI> {
   final _instructionsController = TextEditingController();
-  CreateInstructionsScreenUI({super.key});
+
+  @override
+  void initState() {
+    if(widget.isEditing == true && widget.index != null){
+      context.read<CreateInstructionsBloc>().add(EditStepsEvent(instruction: hposterRecipes[widget.index!].instructions));
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +66,18 @@ class CreateInstructionsScreenUI extends StatelessWidget {
                                 index);
                           })));
                 }
+                if (state is EditStepsState) {
+                  return Expanded(
+                      child: ListView.builder(
+                          itemCount: state.instruction.length,
+                          itemBuilder: ((context, index) {
+                            return showEnteredInstructions(
+                                context,
+                                state.instruction[index],
+                                _screenSize.width,
+                                index);
+                          })));
+                }
                 return Expanded(
                     child: ListView.builder(
                         itemCount: 1,
@@ -64,7 +96,3 @@ class CreateInstructionsScreenUI extends StatelessWidget {
     );
   }
 }
-
-
-
-

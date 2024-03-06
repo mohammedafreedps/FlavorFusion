@@ -11,3 +11,8 @@ class DeleteStepsButtonClickedEvent extends CreateInstructionsEvent{
   int index;
   DeleteStepsButtonClickedEvent({required this.index});
 }
+
+class EditStepsEvent extends CreateInstructionsEvent{
+  List<String> instruction;
+  EditStepsEvent({required this.instruction});
+}

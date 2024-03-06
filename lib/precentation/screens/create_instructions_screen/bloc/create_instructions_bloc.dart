@@ -18,5 +18,10 @@ class CreateInstructionsBloc extends Bloc<CreateInstructionsEvent, CreateInstruc
       hinstructionsSteps.removeAt(event.index);
       emit(ShowInstructionsState(instructions: hinstructionsSteps));
     });
+
+    on<EditStepsEvent>((event, emit) {
+      hinstructionsSteps = event.instruction;
+      emit(EditStepsState(instruction: hinstructionsSteps));
+    });
   }
 }
