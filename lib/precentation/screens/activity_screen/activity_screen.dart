@@ -6,6 +6,7 @@ import 'package:flavorfusion/precentation/screens/activity_screen/widgets/activi
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_state.dart';
+import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -43,17 +44,21 @@ class ActivityScreenUI extends StatelessWidget {
                   );
                 }
                 if (state is SortedValueState) {
-                  return ListView.builder(
-                      itemCount: state.posted.length,
-                      itemBuilder: ((context, index) {
-                        return activityTile(
-                            context,
-                            _screenSize.width,
-                            state.posted[index].imageURL,
-                            state.posted[index].recipeTitle,
-                            index,
-                            state.posted);
-                      }));
+                  return state.posted.isEmpty
+                      ? Center(
+                          child: Text('Nothing to show',style: titleSmallTextStyle(_screenSize.width),),
+                        )
+                      : ListView.builder(
+                          itemCount: state.posted.length,
+                          itemBuilder: ((context, index) {
+                            return activityTile(
+                                context,
+                                _screenSize.width,
+                                state.posted[index].imageURL,
+                                state.posted[index].recipeTitle,
+                                index,
+                                state.posted);
+                          }));
                 } else {
                   return Center(
                     child: CircularProgressIndicator(

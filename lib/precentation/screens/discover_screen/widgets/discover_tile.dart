@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flavorfusion/constants/colors.dart';
+import 'package:flavorfusion/precentation/widgets/image_place_holder_text.dart';
 import 'package:flutter/material.dart';
 
 Widget discoverTile(String src, String title, double screenWidth) {
@@ -21,12 +23,13 @@ Widget discoverTile(String src, String title, double screenWidth) {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(screenWidth * 0.06),
                   child: Container(
-                    color: baseColor,
-                    child: Image.network(
-                      src,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                      color: baseColor,
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: src,
+                        placeholder: (context, url) =>
+                            imagePlaceHolderText(screenWidth),
+                      )),
                 ),
               ),
               Text(

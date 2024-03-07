@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_bloc.dart';
@@ -18,6 +19,7 @@ import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_e
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flavorfusion/precentation/widgets/bottom_sheet.dart';
+import 'package:flavorfusion/precentation/widgets/image_place_holder_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -114,9 +116,12 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
                             }
                             if (state is EditPreviewImageState) {
                               return AspectRatio(
-                                aspectRatio: 10 / 3,
-                                child: Image.network(state.imagePath),
-                              );
+                                  aspectRatio: 10 / 3,
+                                  child: CachedNetworkImage(
+                                    imageUrl: state.imagePath,
+                                    placeholder: (context, url) =>
+                                        imagePlaceHolderText(_screenSize.width),
+                                  ));
                             }
                             if (state is SelectImageState) {
                               return Text(

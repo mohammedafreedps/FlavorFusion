@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:flavorfusion/precentation/screens/firebase_recipe_detail_screen/widgets/cook_time.dart';
@@ -5,6 +6,7 @@ import 'package:flavorfusion/precentation/screens/firebase_recipe_detail_screen/
 import 'package:flavorfusion/precentation/screens/firebase_recipe_detail_screen/widgets/fire_preperation_list.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
+import 'package:flavorfusion/precentation/widgets/image_place_holder_text.dart';
 import 'package:flutter/material.dart';
 
 class FirebaseRecipeDetailScreenUI extends StatelessWidget {
@@ -41,9 +43,10 @@ class FirebaseRecipeDetailScreenUI extends StatelessWidget {
                       borderRadius:
                           BorderRadius.circular(_screenSize.width * 0.07),
                       child: SizedBox(
-                          child: Image.network(
-                        hrecipies[index].imageURL,
-                        fit: BoxFit.cover,
+                          child: CachedNetworkImage(
+                        imageUrl: hrecipies[index].imageURL,
+                        placeholder: (context, url) =>
+                            imagePlaceHolderText(_screenSize.width),
                       ))),
                 ),
                 SizedBox(

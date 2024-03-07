@@ -4,6 +4,7 @@ import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_b
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_state.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/widgets/home_tile.dart';
+import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -16,33 +17,44 @@ class HomeScreenUI extends StatelessWidget {
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: appBar(title: 'Home',icon: Icon(Icons.restart_alt,color: secondaryColor,),needAction: true,function: (){
-        context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
-      }),
+      appBar: appBar(
+          title: 'Home',
+          icon: Icon(
+            Icons.restart_alt,
+            color: secondaryColor,
+          ),
+          needAction: true,
+          function: () {
+            context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
+          }),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.1),
         child: Center(
           child: BlocBuilder<HomeScreenBloc, HomeScreenState>(
             builder: (context, state) {
               if (state is AllDatasLoadedState) {
-                return ListView.builder(
-                    itemCount: state.recipies.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        FirebaseRecipeDetailScreenUI(
-                                            index: index)));
-                          },
-                          child: homeTile(
-                              state.recipies[index].imageURL,
-                              state.recipies[index].recipeTitle,
-                              state.recipies[index].userEmail,
-                              _screenSize.width));
-                    });
+                return state.recipies.isEmpty
+                    ? Center(
+                        child: Text('Be the First to add Recipie',style: titleSmallTextStyle(_screenSize.width),),
+                      )
+                    : ListView.builder(
+                        itemCount: state.recipies.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            FirebaseRecipeDetailScreenUI(
+                                                index: index)));
+                              },
+                              child: homeTile(
+                                  state.recipies[index].imageURL,
+                                  state.recipies[index].recipeTitle,
+                                  state.recipies[index].userEmail,
+                                  _screenSize.width));
+                        });
               }
               return Center(
                 child: CircularProgressIndicator(
@@ -56,5 +68,3 @@ class HomeScreenUI extends StatelessWidget {
     );
   }
 }
-
-
