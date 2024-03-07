@@ -10,8 +10,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-Widget homeTile(BuildContext context, String src, String title, String postedBy,
-    double screenWidth, bool isLiked, String docId) {
+Widget homeTile(
+    BuildContext context,
+    String src,
+    String title,
+    String postedBy,
+    double screenWidth,
+    bool isLiked,
+    bool isWishList,
+    String docId,
+    int index) {
   return BlocListener<HomeScreenBloc, HomeScreenState>(
     listener: (context, state) {
       print('$state statessss'.toString());
@@ -79,7 +87,7 @@ Widget homeTile(BuildContext context, String src, String title, String postedBy,
                             onPressed: () {
                               context.read<HomeScreenBloc>().add(
                                   DislikeButtonClickedEvent(
-                                      docId: docId, user: user!));
+                                      docId: docId, user: huser!));
                             },
                             icon: SvgPicture.asset(
                               'Assets/thumbs-up-solid.svg',
@@ -90,7 +98,7 @@ Widget homeTile(BuildContext context, String src, String title, String postedBy,
                             onPressed: () {
                               context.read<HomeScreenBloc>().add(
                                   LikeButtonClickedEvent(
-                                      docId: docId, user: user!));
+                                      docId: docId, user: huser!));
                             },
                             icon: SvgPicture.asset(
                               'Assets/thumbs-up-solid.svg',
@@ -104,15 +112,32 @@ Widget homeTile(BuildContext context, String src, String title, String postedBy,
                           color: primaryColor,
                           width: screenWidth * 0.06,
                         )),
-                    IconButton(
-                        onPressed: () {},
-                        icon: SvgPicture.asset(
-                          'Assets/heart-solid.svg',
-                          color: primaryColor,
-                          width: screenWidth * 0.06,
-                        ))
+                        
+                    isWishList == true
+                        ? IconButton(
+                            onPressed: () {
+                              context.read<HomeScreenBloc>().add(
+                                  RemoveWishListClickedEvent(
+                                      docId: docId, user: huser!));
+                            },
+                            icon: SvgPicture.asset(
+                              'Assets/heart-solid.svg',
+                              color: secondaryColor,
+                              width: screenWidth * 0.06,
+                            ))
+                        : IconButton(
+                            onPressed: () {
+                              context.read<HomeScreenBloc>().add(
+                                  WishListClickedEvent(
+                                      docId: docId, user: huser!));
+                            },
+                            icon: SvgPicture.asset(
+                              'Assets/heart-solid.svg',
+                              color: primaryColor,
+                              width: screenWidth * 0.06,
+                            )),
                   ],
-                ),
+                )
               ],
             ),
           ),

@@ -12,6 +12,7 @@ class RecipeFromFireBaseModel {
   final String totalTime;
   final String userEmail;
   final List likes;
+  final List wishlist;
 
   RecipeFromFireBaseModel({
     required this.docId,
@@ -27,6 +28,7 @@ class RecipeFromFireBaseModel {
     required this.totalTime,
     required this.userEmail,
     required this.likes,
+    required this.wishlist
   });
 
   factory RecipeFromFireBaseModel.fromMap(String docId, Map<String, dynamic> map) {
@@ -43,7 +45,8 @@ class RecipeFromFireBaseModel {
       recipeTitle: map['recipeTitle'],
       totalTime: map['totalTime'],
       userEmail: map['userEmail'],
-      likes : map['likes']
+      likes : map['likes'],
+      wishlist : map['wishlist']
     );
   }
 }

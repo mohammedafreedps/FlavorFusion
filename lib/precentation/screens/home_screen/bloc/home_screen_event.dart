@@ -15,3 +15,15 @@ class DislikeButtonClickedEvent extends HomeScreenEvent{
   User user;
   DislikeButtonClickedEvent({required this.docId,required this.user});
 }
+
+class WishListClickedEvent extends HomeScreenEvent{
+  String docId;
+  User user;
+  WishListClickedEvent({required this.docId, required this.user});
+}
+
+class RemoveWishListClickedEvent extends HomeScreenEvent{
+  String docId;
+  User user;
+  RemoveWishListClickedEvent({required this.docId, required this.user});
+}

@@ -10,4 +10,5 @@ class AllDatasLoadedState extends HomeScreenState{
   AllDatasLoadedState({required this.recipies});
 }
 
-class LikeCheckState extends HomeScreenState{}
+class LikeCheckState extends HomeScreenState{
+}

@@ -1,5 +1,5 @@
 
-  import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavorfusion/data/repository/recipe_from_firebase_model.dart';
 
 List<String> hcreatedIngredents = [];
@@ -11,4 +11,5 @@ List<String> hcreatedIngredents = [];
   String? himagePath;
   List<RecipeFromFireBaseModel> hrecipies = [];
   List<RecipeFromFireBaseModel> hposterRecipes = [];
-  User? user;
+  User? huser;
+  List hlikes = [];

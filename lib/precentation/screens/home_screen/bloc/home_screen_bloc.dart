@@ -17,27 +17,45 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
       hrecipies.clear();
       for (int i = recipes.length - 1; i >= 0; i--) {
         hrecipies.add(recipes[i]);
+        hlikes.add(recipes[i].likes);
       }
       emit(AllDatasLoadedState(recipies: hrecipies));
     });
 
-    on<LikeButtonClickedEvent>((event, emit) {
-      print('like button clikc bloc');
-      print(event.user);
-      print(event.docId);
+    on<LikeButtonClickedEvent>((event, emit) async {
       final colRef =
           FirebaseFirestore.instance.collection('recipes').doc(event.docId);
       colRef.update({
         'likes': FieldValue.arrayUnion([event.user.email])
       });
+
       emit(LikeCheckState());
     });
 
-    on<DislikeButtonClickedEvent>((event, emit) {
+    on<DislikeButtonClickedEvent>((event, emit) async {
       final colRef =
           FirebaseFirestore.instance.collection('recipes').doc(event.docId);
       colRef.update({
         'likes': FieldValue.arrayRemove([event.user.email])
+      });
+
+      emit(LikeCheckState());
+    });
+
+    on<WishListClickedEvent>((event, emit) {
+      final colRef =
+          FirebaseFirestore.instance.collection('recipes').doc(event.docId);
+      colRef.update({
+        'wishlist': FieldValue.arrayUnion([event.user.email])
+      });
+      emit(LikeCheckState());
+    });
+
+    on<RemoveWishListClickedEvent>((event, emit) {
+      final colRef =
+          FirebaseFirestore.instance.collection('recipes').doc(event.docId);
+      colRef.update({
+        'wishlist': FieldValue.arrayRemove([event.user.email])
       });
       emit(LikeCheckState());
     });

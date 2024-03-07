@@ -42,6 +42,7 @@ class HomeScreenUI extends StatelessWidget {
                         ),
                       )
                     : ListView.builder(
+                        key: const PageStorageKey<String>('page'),
                         itemCount: state.recipies.length,
                         itemBuilder: (context, index) {
                           return GestureDetector(
@@ -59,8 +60,12 @@ class HomeScreenUI extends StatelessWidget {
                                   state.recipies[index].recipeTitle,
                                   state.recipies[index].userEmail,
                                   _screenSize.width,
-                                  state.recipies[index].likes.contains(user!.email),
-                                  state.recipies[index].docId));
+                                  state.recipies[index].likes
+                                      .contains(huser!.email),
+                                  state.recipies[index].wishlist
+                                      .contains(huser!.email),
+                                  state.recipies[index].docId,
+                                  index));
                         });
               }
               return Center(
