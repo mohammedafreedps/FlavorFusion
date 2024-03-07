@@ -66,7 +66,8 @@ class CreateFillinBloc extends Bloc<CreateFillinEvent, CreateFillinState> {
           'cookTime': event.cookTime,
           'totalTime': event.totalTime,
           'difficultyLevel': event.difficultyLevel,
-          'additionalNotes': event.additionalNotes
+          'additionalNotes': event.additionalNotes,
+          'likes' : []
         });
         emit(RecipieUploadedStete());
       } on FirebaseException catch (e) {

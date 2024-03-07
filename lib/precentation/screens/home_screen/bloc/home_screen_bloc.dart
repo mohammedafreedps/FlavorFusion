@@ -9,7 +9,6 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   HomeScreenBloc() : super(HomeScreenInitial()) {
     on<HomeScreenEvent>((event, emit) {});
     on<FechDataFromFirebaseEvent>((event, emit) async {
-      print('Fech Event called');
       QuerySnapshot<Map<String, dynamic>> records =
           await FirebaseFirestore.instance.collection('recipes').get();
       List<RecipeFromFireBaseModel> recipes = records.docs
@@ -20,6 +19,27 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
         hrecipies.add(recipes[i]);
       }
       emit(AllDatasLoadedState(recipies: hrecipies));
+    });
+
+    on<LikeButtonClickedEvent>((event, emit) {
+      print('like button clikc bloc');
+      print(event.user);
+      print(event.docId);
+      final colRef =
+          FirebaseFirestore.instance.collection('recipes').doc(event.docId);
+      colRef.update({
+        'likes': FieldValue.arrayUnion([event.user.email])
+      });
+      emit(LikeCheckState());
+    });
+
+    on<DislikeButtonClickedEvent>((event, emit) {
+      final colRef =
+          FirebaseFirestore.instance.collection('recipes').doc(event.docId);
+      colRef.update({
+        'likes': FieldValue.arrayRemove([event.user.email])
+      });
+      emit(LikeCheckState());
     });
   }
 }

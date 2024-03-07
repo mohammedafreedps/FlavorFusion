@@ -9,3 +9,5 @@ class AllDatasLoadedState extends HomeScreenState{
   List<RecipeFromFireBaseModel> recipies;
   AllDatasLoadedState({required this.recipies});
 }
+
+class LikeCheckState extends HomeScreenState{}

@@ -1,4 +1,5 @@
 
+import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavorfusion/Constants/textes.dart';
@@ -14,6 +15,7 @@ class AuthenticationBloc
         emit(FirstOpeningState());
       } else {
         User? _user = await FirebaseAuth.instance.currentUser;
+        user = _user;
         if (_user == null) {
           emit(LoggedOutState());
         } else {

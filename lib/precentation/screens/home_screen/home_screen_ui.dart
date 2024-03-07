@@ -1,4 +1,5 @@
 import 'package:flavorfusion/constants/colors.dart';
+import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:flavorfusion/precentation/screens/firebase_recipe_detail_screen/firebase_recipe_detail_screen.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
@@ -35,7 +36,10 @@ class HomeScreenUI extends StatelessWidget {
               if (state is AllDatasLoadedState) {
                 return state.recipies.isEmpty
                     ? Center(
-                        child: Text('Be the First to add Recipie',style: titleSmallTextStyle(_screenSize.width),),
+                        child: Text(
+                          'Be the First to add Recipie',
+                          style: titleSmallTextStyle(_screenSize.width),
+                        ),
                       )
                     : ListView.builder(
                         itemCount: state.recipies.length,
@@ -50,10 +54,13 @@ class HomeScreenUI extends StatelessWidget {
                                                 index: index)));
                               },
                               child: homeTile(
+                                  context,
                                   state.recipies[index].imageURL,
                                   state.recipies[index].recipeTitle,
                                   state.recipies[index].userEmail,
-                                  _screenSize.width));
+                                  _screenSize.width,
+                                  state.recipies[index].likes.contains(user!.email),
+                                  state.recipies[index].docId));
                         });
               }
               return Center(
