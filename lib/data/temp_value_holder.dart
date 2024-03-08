@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flavorfusion/data/repository/comments_model.dart';
 import 'package:flavorfusion/data/repository/recipe_from_firebase_model.dart';
 import 'package:flavorfusion/data/repository/saved_recipes_model.dart';
 
@@ -14,3 +15,4 @@ List<String> hcreatedIngredents = [];
   User? huser;
   List hlikes = [];
   List<SavedRecipeModel> hsavedRecipes = [];
+  List<CommentModel> hcomments =  [];

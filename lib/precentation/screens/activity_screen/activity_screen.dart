@@ -1,10 +1,13 @@
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_bloc.dart';
+import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_event.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_state.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/widgets/activity_tile.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_state.dart';
+import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_bloc.dart';
+import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_event.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +25,7 @@ class ActivityScreenUI extends StatelessWidget {
         listener: (context, state) {
           if (state is AllDatasLoadedState) {
             print('add data loadied get in activity page');
-            // context.read<ActivityBloc>().add(SortAndSetValueEvent());
+            context.read<ActivityBloc>().add(SortAndSetValueEvent());
             // Timer(Duration(seconds: 4), () {
             //   context
             //       .read<SavedRecipesBloc>()
@@ -34,6 +37,7 @@ class ActivityScreenUI extends StatelessWidget {
           listener: (context, state) {
             if (state is DeletedSuccesfullyState) {
               context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
+              context.read<SavedRecipesBloc>().add(LoadDataInSavedRecipieEvent());
             }
           },
           child: Padding(

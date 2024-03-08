@@ -70,6 +70,7 @@ class CreateFillinBloc extends Bloc<CreateFillinEvent, CreateFillinState> {
           'likes' : [],
           'wishlist': []
         });
+        
         emit(RecipieUploadedStete());
       } on FirebaseException catch (e) {
         emit(ImageUploadFailedState(message: e.message.toString()));

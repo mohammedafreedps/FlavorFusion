@@ -1,5 +1,6 @@
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/data/temp_value_holder.dart';
+import 'package:flavorfusion/precentation/screens/commant_screen/comment_screen_ui.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_state.dart';
@@ -108,7 +109,13 @@ Widget homeTile(
                               width: screenWidth * 0.06,
                             )),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CommentScreenUI(
+                                      docId: hrecipies[index].docId)));
+                        },
                         icon: SvgPicture.asset(
                           'Assets/comment-solid.svg',
                           color: primaryColor,

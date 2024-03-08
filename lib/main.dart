@@ -7,6 +7,7 @@ import 'package:flavorfusion/precentation/authentication_bloc/auth_State.dart';
 import 'package:flavorfusion/precentation/screens/Intro_page_one_screen/intro_page_one_UI.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_bloc.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_event.dart';
+import 'package:flavorfusion/precentation/screens/commant_screen/bloc/comment_bloc.dart';
 import 'package:flavorfusion/precentation/screens/create_account_screen/create_account_UI.dart';
 import 'package:flavorfusion/precentation/screens/create_cooking_time_screen/bloc/create_cooking_time_bloc.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/bloc/create_fillin_bloc.dart';
@@ -69,7 +70,8 @@ class MyApp extends StatelessWidget {
                 HomeScreenBloc()..add(FechDataFromFirebaseEvent()))),
         BlocProvider<ActivityBloc>(
             create: (context) => ActivityBloc()..add(SortAndSetValueEvent())),
-        BlocProvider<SavedRecipesBloc>(create: (context)=>SavedRecipesBloc()..add(LoadDataInSavedRecipieEvent()))
+        BlocProvider<SavedRecipesBloc>(create: (context)=>SavedRecipesBloc()..add(LoadDataInSavedRecipieEvent())),
+        BlocProvider<CommentBloc>(create: (context)=> CommentBloc())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

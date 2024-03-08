@@ -15,7 +15,7 @@ class SavedRecipesBloc extends Bloc<SavedRecipesEvent, SavedRecipesState> {
       QuerySnapshot<Map<String, dynamic>> record = await FirebaseFirestore.instance.collection('recipes').get();
       List<SavedRecipeModel> savedRecipes = record.docs.map((doc)=> SavedRecipeModel.fromMap(doc.id,doc.data())).toList();
       hsavedRecipes = savedRecipes.where((recipes) => recipes.wishlist.contains(huser!.email),).toList();
-      print(savedRecipes[2].wishlist);
+      // print(savedRecipes[2].wishlist);
       emit(SavedRecipesListState(savedRecipes: hsavedRecipes));
     });
 

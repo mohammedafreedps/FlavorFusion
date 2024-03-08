@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 
 sealed class HomeScreenEvent {}
@@ -27,3 +26,4 @@ class RemoveWishListClickedEvent extends HomeScreenEvent{
   User user;
   RemoveWishListClickedEvent({required this.docId, required this.user});
 }
+
