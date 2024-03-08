@@ -19,6 +19,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
         hrecipies.add(recipes[i]);
         hlikes.add(recipes[i].likes);
       }
+      // await Future.delayed(Duration(seconds: 1));
       emit(AllDatasLoadedState(recipies: hrecipies));
     });
 

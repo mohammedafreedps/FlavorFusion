@@ -5,6 +5,8 @@ import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_b
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_state.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/widgets/home_tile.dart';
+import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_bloc.dart';
+import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_event.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +29,7 @@ class HomeScreenUI extends StatelessWidget {
           needAction: true,
           function: () {
             context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
+            context.read<SavedRecipesBloc>().add(LoadDataInSavedRecipieEvent());
           }),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.1),

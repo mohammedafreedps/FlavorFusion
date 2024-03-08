@@ -1,6 +1,5 @@
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_bloc.dart';
-import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_event.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_state.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/widgets/activity_tile.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
@@ -23,7 +22,12 @@ class ActivityScreenUI extends StatelessWidget {
         listener: (context, state) {
           if (state is AllDatasLoadedState) {
             print('add data loadied get in activity page');
-            context.read<ActivityBloc>().add(SortAndSetValueEvent());
+            // context.read<ActivityBloc>().add(SortAndSetValueEvent());
+            // Timer(Duration(seconds: 4), () {
+            //   context
+            //       .read<SavedRecipesBloc>()
+            //       .add(LoadDataInSavedRecipieEvent());
+            // });
           }
         },
         child: BlocListener<ActivityBloc, ActivityState>(
@@ -46,7 +50,10 @@ class ActivityScreenUI extends StatelessWidget {
                 if (state is SortedValueState) {
                   return state.posted.isEmpty
                       ? Center(
-                          child: Text('Nothing to show',style: titleSmallTextStyle(_screenSize.width),),
+                          child: Text(
+                            'Nothing to show',
+                            style: titleSmallTextStyle(_screenSize.width),
+                          ),
                         )
                       : ListView.builder(
                           itemCount: state.posted.length,

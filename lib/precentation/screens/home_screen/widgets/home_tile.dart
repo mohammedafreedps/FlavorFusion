@@ -3,6 +3,8 @@ import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_state.dart';
+import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_bloc.dart';
+import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_event.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flavorfusion/precentation/widgets/image_place_holder_text.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +27,7 @@ Widget homeTile(
       print('$state statessss'.toString());
       if (state is LikeCheckState) {
         context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
+        context.read<SavedRecipesBloc>().add(LoadDataInSavedRecipieEvent());
       }
     },
     child: Padding(
@@ -38,7 +41,6 @@ Widget homeTile(
             height: 100,
             color: baseColor,
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -112,7 +114,6 @@ Widget homeTile(
                           color: primaryColor,
                           width: screenWidth * 0.06,
                         )),
-                        
                     isWishList == true
                         ? IconButton(
                             onPressed: () {

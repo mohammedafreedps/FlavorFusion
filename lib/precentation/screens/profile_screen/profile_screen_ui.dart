@@ -1,10 +1,9 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_Bloc.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_Event.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/activity_screen.dart';
+import 'package:flavorfusion/precentation/screens/saved_recipies/saved_recipies_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,9 +46,7 @@ class ProfileScreenUI extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            Center(
-              child: Text('Tab 1 Content'),
-            ),
+            SavedRecipesUI(),
             ActivityScreenUI()
           ],
         ),
@@ -66,7 +63,6 @@ class ProfileScreenUI extends StatelessWidget {
                   _user!.email!,
                   style: TextStyle(color: secondaryColor),
                 ),
-                // SizedBox(height: _screenSize.height * 0.66),
                 Column(
                   children: [
                     TextButton(
