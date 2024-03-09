@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +9,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/bloc/create_fillin_event.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/bloc/create_fillin_state.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 class CreateFillinBloc extends Bloc<CreateFillinEvent, CreateFillinState> {
   ImagePicker picker = ImagePicker();
@@ -44,9 +47,18 @@ class CreateFillinBloc extends Bloc<CreateFillinEvent, CreateFillinState> {
       final firebase_storage.FirebaseStorage storage =
           firebase_storage.FirebaseStorage.instance;
       String fileName = event.imageName;
-      File imageFile = File(event.imagePath);
+      // File imageFile = File(event.imagePath);
+      final Uint8List? compressedImage =
+          await FlutterImageCompress.compressWithFile(
+        event.imagePath,
+        quality: 60,
+      );
+      final tempDir = await getTemporaryDirectory();
+      final tempPath = tempDir.path;
+      final tempFile = File('$tempPath/$fileName');
+      await tempFile.writeAsBytes(compressedImage!);
       try {
-        await storage.ref('thumbnails/$fileName').putFile(imageFile);
+        await storage.ref('thumbnails/$fileName').putFile(tempFile);
         String downlordURL =
             await storage.ref('thumbnails/$fileName').getDownloadURL();
         print(downlordURL + 'uploaded imge in firesoter');
@@ -67,10 +79,10 @@ class CreateFillinBloc extends Bloc<CreateFillinEvent, CreateFillinState> {
           'totalTime': event.totalTime,
           'difficultyLevel': event.difficultyLevel,
           'additionalNotes': event.additionalNotes,
-          'likes' : [],
+          'likes': [],
           'wishlist': []
         });
-        
+
         emit(RecipieUploadedStete());
       } on FirebaseException catch (e) {
         emit(ImageUploadFailedState(message: e.message.toString()));
@@ -93,7 +105,7 @@ class CreateFillinBloc extends Bloc<CreateFillinEvent, CreateFillinState> {
       emit(RecipieUploadingStete());
       final storage = FirebaseStorage.instance;
       String imgPath = hposterRecipes[event.index].imageURL;
-      File imgFile = File(event.imagePath);
+      // File imgFile = File(event.imagePath);
       String docId = hposterRecipes[event.index].docId;
       String imageName = DateTime.now().toString();
       final colRef =
@@ -101,7 +113,17 @@ class CreateFillinBloc extends Bloc<CreateFillinEvent, CreateFillinState> {
       final imageRef = FirebaseStorage.instance.refFromURL(imgPath);
       try {
         await imageRef.delete();
-        await storage.ref('thumbnails/$imageName').putFile(imgFile);
+        final Uint8List? compressedImage =
+            await FlutterImageCompress.compressWithFile(
+          event.imagePath,
+          quality: 60,
+        );
+        final tempDir = await getTemporaryDirectory();
+        final tempPath = tempDir.path;
+        final String fileName = 'recipe'+ DateTime.now().toString();
+        final tempFile = File('$tempPath/$fileName');
+        await tempFile.writeAsBytes(compressedImage!);
+        await storage.ref('thumbnails/$imageName').putFile(tempFile);
         String downlordURL =
             await storage.ref('thumbnails/$imageName').getDownloadURL();
         colRef.update({
