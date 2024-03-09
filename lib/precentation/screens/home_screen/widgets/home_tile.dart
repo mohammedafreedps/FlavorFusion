@@ -86,35 +86,53 @@ Widget homeTile(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     isLiked == true
-                        ? IconButton(
-                            onPressed: () {
-                              context.read<HomeScreenBloc>().add(
-                                  DislikeButtonClickedEvent(
-                                      docId: docId, user: huser!));
-                            },
-                            icon: SvgPicture.asset(
-                              'Assets/thumbs-up-solid.svg',
-                              color: secondaryColor,
-                              width: screenWidth * 0.06,
-                            ))
-                        : IconButton(
-                            onPressed: () {
-                              context.read<HomeScreenBloc>().add(
-                                  LikeButtonClickedEvent(
-                                      docId: docId, user: huser!));
-                            },
-                            icon: SvgPicture.asset(
-                              'Assets/thumbs-up-solid.svg',
-                              color: primaryColor,
-                              width: screenWidth * 0.06,
-                            )),
+                        ? Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    context.read<HomeScreenBloc>().add(
+                                        DislikeButtonClickedEvent(
+                                            docId: docId, user: huser!));
+                                  },
+                                  icon: SvgPicture.asset(
+                                    'Assets/thumbs-up-solid.svg',
+                                    color: secondaryColor,
+                                    width: screenWidth * 0.06,
+                                  )),
+                              Text(
+                                hrecipies[index].likes.length.toString(),
+                                style: titleSmallTextStyle(screenWidth),
+                              )
+                            ],
+                          )
+                        : Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    context.read<HomeScreenBloc>().add(
+                                        LikeButtonClickedEvent(
+                                            docId: docId, user: huser!));
+                                  },
+                                  icon: SvgPicture.asset(
+                                    'Assets/thumbs-up-solid.svg',
+                                    color: primaryColor,
+                                    width: screenWidth * 0.06,
+                                  )),
+                              Text(
+                                hrecipies[index].likes.length.toString(),
+                                style: titleSmallTextStyle(screenWidth),
+                              )
+                            ],
+                          ),
                     IconButton(
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => CommentScreenUI(
-                                      docId: hrecipies[index].docId,title: hrecipies[index].recipeTitle,)));
+                                        docId: hrecipies[index].docId,
+                                        title: hrecipies[index].recipeTitle,
+                                      )));
                         },
                         icon: SvgPicture.asset(
                           'Assets/comment-solid.svg',
