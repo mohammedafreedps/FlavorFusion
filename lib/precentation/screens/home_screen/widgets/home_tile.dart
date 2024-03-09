@@ -114,7 +114,7 @@ Widget homeTile(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => CommentScreenUI(
-                                      docId: hrecipies[index].docId)));
+                                      docId: hrecipies[index].docId,title: hrecipies[index].recipeTitle,)));
                         },
                         icon: SvgPicture.asset(
                           'Assets/comment-solid.svg',

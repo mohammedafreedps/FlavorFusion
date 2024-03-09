@@ -29,12 +29,26 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
           .doc(event.docId)
           .collection('comments')
           .get();
-      // hcomments =
-      //     record.docs.map((doc) => CommentModel.fromMap(doc.data())).toList();
-      List<CommentModel> comment =
-          record.docs.map((doc) => CommentModel.fromMap(doc.data())).toList();
+      List<CommentModel> comment = record.docs
+          .map((doc) => CommentModel.fromMap(doc.id, doc.data()))
+          .toList();
 
       emit(CommentsOnPostState(comments: comment));
+    });
+
+    on<DeleteCommentButtonClikedEvent>((event, emit) async {
+      emit(CommentUploadingState());
+      final commentDocRef = FirebaseFirestore.instance
+          .collection('recipes')
+          .doc(event.docId)
+          .collection('comments')
+          .doc(event.commentId);
+      try {
+        await commentDocRef.delete();
+        emit(CommentDeletedState());
+      } on FirebaseException catch (e) {
+        print(e);
+      }
     });
   }
 }

@@ -12,7 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CommentScreenUI extends StatefulWidget {
   final String docId;
-  CommentScreenUI({super.key, required this.docId});
+  final String title;
+  CommentScreenUI({super.key, required this.docId,required this.title});
 
   @override
   State<CommentScreenUI> createState() => _CommentScreenUIState();
@@ -30,7 +31,7 @@ class _CommentScreenUIState extends State<CommentScreenUI> {
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: appBar(title: ''),
+      appBar: appBar(title: widget.title),
       body: BlocListener<CommentBloc, CommentState>(
         listener: (context, state) {
           if (state is CommentAddedState) {
@@ -39,34 +40,51 @@ class _CommentScreenUIState extends State<CommentScreenUI> {
                 .add(LoadCommentsEvent(docId: widget.docId));
             context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
           }
+          if (state is CommentDeletedState) {
+            context
+                .read<CommentBloc>()
+                .add(LoadCommentsEvent(docId: widget.docId));
+            context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
+          }
         },
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.1,vertical: _screenSize.width * 0.05),
+          padding: EdgeInsets.only(
+              left: _screenSize.width * 0.1,
+              right: _screenSize.width * 0.1,
+              bottom: _screenSize.width * 0.05),
           child: Column(
             children: [
               Text(
-                'Comment',
+                'Comments',
                 style: titleMidiumTextStyle(_screenSize.width)
                     .copyWith(fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: _screenSize.width * 0.05,),
+              SizedBox(
+                height: _screenSize.width * 0.05,
+              ),
               BlocBuilder<CommentBloc, CommentState>(
                 builder: (context, state) {
                   if (state is CommentsOnPostState) {
                     return Expanded(
                       // height: _screenSize.width * 0.6,
-                      child: ListView.builder(
+                      child: state.comments.isEmpty ? Center(child: Text('No Comments',style: titleSmallTextStyle(_screenSize.width),),) :  ListView.builder(
                           itemCount: state.comments.length,
                           itemBuilder: (BuildContext context, int index) {
                             return commentTile(
+                                context,
+                                index,
                                 _screenSize.width,
                                 state.comments[index].commentedBy,
-                                state.comments[index].comment);
+                                state.comments[index].comment,
+                                widget.docId,
+                                state.comments[index].commentId);
                           }),
                     );
                   }
                   return Center(
-                    child: CircularProgressIndicator(color: secondaryColor,),
+                    child: CircularProgressIndicator(
+                      color: secondaryColor,
+                    ),
                   );
                 },
               ),
@@ -80,8 +98,8 @@ class _CommentScreenUIState extends State<CommentScreenUI> {
                         style: TextStyle(color: baseColor),
                         cursorColor: baseColor,
                         decoration: InputDecoration(
-                          hintText: 'Add your Comment',
-                          hintStyle: TextStyle(color: baseColor),
+                            hintText: 'Add your Comment',
+                            hintStyle: TextStyle(color: baseColor),
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: baseColor)),
                             focusedBorder: UnderlineInputBorder(

@@ -13,3 +13,5 @@ class CommentsOnPostState extends CommentState{
 }
 
 class CommentAddedState extends CommentState{}
+
+class CommentDeletedState extends CommentState{}
