@@ -13,7 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CommentScreenUI extends StatefulWidget {
   final String docId;
   final String title;
-  CommentScreenUI({super.key, required this.docId,required this.title});
+  CommentScreenUI({super.key, required this.docId, required this.title});
 
   @override
   State<CommentScreenUI> createState() => _CommentScreenUIState();
@@ -67,18 +67,25 @@ class _CommentScreenUIState extends State<CommentScreenUI> {
                   if (state is CommentsOnPostState) {
                     return Expanded(
                       // height: _screenSize.width * 0.6,
-                      child: state.comments.isEmpty ? Center(child: Text('No Comments',style: titleSmallTextStyle(_screenSize.width),),) :  ListView.builder(
-                          itemCount: state.comments.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return commentTile(
-                                context,
-                                index,
-                                _screenSize.width,
-                                state.comments[index].commentedBy,
-                                state.comments[index].comment,
-                                widget.docId,
-                                state.comments[index].commentId);
-                          }),
+                      child: state.comments.isEmpty
+                          ? Center(
+                              child: Text(
+                                'No Comments',
+                                style: titleSmallTextStyle(_screenSize.width),
+                              ),
+                            )
+                          : ListView.builder(
+                              itemCount: state.comments.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return commentTile(
+                                    context,
+                                    index,
+                                    _screenSize.width,
+                                    state.comments[index].commentedBy,
+                                    state.comments[index].comment,
+                                    widget.docId,
+                                    state.comments[index].commentId);
+                              }),
                     );
                   }
                   return Center(

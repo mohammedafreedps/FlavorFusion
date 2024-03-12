@@ -18,7 +18,7 @@ class _StartingScreenUIState extends State<StartingScreenUI> {
   int _selectedPageIndex = 0;
 
   final List<Widget> _pages = [
-    const HomeScreenUI(),
+    HomeScreenUI(),
     DiscoverScreenUI(),
     const CreatePageUI(),
     ProfileScreenUI()

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:flavorfusion/precentation/screens/firebase_recipe_detail_screen/firebase_recipe_detail_screen.dart';
@@ -13,8 +14,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreenUI extends StatelessWidget {
-  const HomeScreenUI({super.key});
+class HomeScreenUI extends StatelessWidget  {
+  final User? _user =  FirebaseAuth.instance.currentUser;
+  HomeScreenUI({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +66,7 @@ class HomeScreenUI extends StatelessWidget {
                                   state.recipies[index].userEmail,
                                   _screenSize.width,
                                   state.recipies[index].likes
-                                      .contains(huser!.email),
+                                      .contains(_user!.email),
                                   state.recipies[index].wishlist
                                       .contains(huser!.email),
                                   state.recipies[index].docId,

@@ -97,22 +97,27 @@ class FirebaseRecipeDetailScreenUI extends StatelessWidget {
                     children: firePreparationList(
                         hrecipies[index].instructions, _screenSize.width)),
                 Divider(),
-                Text(
-                  overflow: TextOverflow.ellipsis,
-                  'Additional Note',
-                  style: titleMidiumTextStyle(_screenSize.width)
-                      .copyWith(fontSize: _screenSize.width * 0.05),
-                ),
-                SizedBox(
-                  height: _screenSize.width * 0.04,
-                ),
-                Text(
-                  hrecipies[index].additionalNotes,
-                  style: titleSmallTextStyle(_screenSize.width),
-                ),
-                SizedBox(
-                  height: _screenSize.width * 0.04,
-                ),
+                hrecipies[index].additionalNotes != 'Nil' ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      overflow: TextOverflow.ellipsis,
+                      'Additional Note',
+                      style: titleMidiumTextStyle(_screenSize.width)
+                          .copyWith(fontSize: _screenSize.width * 0.05),
+                    ),
+                    SizedBox(
+                      height: _screenSize.width * 0.04,
+                    ),
+                    Text(
+                      hrecipies[index].additionalNotes,
+                      style: titleSmallTextStyle(_screenSize.width),
+                    ),
+                    SizedBox(
+                      height: _screenSize.width * 0.04,
+                    ),
+                  ],
+                ): Text('')
               ],
             )),
       ]),
