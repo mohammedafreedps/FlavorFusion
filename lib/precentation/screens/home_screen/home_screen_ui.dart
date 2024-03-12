@@ -57,6 +57,7 @@ class HomeScreenUI extends StatelessWidget  {
                                     MaterialPageRoute(
                                         builder: (context) =>
                                             FirebaseRecipeDetailScreenUI(
+                                              listOfItem: hrecipies,
                                                 index: index)));
                               },
                               child: homeTile(

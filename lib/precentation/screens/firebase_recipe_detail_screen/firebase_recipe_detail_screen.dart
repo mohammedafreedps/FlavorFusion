@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flavorfusion/constants/colors.dart';
-import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:flavorfusion/precentation/screens/firebase_recipe_detail_screen/widgets/cook_time.dart';
 import 'package:flavorfusion/precentation/screens/firebase_recipe_detail_screen/widgets/fire_ingredients_list.dart';
 import 'package:flavorfusion/precentation/screens/firebase_recipe_detail_screen/widgets/fire_preperation_list.dart';
@@ -11,7 +10,9 @@ import 'package:flutter/material.dart';
 
 class FirebaseRecipeDetailScreenUI extends StatelessWidget {
   final int index;
-  FirebaseRecipeDetailScreenUI({super.key, required this.index});
+  final List listOfItem;
+  FirebaseRecipeDetailScreenUI(
+      {super.key, required this.index, required this.listOfItem});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +28,8 @@ class FirebaseRecipeDetailScreenUI extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
+                  listOfItem[index].recipeTitle,
                   overflow: TextOverflow.ellipsis,
-                  hrecipies[index].recipeTitle,
                   style: TextStyle(
                       color: secondaryColor,
                       fontWeight: FontWeight.bold,
@@ -44,7 +45,7 @@ class FirebaseRecipeDetailScreenUI extends StatelessWidget {
                           BorderRadius.circular(_screenSize.width * 0.07),
                       child: SizedBox(
                           child: CachedNetworkImage(
-                        imageUrl: hrecipies[index].imageURL,
+                        imageUrl: listOfItem[index].imageURL,
                         placeholder: (context, url) =>
                             imagePlaceHolderText(_screenSize.width),
                       ))),
@@ -65,8 +66,8 @@ class FirebaseRecipeDetailScreenUI extends StatelessWidget {
                   height: _screenSize.width * 0.02,
                 ),
                 Column(
-                  children: fireIngredientsList(hrecipies[index].ingredients,
-                      hrecipies[index].quantitys, _screenSize.width),
+                  children: fireIngredientsList(listOfItem[index].ingredients,
+                      listOfItem[index].quantitys, _screenSize.width),
                 ),
                 SizedBox(
                   height: _screenSize.width * 0.02,
@@ -74,11 +75,11 @@ class FirebaseRecipeDetailScreenUI extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    cookTime('Prep Time', hrecipies[index].prepTime,
+                    cookTime('Prep Time', listOfItem[index].prepTime,
                         _screenSize.width),
-                    cookTime('Cook Time', hrecipies[index].cookTime,
+                    cookTime('Cook Time', listOfItem[index].cookTime,
                         _screenSize.width),
-                    cookTime('Total Time', hrecipies[index].totalTime,
+                    cookTime('Total Time', listOfItem[index].totalTime,
                         _screenSize.width)
                   ],
                 ),
@@ -95,29 +96,31 @@ class FirebaseRecipeDetailScreenUI extends StatelessWidget {
                 ),
                 Column(
                     children: firePreparationList(
-                        hrecipies[index].instructions, _screenSize.width)),
+                        listOfItem[index].instructions, _screenSize.width)),
                 Divider(),
-                hrecipies[index].additionalNotes != 'Nil' ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      overflow: TextOverflow.ellipsis,
-                      'Additional Note',
-                      style: titleMidiumTextStyle(_screenSize.width)
-                          .copyWith(fontSize: _screenSize.width * 0.05),
-                    ),
-                    SizedBox(
-                      height: _screenSize.width * 0.04,
-                    ),
-                    Text(
-                      hrecipies[index].additionalNotes,
-                      style: titleSmallTextStyle(_screenSize.width),
-                    ),
-                    SizedBox(
-                      height: _screenSize.width * 0.04,
-                    ),
-                  ],
-                ): Text('')
+                listOfItem[index].additionalNotes != 'Nil'
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            overflow: TextOverflow.ellipsis,
+                            'Additional Note',
+                            style: titleMidiumTextStyle(_screenSize.width)
+                                .copyWith(fontSize: _screenSize.width * 0.05),
+                          ),
+                          SizedBox(
+                            height: _screenSize.width * 0.04,
+                          ),
+                          Text(
+                            listOfItem[index].additionalNotes,
+                            style: titleSmallTextStyle(_screenSize.width),
+                          ),
+                          SizedBox(
+                            height: _screenSize.width * 0.04,
+                          ),
+                        ],
+                      )
+                    : Text('')
               ],
             )),
       ]),
