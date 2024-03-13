@@ -2,12 +2,13 @@ import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:flavorfusion/precentation/screens/commant_screen/bloc/comment_bloc.dart';
 import 'package:flavorfusion/precentation/screens/commant_screen/bloc/comment_event.dart';
+import 'package:flavorfusion/precentation/screens/commant_screen/function/dateFormatter.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 Widget commentTile(BuildContext context, int index, double screenWidth,
-    String user, String comment, String docId, String commentId) {
+    String user, String comment, String docId, String commentId, DateTime dateTime) {
   return Padding(
     padding: EdgeInsets.only(bottom: screenWidth * 0.02),
     child: ClipRRect(
@@ -19,9 +20,21 @@ Widget commentTile(BuildContext context, int index, double screenWidth,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              user.replaceAll('@gmail.com', ''),
-              style: titleSmallTextStyle(screenWidth),
+            Row(
+              children: [
+                Text(
+                  user.replaceAll('@gmail.com', ''),
+                  style: titleSmallTextStyle(screenWidth),
+                ),
+                Text(
+                  ' . ',
+                  style: titleSmallTextStyle(screenWidth),
+                ),
+                Text(
+                  dateFormatter(date: dateTime),
+                  style: titleSmallTextStyle(screenWidth),
+                ),
+              ],
             ),
             SizedBox(
               height: screenWidth * 0.05,

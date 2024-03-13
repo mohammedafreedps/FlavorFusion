@@ -17,7 +17,7 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
           .collection('recipes')
           .doc(event.docId)
           .collection('comments')
-          .add({'comment': event.comment, 'commentedby': huser!.email});
+          .add({'comment': event.comment, 'commentedby': huser!.email, 'time' : event.dateTime});
       emit(CommentAddedState());
     });
 
@@ -32,7 +32,8 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
       List<CommentModel> comment = record.docs
           .map((doc) => CommentModel.fromMap(doc.id, doc.data()))
           .toList();
-
+      hcommentCount.add(record.size);
+      print(hcommentCount.length);
       emit(CommentsOnPostState(comments: comment));
     });
 

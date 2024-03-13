@@ -84,7 +84,7 @@ class _CommentScreenUIState extends State<CommentScreenUI> {
                                     state.comments[index].commentedBy,
                                     state.comments[index].comment,
                                     widget.docId,
-                                    state.comments[index].commentId);
+                                    state.comments[index].commentId,state.comments[index].dateTime);
                               }),
                     );
                   }
@@ -117,7 +117,7 @@ class _CommentScreenUIState extends State<CommentScreenUI> {
                         context.read<CommentBloc>().add(
                             PostCommentButtonClikedEvent(
                                 docId: widget.docId,
-                                comment: _commentController.text));
+                                comment: _commentController.text,dateTime: DateTime.now()));
                       },
                       icon: Icon(
                         Icons.check,

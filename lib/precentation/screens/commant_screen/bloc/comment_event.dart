@@ -1,9 +1,12 @@
+
+
 sealed class CommentEvent {}
 
 class PostCommentButtonClikedEvent extends CommentEvent {
   String docId;
   String comment;
-  PostCommentButtonClikedEvent({required this.docId, required this.comment});
+  DateTime dateTime;
+  PostCommentButtonClikedEvent({required this.docId, required this.comment, required this.dateTime});
 }
 
 class LoadCommentsEvent extends CommentEvent {

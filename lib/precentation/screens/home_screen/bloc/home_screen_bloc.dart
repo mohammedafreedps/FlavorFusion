@@ -19,6 +19,19 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
         hrecipies.add(recipes[i]);
         hlikes.add(recipes[i].likes);
       }
+
+      for (var i = 0; i < hrecipies.length; i++) {
+        QuerySnapshot<Map<String, dynamic>> record = await FirebaseFirestore
+          .instance
+          .collection('recipes')
+          .doc(hrecipies[i].docId)
+          .collection('comments')
+          .get();
+          hrecipies[i].commentCount = record.size;
+          print(hrecipies[i].commentCount);
+      }
+      
+
       emit(AllDatasLoadedState(recipies: hrecipies));
     });
 

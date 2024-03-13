@@ -16,3 +16,4 @@ List<String> hcreatedIngredents = [];
   List hlikes = [];
   List<SavedRecipeModel> hsavedRecipes = [];
   List<CommentModel> hcomments =  [];
+  List<int> hcommentCount =[];

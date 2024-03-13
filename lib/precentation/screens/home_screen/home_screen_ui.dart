@@ -14,9 +14,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreenUI extends StatelessWidget  {
-  final User? _user =  FirebaseAuth.instance.currentUser;
+class HomeScreenUI extends StatefulWidget  {
+
   HomeScreenUI({super.key});
+
+  @override
+  State<HomeScreenUI> createState() => _HomeScreenUIState();
+}
+
+class _HomeScreenUIState extends State<HomeScreenUI> {
+  final User? _user =  FirebaseAuth.instance.currentUser;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -25,7 +25,7 @@ Widget homeTile(
     int index) {
   return BlocListener<HomeScreenBloc, HomeScreenState>(
     listener: (context, state) {
-      print('$state statessss'.toString());
+      print(hcomments.length.toString() + 'comment');
       if (state is LikeCheckState) {
         context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
         context.read<SavedRecipesBloc>().add(LoadDataInSavedRecipieEvent());
@@ -124,21 +124,31 @@ Widget homeTile(
                               )
                             ],
                           ),
-                    IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CommentScreenUI(
-                                        docId: hrecipies[index].docId,
-                                        title: hrecipies[index].recipeTitle,
-                                      )));
-                        },
-                        icon: SvgPicture.asset(
-                          'Assets/comment-solid.svg',
-                          color: primaryColor,
-                          width: screenWidth * 0.06,
-                        )),
+                    Row(
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CommentScreenUI(
+                                            docId: hrecipies[index].docId,
+                                            title: hrecipies[index].recipeTitle,
+                                          )));
+                            },
+                            icon: SvgPicture.asset(
+                              'Assets/comment-solid.svg',
+                              color: primaryColor,
+                              width: screenWidth * 0.06,
+                            )),
+                        Text(
+                          hrecipies[index].commentCount != null
+                              ? hrecipies[index].commentCount.toString()
+                              : '0',
+                          style: titleSmallTextStyle(screenWidth),
+                        )
+                      ],
+                    ),
                     isWishList == true
                         ? IconButton(
                             onPressed: () {
