@@ -6,6 +6,7 @@ import 'package:flavorfusion/precentation/screens/activity_screen/activity_scree
 import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_bloc.dart';
 import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_state.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/saved_recipies_ui.dart';
+import 'package:flavorfusion/precentation/screens/setting_screen/setting_screen_ui.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -124,7 +125,12 @@ class ProfileScreenUI extends StatelessWidget {
                 Column(
                   children: [
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => SettingScreenUI())));
+                      },
                       child: Text(
                         'Settings',
                         style: TextStyle(

@@ -23,6 +23,7 @@ import 'package:flavorfusion/precentation/screens/log_in_screen/log_In_screen_UI
 import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_bloc.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_bloc.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_event.dart';
+import 'package:flavorfusion/precentation/screens/setting_screen/bloc/setting_bloc.dart';
 import 'package:flavorfusion/precentation/screens/splash_screen/splash_screen_ui.dart';
 import 'package:flavorfusion/precentation/screens/starting_screen/starting_screen.dart';
 import 'package:flavorfusion/constants/key.dart';
@@ -75,7 +76,8 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 SavedRecipesBloc()..add(LoadDataInSavedRecipieEvent())),
         BlocProvider<CommentBloc>(create: (context) => CommentBloc()),
-        BlocProvider<ProfileBloc>(create: (context) => ProfileBloc())
+        BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),
+        BlocProvider<SettingBloc>(create: ((context) => SettingBloc()))
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
