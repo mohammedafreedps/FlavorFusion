@@ -9,13 +9,19 @@ import 'package:flavorfusion/precentation/screens/firebase_recipe_detail_screen/
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flavorfusion/precentation/widgets/image_place_holder_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 Widget activityTile(BuildContext context, double screenWidth, String src,
     String title, int index, List<RecipeFromFireBaseModel> recipes) {
   return GestureDetector(
-    onTap: (){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> FirebaseRecipeDetailScreenUI(index: index, listOfItem: hposterRecipes)));
+    onTap: () {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => FirebaseRecipeDetailScreenUI(
+                  index: index, listOfItem: hposterRecipes)));
     },
     child: Padding(
       padding: EdgeInsets.only(bottom: screenWidth * 0.05),
@@ -29,7 +35,6 @@ Widget activityTile(BuildContext context, double screenWidth, String src,
           child: Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
                     width: screenWidth * 0.3,
@@ -40,6 +45,9 @@ Widget activityTile(BuildContext context, double screenWidth, String src,
                             imageUrl: src,
                             placeholder: (context, url) =>
                                 imagePlaceHolderText(screenWidth))),
+                  ),
+                  SizedBox(
+                    width: screenWidth * 0.02,
                   ),
                   Text(
                     overflow: TextOverflow.ellipsis,
@@ -53,8 +61,44 @@ Widget activityTile(BuildContext context, double screenWidth, String src,
                 ],
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Stack(
+                    children: [
+                      SvgPicture.asset(
+                        'Assets/thumbs-up-solid.svg',
+                        color: secondaryColor,
+                        width: screenWidth * 0.06,
+                      ),
+                      Positioned(
+                          top: 7.9,
+                          bottom: null,
+                          left: 13,
+                          right: null,
+                          child: Text(
+                            hrecipies[index].likes.length.toString(),
+                            style: titleSmallTextStyle(screenWidth).copyWith(fontSize: screenWidth * 0.02,color: primaryColor),
+                          ))
+                    ],
+                  ),
+                  Stack(
+                    children: [
+                      SvgPicture.asset(
+                        'Assets/comment-solid.svg',
+                        color: secondaryColor,
+                        width: screenWidth * 0.06,
+                      ),
+                      Positioned(
+                          top: 3.9,
+                          bottom: null,
+                          left: 9.8,
+                          right: null,
+                          child: Text(
+                            hrecipies[index].commentCount.toString(),
+                            style: titleSmallTextStyle(screenWidth).copyWith(fontSize: screenWidth * 0.02,color: primaryColor),
+                          ))
+                    ],
+                  ),
                   PopupMenuButton(
                       onSelected: (String value) {
                         if (value == '0') {

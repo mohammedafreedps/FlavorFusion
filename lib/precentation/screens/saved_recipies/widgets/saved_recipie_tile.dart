@@ -11,10 +11,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 Widget saverRecipeTile(BuildContext context, double screenWidth, String src,
-    String title, int index,String docId) {
+    String title, int index, String docId) {
   return GestureDetector(
-    onTap: (){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>FirebaseRecipeDetailScreenUI(index: index, listOfItem: hsavedRecipes)));
+    onTap: () {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => FirebaseRecipeDetailScreenUI(
+                  index: index, listOfItem: hsavedRecipes)));
     },
     child: Padding(
       padding: EdgeInsets.only(bottom: screenWidth * 0.05),
@@ -24,39 +28,41 @@ Widget saverRecipeTile(BuildContext context, double screenWidth, String src,
           padding: EdgeInsets.all(screenWidth * 0.03),
           color: baseColor,
           width: double.infinity,
-          height: screenWidth * 0.41,
+          height: screenWidth * 0.31,
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    width: screenWidth * 0.3,
-                    height: screenWidth * 0.3 / 1.3,
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(screenWidth * 0.06),
-                        child: CachedNetworkImage(
-                            imageUrl: src,
-                            placeholder: (context, url) =>
-                                imagePlaceHolderText(screenWidth))),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: screenWidth * 0.3,
+                        height: screenWidth * 0.3 / 1.3,
+                        child: ClipRRect(
+                            borderRadius:
+                                BorderRadius.circular(screenWidth * 0.06),
+                            child: CachedNetworkImage(
+                                imageUrl: src,
+                                placeholder: (context, url) =>
+                                    imagePlaceHolderText(screenWidth))),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        overflow: TextOverflow.ellipsis,
+                        title,
+                        style: titleSmallTextStyle(screenWidth)
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
-                  Text(
-                    overflow: TextOverflow.ellipsis,
-                    title,
-                    style: titleSmallTextStyle(screenWidth)
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
                   IconButton(
                       onPressed: () {
-                        context.read<SavedRecipesBloc>().add(RemoveSavedRecipeButtonClickedEvent(docId: docId, user: huser!));
+                        context.read<SavedRecipesBloc>().add(
+                            RemoveSavedRecipeButtonClickedEvent(
+                                docId: docId, user: huser!));
                       },
                       icon: SvgPicture.asset(
                         'Assets/heart-solid.svg',
@@ -64,7 +70,7 @@ Widget saverRecipeTile(BuildContext context, double screenWidth, String src,
                         width: screenWidth * 0.06,
                       ))
                 ],
-              )
+              ),
             ],
           ),
         ),
