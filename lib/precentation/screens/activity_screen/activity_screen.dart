@@ -6,6 +6,8 @@ import 'package:flavorfusion/precentation/screens/activity_screen/widgets/activi
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_state.dart';
+import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_bloc.dart';
+import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_event.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_bloc.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_event.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
@@ -26,11 +28,7 @@ class ActivityScreenUI extends StatelessWidget {
           if (state is AllDatasLoadedState) {
             print('add data loadied get in activity page');
             context.read<ActivityBloc>().add(SortAndSetValueEvent());
-            // Timer(Duration(seconds: 4), () {
-            //   context
-            //       .read<SavedRecipesBloc>()
-            //       .add(LoadDataInSavedRecipieEvent());
-            // });
+            context.read<ProfileBloc>().add(CountTotalLikeandPostEvent());
           }
         },
         child: BlocListener<ActivityBloc, ActivityState>(

@@ -3,7 +3,10 @@ import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_Bloc.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_Event.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/activity_screen.dart';
+import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_bloc.dart';
+import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_state.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/saved_recipies_ui.dart';
+import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +30,7 @@ class ProfileScreenUI extends StatelessWidget {
                 TextStyle(color: secondaryColor, fontWeight: FontWeight.bold),
           ),
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(48.0),
+            preferredSize: const Size.fromHeight(48.0),
             child: Column(
               children: [
                 TabBar(
@@ -36,19 +39,16 @@ class ProfileScreenUI extends StatelessWidget {
                   indicatorColor: secondaryColor,
                   unselectedLabelColor: acsentColor,
                   tabs: [
-                    Tab(text: 'Saved Recipes'),
-                    Tab(text: 'Activity'),
+                    const Tab(text: 'Saved Recipes'),
+                    const Tab(text: 'Activity'),
                   ],
                 ),
               ],
             ),
           ),
         ),
-        body: TabBarView(
-          children: [
-            SavedRecipesUI(),
-            ActivityScreenUI()
-          ],
+        body: const TabBarView(
+          children: [SavedRecipesUI(), ActivityScreenUI()],
         ),
         endDrawer: Drawer(
           backgroundColor: primaryColor,
@@ -58,27 +58,75 @@ class ProfileScreenUI extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  overflow: TextOverflow.ellipsis,
-                  _user!.email!,
-                  style: TextStyle(color: secondaryColor),
+                Column(
+                  children: [
+                    Text(
+                      overflow: TextOverflow.ellipsis,
+                      _user!.email!,
+                      style: TextStyle(color: secondaryColor),
+                    ),
+                    SizedBox(
+                      height: _screenSize.width * 0.05,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        BlocBuilder<ProfileBloc, ProfileState>(
+                          builder: (context, state) {
+                            if (state is TotalLikeandPostState) {
+                              return (Column(
+                                children: [
+                                  Text(
+                                    'Total Post',
+                                    style:
+                                        titleSmallTextStyle(_screenSize.width),
+                                  ),
+                                  Text(
+                                    state.totalPost,
+                                    style:
+                                        titleSmallTextStyle(_screenSize.width)
+                                            .copyWith(
+                                                fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ));
+                            }
+                            return Text('Total post');
+                          },
+                        ),
+                        BlocBuilder<ProfileBloc, ProfileState>(
+                          builder: (context, state) {
+                            if (state is TotalLikeandPostState) {
+                              return (Column(
+                                children: [
+                                  Text(
+                                    'Total Likes',
+                                    style:
+                                        titleSmallTextStyle(_screenSize.width),
+                                  ),
+                                  Text(
+                                    state.totalLike,
+                                    style:
+                                        titleSmallTextStyle(_screenSize.width)
+                                            .copyWith(
+                                                fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ));
+                            }
+                            return Text('Total post');
+                          },
+                        ),
+                      ],
+                    )
+                  ],
                 ),
                 Column(
                   children: [
                     TextButton(
                       onPressed: () {},
                       child: Text(
-                        'Privacy Policy',
-                        style: TextStyle(
-                          color: secondaryColor,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Terms & Conditions',
+                        'Settings',
                         style: TextStyle(
                           color: secondaryColor,
                           fontWeight: FontWeight.w300,

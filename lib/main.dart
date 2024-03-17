@@ -20,6 +20,7 @@ import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_b
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
 import 'package:flavorfusion/precentation/screens/log_in_screen/bloc/login_validation_bloc.dart';
 import 'package:flavorfusion/precentation/screens/log_in_screen/log_In_screen_UI.dart';
+import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_bloc.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_bloc.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_event.dart';
 import 'package:flavorfusion/precentation/screens/splash_screen/splash_screen_ui.dart';
@@ -70,8 +71,11 @@ class MyApp extends StatelessWidget {
                 HomeScreenBloc()..add(FechDataFromFirebaseEvent()))),
         BlocProvider<ActivityBloc>(
             create: (context) => ActivityBloc()..add(SortAndSetValueEvent())),
-        BlocProvider<SavedRecipesBloc>(create: (context)=>SavedRecipesBloc()..add(LoadDataInSavedRecipieEvent())),
-        BlocProvider<CommentBloc>(create: (context)=> CommentBloc())
+        BlocProvider<SavedRecipesBloc>(
+            create: (context) =>
+                SavedRecipesBloc()..add(LoadDataInSavedRecipieEvent())),
+        BlocProvider<CommentBloc>(create: (context) => CommentBloc()),
+        BlocProvider<ProfileBloc>(create: (context) => ProfileBloc())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

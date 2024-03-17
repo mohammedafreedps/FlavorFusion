@@ -22,6 +22,8 @@ import 'package:flavorfusion/precentation/screens/create_instructions_screen/cre
 import 'package:flavorfusion/precentation/screens/create_instructions_screen/widgets/show_entered_instructions.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
+import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_bloc.dart';
+import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_event.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flavorfusion/precentation/widgets/bottom_sheet.dart';
@@ -106,6 +108,7 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
             context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
             Timer(Duration(seconds: 1), () {
               context.read<ActivityBloc>().add(SortAndSetValueEvent());
+              context.read<ProfileBloc>().add(CountTotalLikeandPostEvent());
             });
           }
           if (state is EditRecipieUploadedState) {

@@ -6,6 +6,8 @@ import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_e
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_state.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/widgets/fileter_selecter.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/widgets/show_data_widget.dart';
+import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_bloc.dart';
+import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_event.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_bloc.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_event.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
@@ -34,6 +36,7 @@ class HomeScreenUI extends StatelessWidget {
           function: () {
             context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
             context.read<SavedRecipesBloc>().add(LoadDataInSavedRecipieEvent());
+            context.read<ProfileBloc>().add(CountTotalLikeandPostEvent());
           }),
       body: SingleChildScrollView(
         child: Padding(
@@ -76,6 +79,7 @@ class HomeScreenUI extends StatelessWidget {
               BlocBuilder<HomeScreenBloc, HomeScreenState>(
                 builder: (context, state) {
                   if (state is AllDatasLoadedState) {
+                    context.read<ProfileBloc>().add(CountTotalLikeandPostEvent());
                     return showDataWidget(hrecipies, _screenSize, _user!,'Be the First One to add');
                   }
                   if(state is SearchRecipieResultState){
