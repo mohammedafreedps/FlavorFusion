@@ -12,15 +12,23 @@ import 'package:flavorfusion/precentation/screens/create_fillIn_screen/bloc/crea
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/widgets/create_button_one.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/widgets/create_button_two.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/widgets/create_text_field.dart';
+import 'package:flavorfusion/precentation/screens/create_ingredients_screen/bloc/create_ingredients_bloc.dart';
+import 'package:flavorfusion/precentation/screens/create_ingredients_screen/bloc/create_ingredients_state.dart';
 import 'package:flavorfusion/precentation/screens/create_ingredients_screen/create_ingredients_screen_UI.dart';
+import 'package:flavorfusion/precentation/screens/create_ingredients_screen/widgets/entered_ingredients_and_quantity.dart';
+import 'package:flavorfusion/precentation/screens/create_instructions_screen/bloc/create_instructions_bloc.dart';
+import 'package:flavorfusion/precentation/screens/create_instructions_screen/bloc/create_instructions_state.dart';
 import 'package:flavorfusion/precentation/screens/create_instructions_screen/create_instructions_screen_ui.dart';
+import 'package:flavorfusion/precentation/screens/create_instructions_screen/widgets/show_entered_instructions.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flavorfusion/precentation/widgets/bottom_sheet.dart';
 import 'package:flavorfusion/precentation/widgets/image_place_holder_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreateFIllinScreenUI extends StatefulWidget {
@@ -36,6 +44,9 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
   double _currentSliderValue = 0;
   final _recipeTitleController = TextEditingController();
   final _additionalNotesController = TextEditingController();
+  bool isIngredientsVisible = false;
+  bool isInstructionVisible = false;
+  bool isCookingTimeVisible = false;
 
   @override
   void initState() {
@@ -62,6 +73,25 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
   @override
   Widget build(BuildContext context) {
     Size _screenSize = MediaQuery.of(context).size;
+    List<DropdownMenuItem> items = [
+      DropdownMenuItem(
+        child: Text(
+          'Other',
+          style: titleSmallTextStyle(_screenSize.width),
+        ),
+        value: 'Other',
+      ),
+      DropdownMenuItem(
+          child: Text('Italian', style: titleSmallTextStyle(_screenSize.width)),
+          value: 'Italian'),
+      DropdownMenuItem(
+          child: Text('Chinese', style: titleSmallTextStyle(_screenSize.width)),
+          value: 'Chinese'),
+      DropdownMenuItem(
+          child: Text('Indian', style: titleSmallTextStyle(_screenSize.width)),
+          value: 'Indian')
+    ];
+
     return Scaffold(
       appBar: appBar(title: ''),
       body: BlocListener<CreateFillinBloc, CreateFillinState>(
@@ -102,7 +132,7 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
                     right: _screenSize.width * 0.1),
                 child: ListView(children: [
                   SizedBox(
-                    height: _screenSize.height,
+                    height: _screenSize.height + 200,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -129,10 +159,16 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
                                 style: titleMidiumTextStyle(_screenSize.width),
                               );
                             }
-                            return Text(
-                              'Select Image',
-                              style: titleMidiumTextStyle(_screenSize.width),
-                            );
+                            return himagePath != null
+                                ? AspectRatio(
+                                    aspectRatio: 10 / 3,
+                                    child: Image.file(File(himagePath!)),
+                                  )
+                                : Text(
+                                    'Select Image',
+                                    style:
+                                        titleMidiumTextStyle(_screenSize.width),
+                                  );
                           },
                         ),
                         Row(
@@ -168,18 +204,149 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
                                   : false,
                               index: widget.index,
                             )),
+                        GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isIngredientsVisible =
+                                    !isIngredientsVisible; // Toggle visibility
+                              });
+                            },
+                            child: Text(
+                              isIngredientsVisible ? 'hide' : 'show',
+                              style: titleSmallTextStyle(_screenSize.width),
+                            )),
+                        Visibility(
+                          visible: isIngredientsVisible,
+                          child: SizedBox(
+                            height: _screenSize.width * 0.5,
+                            child: BlocBuilder<CreateIngredientsCountBloc,
+                                CreateIngredientsCountState>(
+                              builder: (context, state) {
+                                if (state is ShowIngredientAndQuantityState) {
+                                  return ListView.builder(
+                                      itemCount: state.ingredients.length,
+                                      itemBuilder: ((context, index) {
+                                        return enteredIngredientsAndQuantity(
+                                            context,
+                                            index,
+                                            state.ingredients[index],
+                                            state.quantitys[index],
+                                            _screenSize.width);
+                                      }));
+                                }
+                                if (state is EditIngredientsAndQuantityState) {
+                                  return ListView.builder(
+                                      itemCount: state.ingredient.length,
+                                      itemBuilder: ((context, index) {
+                                        return enteredIngredientsAndQuantity(
+                                            context,
+                                            index,
+                                            state.ingredient[index],
+                                            state.quantity[index],
+                                            _screenSize.width);
+                                      }));
+                                }
+                                return ListView.builder(
+                                    itemCount: 1,
+                                    itemBuilder: (BuildContext context, intex) {
+                                      return Center(
+                                          child: Text(
+                                        'Nothing added',
+                                        style: titleSmallTextStyle(
+                                            _screenSize.width),
+                                      ));
+                                    });
+                              },
+                            ),
+                          ),
+                        ),
                         createButtonTwo(
                             'Instructions >', context, _screenSize.width,
                             page: CreateInstructionsScreenUI(
                               isEditing: widget.isEditing,
                               index: widget.index,
                             )),
+                        GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isInstructionVisible =
+                                    !isInstructionVisible; // Toggle visibility
+                              });
+                            },
+                            child: Text(
+                              isInstructionVisible ? 'hide' : 'show',
+                              style: titleSmallTextStyle(_screenSize.width),
+                            )),
+                        Visibility(
+                          visible: isInstructionVisible,
+                          child: SizedBox(
+                            height: _screenSize.width * 0.5,
+                            child: BlocBuilder<CreateInstructionsBloc,
+                                CreateInstructionsState>(
+                              builder: (context, state) {
+                                if (state is ShowInstructionsState) {
+                                  return ListView.builder(
+                                      itemCount: state.instructions.length,
+                                      itemBuilder: ((context, index) {
+                                        return showEnteredInstructions(
+                                            context,
+                                            state.instructions[index],
+                                            _screenSize.width,
+                                            index);
+                                      }));
+                                }
+                                if (state is EditStepsState) {
+                                  return ListView.builder(
+                                      itemCount: state.instruction.length,
+                                      itemBuilder: ((context, index) {
+                                        return showEnteredInstructions(
+                                            context,
+                                            state.instruction[index],
+                                            _screenSize.width,
+                                            index);
+                                      }));
+                                }
+                                return ListView.builder(
+                                    itemCount: 1,
+                                    itemBuilder: ((context, index) {
+                                      return Center(
+                                          child: Text(
+                                        'Add Instructions',
+                                        style: titleSmallTextStyle(
+                                            _screenSize.width),
+                                      ));
+                                    }));
+                              },
+                            ),
+                          ),
+                        ),
                         createButtonTwo(
                             'Cooking Time >', context, _screenSize.width,
                             page: CreateCookingTimeScreenUI(
                               isEditing: widget.isEditing,
                               index: widget.index,
                             )),
+                        GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isCookingTimeVisible =
+                                    !isCookingTimeVisible; // Toggle visibility
+                              });
+                            },
+                            child: Text(
+                              isCookingTimeVisible ? 'hide' : 'show',
+                              style: titleSmallTextStyle(_screenSize.width),
+                            )),
+                        Visibility(
+                          visible: isCookingTimeVisible,
+                          child: SizedBox(
+                            height: _screenSize.width * 0.1,
+                            child: Text(
+                              'PrepTime: $hprepTime CookTime: $hcookTime TotalTime: $htotalTime',
+                              style: titleSmallTextStyle(_screenSize.width),
+                            ),
+                          ),
+                        ),
                         Column(
                           children: [
                             Text(
@@ -209,6 +376,19 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
                                 : const Text('')
                           ],
                         ),
+                        Text(
+                          'Select Category',
+                          style: titleMidiumTextStyle(_screenSize.width),
+                        ),
+                        DropdownButton(
+                            dropdownColor: baseColor,
+                            value: hselectedCategory,
+                            items: items,
+                            onChanged: (value) {
+                              setState(() {
+                                hselectedCategory = value!;
+                              });
+                            }),
                         Column(
                           children: [
                             Text(
@@ -251,7 +431,8 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
                                       difficultyLevel:
                                           _currentSliderValue.round(),
                                       additionalNotes:
-                                          _additionalNotesController.text));
+                                          _additionalNotesController.text,
+                                      category: hselectedCategory));
                             } else {
                               context.read<CreateFillinBloc>().add(
                                   UploadRecipieButtonClickedEvent(
@@ -266,6 +447,7 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
                                       totalTime: htotalTime!,
                                       additionalNotes:
                                           _additionalNotesController.text,
+                                      category: hselectedCategory,
                                       difficultyLevel:
                                           _currentSliderValue.round()));
                             }

@@ -54,7 +54,7 @@ class ProfileScreenUI extends StatelessWidget {
           backgroundColor: primaryColor,
           width: _screenSize.width * 0.5,
           child: Padding(
-            padding: EdgeInsets.all(_screenSize.width * 0.1),
+            padding: EdgeInsets.all(_screenSize.width * 0.05),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -69,6 +69,16 @@ class ProfileScreenUI extends StatelessWidget {
                       onPressed: () {},
                       child: Text(
                         'Privacy Policy',
+                        style: TextStyle(
+                          color: secondaryColor,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Terms & Conditions',
                         style: TextStyle(
                           color: secondaryColor,
                           fontWeight: FontWeight.w300,

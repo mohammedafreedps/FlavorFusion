@@ -10,3 +10,13 @@ class AllDatasLoadedState extends HomeScreenState {
 }
 
 class LikeCheckState extends HomeScreenState {}
+
+class SearchRecipieResultState extends HomeScreenState {
+  List<RecipeFromFireBaseModel> searchResults;
+  SearchRecipieResultState({required this.searchResults});
+}
+
+class CategorySearchResultsState extends HomeScreenState{
+  List<RecipeFromFireBaseModel> searchResults;
+  CategorySearchResultsState({required this.searchResults});
+}

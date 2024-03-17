@@ -13,6 +13,7 @@ class RecipeFromFireBaseModel {
   final String userEmail;
   final List likes;
   final List wishlist;
+  final String category;
   int? commentCount;
 
   RecipeFromFireBaseModel(
@@ -30,6 +31,7 @@ class RecipeFromFireBaseModel {
       required this.userEmail,
       required this.likes,
       required this.wishlist,
+      required this.category,
       required this.commentCount});
 
   factory RecipeFromFireBaseModel.fromMap(
@@ -49,6 +51,7 @@ class RecipeFromFireBaseModel {
         userEmail: map['userEmail'],
         likes: map['likes'],
         wishlist: map['wishlist'],
+        category: map['category'],
         commentCount: 0);
   }
 }

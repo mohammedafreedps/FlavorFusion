@@ -1,35 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/data/temp_value_holder.dart';
-import 'package:flavorfusion/precentation/screens/firebase_recipe_detail_screen/firebase_recipe_detail_screen.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_state.dart';
-import 'package:flavorfusion/precentation/screens/home_screen/widgets/home_tile.dart';
+import 'package:flavorfusion/precentation/screens/home_screen/widgets/fileter_selecter.dart';
+import 'package:flavorfusion/precentation/screens/home_screen/widgets/show_data_widget.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_bloc.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_event.dart';
-import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreenUI extends StatefulWidget  {
-
+class HomeScreenUI extends StatelessWidget {
   HomeScreenUI({super.key});
 
-  @override
-  State<HomeScreenUI> createState() => _HomeScreenUIState();
-}
+  final User? _user = FirebaseAuth.instance.currentUser;
 
-class _HomeScreenUIState extends State<HomeScreenUI> {
-  final User? _user =  FirebaseAuth.instance.currentUser;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+  final _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,53 +35,61 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
             context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
             context.read<SavedRecipesBloc>().add(LoadDataInSavedRecipieEvent());
           }),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.1),
-        child: Center(
-          child: BlocBuilder<HomeScreenBloc, HomeScreenState>(
-            builder: (context, state) {
-              if (state is AllDatasLoadedState) {
-                return state.recipies.isEmpty
-                    ? Center(
-                        child: Text(
-                          'Be the First to add Recipie',
-                          style: titleSmallTextStyle(_screenSize.width),
-                        ),
-                      )
-                    : ListView.builder(
-                        key: const PageStorageKey<String>('page'),
-                        itemCount: state.recipies.length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            FirebaseRecipeDetailScreenUI(
-                                              listOfItem: hrecipies,
-                                                index: index)));
-                              },
-                              child: homeTile(
-                                  context,
-                                  state.recipies[index].imageURL,
-                                  state.recipies[index].recipeTitle,
-                                  state.recipies[index].userEmail,
-                                  _screenSize.width,
-                                  state.recipies[index].likes
-                                      .contains(_user!.email),
-                                  state.recipies[index].wishlist
-                                      .contains(huser!.email),
-                                  state.recipies[index].docId,
-                                  index));
-                        });
-              }
-              return Center(
-                child: CircularProgressIndicator(
-                  color: secondaryColor,
-                ),
-              );
-            },
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.1),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  SizedBox(
+                    width: _screenSize.width * 0.68,
+                    child: TextField(
+                      controller: _searchController,
+                      cursorColor: baseColor,
+                      onChanged: (text) {
+                        if(_searchController.text.isEmpty){
+                          context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
+                        }
+                        context.read<HomeScreenBloc>().add(SearchingEvent(query: _searchController.text));
+                      },
+                      style: TextStyle(color: baseColor),
+                      decoration: InputDecoration(
+                          hintText: 'Search for Dishes',
+                          hintStyle: TextStyle(
+                            color: baseColor,
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: baseColor)),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: baseColor))),
+                    ),
+                  ),
+                  IconButton(onPressed: (){
+                    filterSelector(context, _screenSize.width);
+                  }, icon: Icon(Icons.filter_list_alt,color: secondaryColor,))
+                ],
+              ),
+              SizedBox(
+                height: _screenSize.width * 0.05,
+              ),
+              BlocBuilder<HomeScreenBloc, HomeScreenState>(
+                builder: (context, state) {
+                  if (state is AllDatasLoadedState) {
+                    return showDataWidget(hrecipies, _screenSize, _user!,'Be the First One to add');
+                  }
+                  if(state is SearchRecipieResultState){
+                    return showDataWidget(state.searchResults, _screenSize, _user!,'Item not found');
+                  }
+                  if(state is CategorySearchResultsState){
+                    return showDataWidget(state.searchResults, _screenSize, _user!,'Item not found');
+                  }
+                  return CircularProgressIndicator(
+                    color: secondaryColor,
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),

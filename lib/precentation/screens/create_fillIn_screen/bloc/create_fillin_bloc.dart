@@ -79,6 +79,7 @@ class CreateFillinBloc extends Bloc<CreateFillinEvent, CreateFillinState> {
           'totalTime': event.totalTime,
           'difficultyLevel': event.difficultyLevel,
           'additionalNotes': event.additionalNotes,
+          'category' : event.category,
           'likes': [],
           'wishlist': []
         });

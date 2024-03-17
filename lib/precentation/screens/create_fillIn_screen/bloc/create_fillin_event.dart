@@ -18,6 +18,7 @@ class UploadRecipieButtonClickedEvent extends CreateFillinEvent {
   String totalTime;
   int difficultyLevel;
   String additionalNotes;
+  String category;
   UploadRecipieButtonClickedEvent(
       {required this.imagePath,
       required this.imageName,
@@ -29,7 +30,7 @@ class UploadRecipieButtonClickedEvent extends CreateFillinEvent {
       required this.cookTime,
       required this.totalTime,
       required this.difficultyLevel,
-      required this.additionalNotes});
+      required this.additionalNotes,required this.category});
 }
 
 class FieldFilledCheckErrorEvent extends CreateFillinEvent {}
@@ -54,10 +55,10 @@ class EditedRecipieUploadButtonClickedEvent extends CreateFillinEvent {
   String totalTime;
   int difficultyLevel;
   String additionalNotes;
+  String category;
   EditedRecipieUploadButtonClickedEvent(
-      {
-        required this.index,
-        required this.imagePath,
+      {required this.index,
+      required this.imagePath,
       required this.imageName,
       required this.recipeTitle,
       required this.ingredients,
@@ -67,5 +68,6 @@ class EditedRecipieUploadButtonClickedEvent extends CreateFillinEvent {
       required this.cookTime,
       required this.totalTime,
       required this.difficultyLevel,
-      required this.additionalNotes});
+      required this.additionalNotes,
+      required this.category});
 }

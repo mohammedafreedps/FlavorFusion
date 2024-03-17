@@ -27,3 +27,12 @@ class RemoveWishListClickedEvent extends HomeScreenEvent{
   RemoveWishListClickedEvent({required this.docId, required this.user});
 }
 
+class SearchingEvent extends HomeScreenEvent{
+  String query;
+  SearchingEvent({required this.query});
+}
+
+class CategorySearchEvent extends HomeScreenEvent{
+  String query;
+  CategorySearchEvent({required this.query});
+}

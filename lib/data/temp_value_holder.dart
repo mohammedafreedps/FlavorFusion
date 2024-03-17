@@ -17,3 +17,4 @@ List<String> hcreatedIngredents = [];
   List<SavedRecipeModel> hsavedRecipes = [];
   List<CommentModel> hcomments =  [];
   List<int> hcommentCount =[];
+  String hselectedCategory = 'Other';

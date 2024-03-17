@@ -22,15 +22,14 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
 
       for (var i = 0; i < hrecipies.length; i++) {
         QuerySnapshot<Map<String, dynamic>> record = await FirebaseFirestore
-          .instance
-          .collection('recipes')
-          .doc(hrecipies[i].docId)
-          .collection('comments')
-          .get();
-          hrecipies[i].commentCount = record.size;
-          print(hrecipies[i].commentCount);
+            .instance
+            .collection('recipes')
+            .doc(hrecipies[i].docId)
+            .collection('comments')
+            .get();
+        hrecipies[i].commentCount = record.size;
+        print(hrecipies[i].commentCount);
       }
-      
 
       emit(AllDatasLoadedState(recipies: hrecipies));
     });
@@ -71,6 +70,25 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
         'wishlist': FieldValue.arrayRemove([event.user.email])
       });
       emit(LikeCheckState());
+    });
+
+    on<SearchingEvent>((event, emit) {
+      List<RecipeFromFireBaseModel> searchRecipieResult = hrecipies
+          .where((recip) => recip.recipeTitle
+              .toLowerCase()
+              .contains(event.query.toLowerCase().trim()))
+          .toList();
+      print(searchRecipieResult);
+      emit(SearchRecipieResultState(searchResults: searchRecipieResult));
+    });
+
+    on<CategorySearchEvent>((event, emit) {
+      List<RecipeFromFireBaseModel> searchRecipieResult = hrecipies
+          .where((recip) => recip.category
+              .toLowerCase()
+              .contains(event.query.toLowerCase().trim()))
+          .toList();
+      emit(CategorySearchResultsState(searchResults: searchRecipieResult));
     });
   }
 }
