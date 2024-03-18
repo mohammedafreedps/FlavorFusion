@@ -6,6 +6,7 @@ import 'package:flavorfusion/Constants/textes.dart';
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/precentation/screens/log_in_screen/log_In_screen_UI.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class IntroPageTwoUI extends StatelessWidget {
   const IntroPageTwoUI({super.key});
@@ -25,7 +26,7 @@ class IntroPageTwoUI extends StatelessWidget {
       body: Center(
         child: SizedBox(
           width: _screenSize.width * 0.9,
-          child: Text(introPageTwoText,style: TextStyle(color: secondaryColor,fontWeight: FontWeight.w300,fontSize: _screenSize.width * 0.04),textAlign: TextAlign.center,)),
+          child: Text(introPageTwoText,style: TextStyle(color: secondaryColor,fontWeight: FontWeight.w300,fontSize: _screenSize.width * 0.04),textAlign: TextAlign.center,).animate(effects: [FadeEffect()])),
       ),
     );
   }

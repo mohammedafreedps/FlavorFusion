@@ -3,7 +3,7 @@ import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/precentation/widgets/image_place_holder_text.dart';
 import 'package:flutter/material.dart';
 
-Widget discoverTile(String src, String title, double screenWidth) {
+Widget discoverTile(int index ,String src, String title, double screenWidth) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 10),
     child: AspectRatio(

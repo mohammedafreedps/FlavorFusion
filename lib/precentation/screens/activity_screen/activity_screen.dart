@@ -14,6 +14,7 @@ import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart'
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ActivityScreenUI extends StatelessWidget {
@@ -35,7 +36,9 @@ class ActivityScreenUI extends StatelessWidget {
           listener: (context, state) {
             if (state is DeletedSuccesfullyState) {
               context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
-              context.read<SavedRecipesBloc>().add(LoadDataInSavedRecipieEvent());
+              context
+                  .read<SavedRecipesBloc>()
+                  .add(LoadDataInSavedRecipieEvent());
             }
           },
           child: Padding(
@@ -61,12 +64,20 @@ class ActivityScreenUI extends StatelessWidget {
                           itemCount: state.posted.length,
                           itemBuilder: ((context, index) {
                             return activityTile(
-                                context,
-                                _screenSize.width,
-                                state.posted[index].imageURL,
-                                state.posted[index].recipeTitle,
-                                index,
-                                state.posted);
+                                    context,
+                                    _screenSize.width,
+                                    state.posted[index].imageURL,
+                                    state.posted[index].recipeTitle,
+                                    index,
+                                    state.posted)
+                                .animate(effects: [
+                              FadeEffect(),
+                              SlideEffect(
+                                  begin: Offset(
+                                2,
+                                0,
+                              ))
+                            ], delay: Duration(milliseconds: 500 * index));
                           }));
                 } else {
                   return Center(

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class SplashScreenUI extends StatelessWidget {
   const SplashScreenUI({super.key});
@@ -20,7 +21,7 @@ class SplashScreenUI extends StatelessWidget {
         child: AspectRatio(
           aspectRatio: 4,
           child: Image.asset('Assets/AppIcon.png')),
-      ),
+      ).animate(effects: [FadeEffect()]),
     );
   }
 }

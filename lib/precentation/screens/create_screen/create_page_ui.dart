@@ -6,6 +6,7 @@ import 'package:flavorfusion/precentation/screens/create_screen/Widgets/button.d
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class CreatePageUI extends StatelessWidget {
   const CreatePageUI({super.key});
@@ -26,8 +27,8 @@ class CreatePageUI extends StatelessWidget {
               createPageText,
               style: titleMidiumTextStyle(_screenSize.width)
             ),
-          ),
-          button(screenWidth: _screenSize.width, text: 'Fill in',page: CreateFIllinScreenUI(),context: context)
+          ).animate(effects: [FadeEffect()]),
+          button(screenWidth: _screenSize.width, text: 'Fill in',page: CreateFIllinScreenUI(),context: context).animate(effects: [FadeEffect(delay: Duration(milliseconds: 100))])
         ],
       ),
     ));

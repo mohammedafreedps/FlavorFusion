@@ -7,6 +7,7 @@ import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_reci
 import 'package:flavorfusion/precentation/screens/saved_recipies/widgets/saved_recipie_tile.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SavedRecipesUI extends StatelessWidget {
@@ -37,7 +38,15 @@ class SavedRecipesUI extends StatelessWidget {
                         state.savedRecipes[index].imageURL,
                         state.savedRecipes[index].recipeTitle,
                         index,
-                        state.savedRecipes[index].docId);
+                        state.savedRecipes[index].docId).animate(effects: [
+                              FadeEffect(),
+                              SlideEffect(
+                                curve: Curves.easeOut,
+                                  begin: Offset(
+                                -2,
+                                0,
+                              ))
+                            ], delay: Duration(milliseconds: 500 * index));
                   });
             }
             return Center(
