@@ -81,17 +81,34 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
           'Other',
           style: titleSmallTextStyle(_screenSize.width),
         ),
-        value: 'Other',
+        value: 'other',
       ),
       DropdownMenuItem(
           child: Text('Italian', style: titleSmallTextStyle(_screenSize.width)),
-          value: 'Italian'),
+          value: 'italian'),
       DropdownMenuItem(
-          child: Text('Chinese', style: titleSmallTextStyle(_screenSize.width)),
-          value: 'Chinese'),
+          child: Text('Mexican', style: titleSmallTextStyle(_screenSize.width)),
+          value: 'mexican'),
       DropdownMenuItem(
-          child: Text('Indian', style: titleSmallTextStyle(_screenSize.width)),
-          value: 'Indian')
+          child:
+              Text('Japanese', style: titleSmallTextStyle(_screenSize.width)),
+          value: 'japanese'),
+      DropdownMenuItem(
+          child:
+              Text('American', style: titleSmallTextStyle(_screenSize.width)),
+          value: 'american'),
+      DropdownMenuItem(
+          child: Text('French', style: titleSmallTextStyle(_screenSize.width)),
+          value: 'french'),
+      DropdownMenuItem(
+          child: Text('Thai', style: titleSmallTextStyle(_screenSize.width)),
+          value: 'thai'),
+      DropdownMenuItem(
+          child: Text('Veg', style: titleSmallTextStyle(_screenSize.width)),
+          value: 'veg'),
+      DropdownMenuItem(
+          child: Text('Non veg', style: titleSmallTextStyle(_screenSize.width)),
+          value: 'non veg'),
     ];
 
     return Scaffold(
