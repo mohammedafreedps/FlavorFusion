@@ -15,10 +15,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreenUI extends StatelessWidget {
+class HomeScreenUI extends StatefulWidget {
   HomeScreenUI({super.key});
 
-  final User? _user = FirebaseAuth.instance.currentUser;
+  @override
+  State<HomeScreenUI> createState() => _HomeScreenUIState();
+}
+
+class _HomeScreenUIState extends State<HomeScreenUI> {
+  User? _user;
+
+  @override
+  void initState() {
+    final User? _use = FirebaseAuth.instance.currentUser;
+    _user = _use;
+    super.initState();
+  }
 
   final _searchController = TextEditingController();
 

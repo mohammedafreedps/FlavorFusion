@@ -54,108 +54,110 @@ class ProfileScreenUI extends StatelessWidget {
         endDrawer: Drawer(
           backgroundColor: primaryColor,
           width: _screenSize.width * 0.5,
-          child: Padding(
-            padding: EdgeInsets.all(_screenSize.width * 0.05),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      overflow: TextOverflow.ellipsis,
-                      _user!.email!,
-                      style: TextStyle(color: secondaryColor),
-                    ),
-                    SizedBox(
-                      height: _screenSize.width * 0.05,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        BlocBuilder<ProfileBloc, ProfileState>(
-                          builder: (context, state) {
-                            if (state is TotalLikeandPostState) {
-                              return (Column(
-                                children: [
-                                  Text(
-                                    'Total Post',
-                                    style:
-                                        titleSmallTextStyle(_screenSize.width),
-                                  ),
-                                  Text(
-                                    state.totalPost,
-                                    style:
-                                        titleSmallTextStyle(_screenSize.width)
-                                            .copyWith(
-                                                fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ));
-                            }
-                            return Text('Total post');
-                          },
-                        ),
-                        BlocBuilder<ProfileBloc, ProfileState>(
-                          builder: (context, state) {
-                            if (state is TotalLikeandPostState) {
-                              return (Column(
-                                children: [
-                                  Text(
-                                    'Total Likes',
-                                    style:
-                                        titleSmallTextStyle(_screenSize.width),
-                                  ),
-                                  Text(
-                                    state.totalLike,
-                                    style:
-                                        titleSmallTextStyle(_screenSize.width)
-                                            .copyWith(
-                                                fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ));
-                            }
-                            return Text('Total post');
-                          },
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                Column(
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) => SettingScreenUI())));
-                      },
-                      child: Text(
-                        'Settings',
-                        style: TextStyle(
-                          color: secondaryColor,
-                          fontWeight: FontWeight.w300,
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.all(_screenSize.width * 0.05),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        overflow: TextOverflow.ellipsis,
+                        _user!.email!,
+                        style: TextStyle(color: secondaryColor),
+                      ),
+                      SizedBox(
+                        height: _screenSize.width * 0.05,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          BlocBuilder<ProfileBloc, ProfileState>(
+                            builder: (context, state) {
+                              if (state is TotalLikeandPostState) {
+                                return (Column(
+                                  children: [
+                                    Text(
+                                      'Total Post',
+                                      style:
+                                          titleSmallTextStyle(_screenSize.width),
+                                    ),
+                                    Text(
+                                      state.totalPost,
+                                      style:
+                                          titleSmallTextStyle(_screenSize.width)
+                                              .copyWith(
+                                                  fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ));
+                              }
+                              return Text('Total post');
+                            },
+                          ),
+                          BlocBuilder<ProfileBloc, ProfileState>(
+                            builder: (context, state) {
+                              if (state is TotalLikeandPostState) {
+                                return (Column(
+                                  children: [
+                                    Text(
+                                      'Total Likes',
+                                      style:
+                                          titleSmallTextStyle(_screenSize.width),
+                                    ),
+                                    Text(
+                                      state.totalLike,
+                                      style:
+                                          titleSmallTextStyle(_screenSize.width)
+                                              .copyWith(
+                                                  fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ));
+                              }
+                              return Text('Total post');
+                            },
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => SettingScreenUI())));
+                        },
+                        child: Text(
+                          'Settings',
+                          style: TextStyle(
+                            color: secondaryColor,
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
                       ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        context
-                            .read<AuthenticationBloc>()
-                            .add(LogginOutEvent());
-                      },
-                      child: Text(
-                        'Logout',
-                        style: TextStyle(
-                          color: secondaryColor,
-                          fontWeight: FontWeight.bold,
+                      TextButton(
+                        onPressed: () {
+                          context
+                              .read<AuthenticationBloc>()
+                              .add(LogginOutEvent());
+                        },
+                        child: Text(
+                          'Logout',
+                          style: TextStyle(
+                            color: secondaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                )
-              ],
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

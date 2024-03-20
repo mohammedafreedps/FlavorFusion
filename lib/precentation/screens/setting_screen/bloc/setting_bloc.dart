@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flavorfusion/data/repository/recipe_from_firebase_model.dart';
 import 'package:flavorfusion/data/temp_value_holder.dart';
@@ -12,7 +13,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
       // TODO: implement event handler
     });
 
-    on((event, emit) async {
+    on<DeleteAccountButtonClickedEvent>((event, emit) async {
       List<RecipeFromFireBaseModel> resHold = hrecipies
           .where(
               (recip) => recip.userEmail.toLowerCase().contains(huser!.email!))
@@ -28,12 +29,20 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
           await imageRef.delete();
           await docRef.delete();
         } on FirebaseException catch (e) {
+          emit(AccountDeleteErrorState(message: e.message.toString()));
           throw e;
         }
       }
       try {
+        if (huser != null && huser!.email!.isNotEmpty) {
+          AuthCredential _credential = EmailAuthProvider.credential(
+              email: huser!.email!, password: '1234567890');
+          await huser!.reauthenticateWithCredential(_credential);
+        }
         await huser!.delete();
+        emit(AccountDeleteSuccsussState(message: 'Account deleted Successfully'));
       } on FirebaseException catch (e) {
+        emit(AccountDeleteErrorState(message: e.message.toString()));
         print(e);
       }
     });

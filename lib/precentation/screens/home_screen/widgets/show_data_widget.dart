@@ -44,7 +44,7 @@ Widget showDataWidget(List<RecipeFromFireBaseModel> recipies, Size screenSize,
                           recipies[index].userEmail,
                           screenSize.width,
                           recipies[index].likes.contains(user.email),
-                          recipies[index].wishlist.contains(huser!.email),
+                          recipies[index].wishlist.contains(user.email),
                           recipies[index].docId,
                           index));
                 }),
