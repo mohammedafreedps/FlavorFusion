@@ -1,11 +1,6 @@
-import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 Widget imagePlaceHolderText(double screenWidth) {
-  return Center(
-    child: Text(
-      'Loading....',
-      style: titleSmallTextStyle(screenWidth),
-    ),
-  );
+  return Center(child: SizedBox(child: Lottie.asset('Assets/loading_animation.json')));
 }

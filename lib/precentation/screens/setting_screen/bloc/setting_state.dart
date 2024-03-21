@@ -12,3 +12,5 @@ class AccountDeleteErrorState extends SettingState{
   String message;
   AccountDeleteErrorState({required this.message});
 }
+
+class DeletingAccountState extends SettingState{}

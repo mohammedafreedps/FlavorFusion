@@ -14,6 +14,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     });
 
     on<DeleteAccountButtonClickedEvent>((event, emit) async {
+      emit(DeletingAccountState());
       List<RecipeFromFireBaseModel> resHold = hrecipies
           .where(
               (recip) => recip.userEmail.toLowerCase().contains(huser!.email!))

@@ -9,6 +9,7 @@ import 'package:flavorfusion/precentation/screens/create_fillIn_screen/bloc/crea
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/functions/edit_recipie_uploaded.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/functions/init_function.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/functions/recipie_uploaded.dart';
+import 'package:flavorfusion/precentation/screens/create_fillIn_screen/functions/reset_value.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/functions/upload_recipie.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/widgets/create_button_one.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/widgets/create_button_two.dart';
@@ -74,6 +75,7 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
                 _screenSize.height);
           }
           if (state is RecipieUploadedStete) {
+            resetValue();
             recipieUploaded(context, _screenSize);
           }
           if (state is EditRecipieUploadedState) {

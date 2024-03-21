@@ -1,4 +1,3 @@
-import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_bloc.dart';
@@ -6,6 +5,7 @@ import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_reci
 import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_state.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/widgets/saved_recipie_tile.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
+import 'package:flavorfusion/precentation/widgets/loading_icon_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,9 +50,7 @@ class SavedRecipesUI extends StatelessWidget {
                   });
             }
             return Center(
-              child: CircularProgressIndicator(
-                color: secondaryColor,
-              ),
+              child: loadingIconAnimation(_screenSize.width)
             );
           },
         ),

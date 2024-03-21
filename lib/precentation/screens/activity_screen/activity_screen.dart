@@ -1,4 +1,3 @@
-import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_bloc.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_event.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_state.dart';
@@ -11,6 +10,7 @@ import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_ev
 import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_bloc.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_event.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
+import 'package:flavorfusion/precentation/widgets/loading_icon_animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -47,9 +47,7 @@ class ActivityScreenUI extends StatelessWidget {
               builder: (context, state) {
                 if (state is DeletingPostState) {
                   return Center(
-                    child: CircularProgressIndicator(
-                      color: secondaryColor,
-                    ),
+                    child: loadingIconAnimation(_screenSize.width)
                   );
                 }
                 if (state is SortedValueState) {
@@ -81,9 +79,7 @@ class ActivityScreenUI extends StatelessWidget {
                           }));
                 } else {
                   return Center(
-                    child: CircularProgressIndicator(
-                      color: secondaryColor,
-                    ),
+                    child: loadingIconAnimation(_screenSize.width)
                   );
                 }
               },

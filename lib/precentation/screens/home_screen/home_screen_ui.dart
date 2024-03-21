@@ -10,6 +10,7 @@ import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_ev
 import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_bloc.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_event.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
+import 'package:flavorfusion/precentation/widgets/loading_icon_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -102,9 +103,7 @@ class HomeScreenUI extends StatelessWidget {
                   }
                   return Padding(
                     padding: EdgeInsets.only(top: _screenSize.height * 0.35),
-                    child: CircularProgressIndicator(
-                      color: secondaryColor,
-                    ),
+                    child: loadingIconAnimation(_screenSize.width)
                   );
                 },
               ),

@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/precentation/screens/details_screen/widgets/ingredients_list.dart';
 import 'package:flavorfusion/precentation/screens/details_screen/widgets/preparation_list.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_bloc.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_state.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
+import 'package:flavorfusion/precentation/widgets/image_place_holder_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,10 +45,13 @@ class DetailsScreenUI extends StatelessWidget {
                           borderRadius:
                               BorderRadius.circular(_screenSize.width * 0.07),
                           child: SizedBox(
-                              child: Image.network(
-                            state.mealAPIModels[index].strMealThumb,
-                            fit: BoxFit.cover,
-                          ))),
+                            child: CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl:
+                                    state.mealAPIModels[index].strMealThumb,
+                                placeholder: (context, url) =>
+                                    imagePlaceHolderText(_screenSize.width)),
+                          )),
                     ),
                     SizedBox(
                       height: _screenSize.width * 0.02,
@@ -101,5 +106,3 @@ class DetailsScreenUI extends StatelessWidget {
     );
   }
 }
-
-

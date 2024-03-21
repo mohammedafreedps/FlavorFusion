@@ -7,6 +7,7 @@ import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_b
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
+import 'package:flavorfusion/precentation/widgets/loading_icon_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -90,9 +91,7 @@ class _CommentScreenUIState extends State<CommentScreenUI> {
                     );
                   }
                   return Center(
-                    child: CircularProgressIndicator(
-                      color: secondaryColor,
-                    ),
+                    child: loadingIconAnimation(_screenSize.width)
                   );
                 },
               ),

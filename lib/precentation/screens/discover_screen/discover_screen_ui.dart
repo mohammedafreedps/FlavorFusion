@@ -5,6 +5,7 @@ import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_state.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/widgets/discover_tile.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
+import 'package:flavorfusion/precentation/widgets/loading_icon_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,9 +57,7 @@ class DiscoverScreenUI extends StatelessWidget {
                 builder: (context, state) {
                   if (state is PageDiscoverLodingState) {
                     return Center(
-                      child: CircularProgressIndicator(
-                        color: secondaryColor,
-                      ),
+                      child: loadingIconAnimation(_screenSize.width)
                     );
                   }
                   if (state is DataFechSuccessState) {
