@@ -2,7 +2,9 @@ import 'package:flavorfusion/precentation/screens/setting_screen/bloc/setting_bl
 import 'package:flavorfusion/precentation/screens/setting_screen/bloc/setting_state.dart';
 import 'package:flavorfusion/precentation/screens/setting_screen/functions/account_deleted.dart';
 import 'package:flavorfusion/precentation/screens/setting_screen/functions/delete_account.dart';
+import 'package:flavorfusion/precentation/screens/setting_screen/functions/navigator.dart';
 import 'package:flavorfusion/precentation/screens/setting_screen/widgets/setting_buttons.dart';
+import 'package:flavorfusion/precentation/screens/setting_screen/widgets/setting_detail_screen_ui.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flavorfusion/precentation/widgets/bottom_sheet.dart';
@@ -43,10 +45,18 @@ class SettingScreenUI extends StatelessWidget {
                     style: titleMidiumTextStyle(_screenSize.width)
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
-                  settingButtons(_screenSize.width, 'About'),
-                  settingButtons(_screenSize.width, 'Feedback'),
-                  settingButtons(_screenSize.width, 'Privacy Policy'),
-                  settingButtons(_screenSize.width, 'Terms and Conditions'),
+                  settingButtons(_screenSize.width, 'About', function: () {
+                    navigator(
+                        context, SettingDetailScreenUi(pageName: 'About'));
+                  }),
+                  settingButtons(_screenSize.width, 'Privacy Policy',
+                      function: () {
+                    navigator(context,
+                        SettingDetailScreenUi(pageName: 'privacy Policy'));
+                  }),
+                  settingButtons(_screenSize.width, 'Terms and Conditions',function: (){
+                    navigator(context, SettingDetailScreenUi(pageName: 'Terms & Condition'));
+                  }),
                   Text(
                     'Account',
                     style: titleMidiumTextStyle(_screenSize.width)

@@ -100,8 +100,11 @@ class HomeScreenUI extends StatelessWidget {
                     return showDataWidget(state.searchResults, _screenSize,
                         huser!, 'Item not found');
                   }
-                  return CircularProgressIndicator(
-                    color: secondaryColor,
+                  return Padding(
+                    padding: EdgeInsets.only(top: _screenSize.height * 0.35),
+                    child: CircularProgressIndicator(
+                      color: secondaryColor,
+                    ),
                   );
                 },
               ),
