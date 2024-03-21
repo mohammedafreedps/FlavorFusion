@@ -18,6 +18,7 @@ import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_
 import 'package:flavorfusion/precentation/screens/forget_passwrod_screen/bloc/forget_password_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
+import 'package:flavorfusion/precentation/screens/intro_page_two_screen/intro_page_two_UI.dart';
 import 'package:flavorfusion/precentation/screens/log_in_screen/bloc/login_validation_bloc.dart';
 import 'package:flavorfusion/precentation/screens/log_in_screen/log_In_screen_UI.dart';
 import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_bloc.dart';
@@ -89,6 +90,9 @@ class MyApp extends StatelessWidget {
             print(state);
             if (state is SplashState) {
               return const SplashScreenUI();
+            }
+            if (state is ShowIntroPageTwoState) {
+              return IntroPageTwoUI();
             }
             if (state is FirstOpeningState) {
               return const IntroPageOneUI();

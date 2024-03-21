@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
@@ -16,22 +15,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreenUI extends StatefulWidget {
+class HomeScreenUI extends StatelessWidget {
   HomeScreenUI({super.key});
-
-  @override
-  State<HomeScreenUI> createState() => _HomeScreenUIState();
-}
-
-class _HomeScreenUIState extends State<HomeScreenUI> {
-  User? _user;
-
-  @override
-  void initState() {
-    final User? _use = FirebaseAuth.instance.currentUser;
-    _user = _use;
-    super.initState();
-  }
 
   final _searchController = TextEditingController();
 
@@ -64,10 +49,14 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
                       controller: _searchController,
                       cursorColor: baseColor,
                       onChanged: (text) {
-                        if(_searchController.text.isEmpty){
-                          context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
+                        if (_searchController.text.isEmpty) {
+                          context
+                              .read<HomeScreenBloc>()
+                              .add(FechDataFromFirebaseEvent());
                         }
-                        context.read<HomeScreenBloc>().add(SearchingEvent(query: _searchController.text));
+                        context
+                            .read<HomeScreenBloc>()
+                            .add(SearchingEvent(query: _searchController.text));
                       },
                       style: TextStyle(color: baseColor),
                       decoration: InputDecoration(
@@ -81,9 +70,14 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
                               borderSide: BorderSide(color: baseColor))),
                     ),
                   ),
-                  IconButton(onPressed: (){
-                    filterSelector(context, _screenSize.width);
-                  }, icon: Icon(Icons.filter_list_alt,color: secondaryColor,)).animate(effects: [ScaleEffect()])
+                  IconButton(
+                      onPressed: () {
+                        filterSelector(context, _screenSize.width);
+                      },
+                      icon: Icon(
+                        Icons.filter_list_alt,
+                        color: secondaryColor,
+                      )).animate(effects: [ScaleEffect()])
                 ],
               ),
               SizedBox(
@@ -92,14 +86,19 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
               BlocBuilder<HomeScreenBloc, HomeScreenState>(
                 builder: (context, state) {
                   if (state is AllDatasLoadedState) {
-                    context.read<ProfileBloc>().add(CountTotalLikeandPostEvent());
-                    return showDataWidget(hrecipies, _screenSize, _user!,'Be the First One to add');
+                    context
+                        .read<ProfileBloc>()
+                        .add(CountTotalLikeandPostEvent());
+                    return showDataWidget(hrecipies, _screenSize, huser!,
+                        'Be the First One to add');
                   }
-                  if(state is SearchRecipieResultState){
-                    return showDataWidget(state.searchResults, _screenSize, _user!,'Item not found');
+                  if (state is SearchRecipieResultState) {
+                    return showDataWidget(state.searchResults, _screenSize,
+                        huser!, 'Item not found');
                   }
-                  if(state is CategorySearchResultsState){
-                    return showDataWidget(state.searchResults, _screenSize, _user!,'Item not found');
+                  if (state is CategorySearchResultsState) {
+                    return showDataWidget(state.searchResults, _screenSize,
+                        huser!, 'Item not found');
                   }
                   return CircularProgressIndicator(
                     color: secondaryColor,

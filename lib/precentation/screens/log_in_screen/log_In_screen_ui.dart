@@ -1,5 +1,3 @@
-
-
 import 'package:flavorfusion/precentation/authentication_bloc/auth_Bloc.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_Event.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_State.dart';
@@ -15,6 +13,7 @@ import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart'
 import 'package:flavorfusion/precentation/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LogInScreenUI extends StatelessWidget {
@@ -32,7 +31,10 @@ class LogInScreenUI extends StatelessWidget {
       child: BlocListener<LoginValidationBloc, LoginValidationState>(
         listener: (context, state) {
           if (state is ValidatedState) {
-            context.read<AuthenticationBloc>().add(LoginButtonClickedEvent(email: _emailController.text, password: _passwordController.text, page: Placeholder()));
+            context.read<AuthenticationBloc>().add(LoginButtonClickedEvent(
+                email: _emailController.text,
+                password: _passwordController.text,
+                page: Placeholder()));
           }
           if (state is EmailPasswordnotinputedState) {
             bottomSheet(
@@ -50,8 +52,12 @@ class LogInScreenUI extends StatelessWidget {
             bottomSheet(
                 state.vMessage, context, _screenSize.width, _screenSize.height);
           }
-          if (state is NavigatePageToForgetPasswordScreenEvent){
-            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>ForgetPasswordScreenUI()));
+          if (state is NavigatePageToForgetPasswordScreenEvent) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        ForgetPasswordScreenUI()));
           }
         },
         child: Scaffold(
@@ -72,42 +78,51 @@ class LogInScreenUI extends StatelessWidget {
                         return CircularProgressIndicator();
                       } else {
                         return Text('LogIn',
-                            style: titleLargeBoldTextStyle(_screenSize.width));
+                                style:
+                                    titleLargeBoldTextStyle(_screenSize.width))
+                            .animate(effects: [FadeEffect()]);
                       }
                     },
                   ),
                   Column(
                     children: [
-                      midLevelTextField(
-                          'Email', _screenSize.width, false, _emailController),
+                      midLevelTextField('Email', _screenSize.width, false,
+                              _emailController)
+                          .animate(effects: [FadeEffect()]),
                       SizedBox(
                         height: _screenSize.width * 0.06,
                       ),
                       midLevelTextField('Password', _screenSize.width, true,
-                          _passwordController),
+                              _passwordController)
+                          .animate(effects: [FadeEffect()]),
                       SizedBox(
                         height: _screenSize.width * 0.06,
                       ),
-                      textButton('Forget Password?', _screenSize.width,page: 'forgetPassword',context: context),
+                      textButton('Forget Password?', _screenSize.width,
+                              page: 'forgetPassword', context: context)
+                          .animate(effects: [FadeEffect()]),
                     ],
                   ),
                   Column(
                     children: [
                       loginButton(
-                          'Log In',
-                          _screenSize.width,
-                          context,
-                          _emailController.text,
-                          _passwordController.text,
-                          StartingScreenUI()),
+                              'Log In',
+                              _screenSize.width,
+                              context,
+                              _emailController.text,
+                              _passwordController.text,
+                              StartingScreenUI())
+                          .animate(effects: [FadeEffect()]),
                       SizedBox(
                         height: _screenSize.width * 0.06,
                       ),
                       textButton('Create Account', _screenSize.width,
-                          context: context, page: 'createAccount'),
+                              context: context, page: 'createAccount')
+                          .animate(effects: [FadeEffect()]),
                     ],
                   ),
                   logWithGoogleButton(_screenSize.width, context)
+                      .animate(effects: [FadeEffect()])
                 ],
               ),
             ),

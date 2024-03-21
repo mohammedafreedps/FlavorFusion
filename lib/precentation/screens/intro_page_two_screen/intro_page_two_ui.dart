@@ -4,17 +4,22 @@ import 'dart:async';
 
 import 'package:flavorfusion/Constants/textes.dart';
 import 'package:flavorfusion/constants/colors.dart';
+import 'package:flavorfusion/precentation/authentication_bloc/auth_Bloc.dart';
+import 'package:flavorfusion/precentation/authentication_bloc/auth_Event.dart';
 import 'package:flavorfusion/precentation/screens/log_in_screen/log_In_screen_UI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class IntroPageTwoUI extends StatelessWidget {
   const IntroPageTwoUI({super.key});
 
     void _navigatePage(BuildContext context, Widget widget) {
     Timer(Duration(seconds: 3), () {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => widget));
+      print('3 navigator called');
+      // Navigator.pushReplacement(context,
+      //     MaterialPageRoute(builder: (BuildContext context) => widget));
+      context.read<AuthenticationBloc>().add(BackToLoginButtonClickedEvent());
     });
   }
 

@@ -1,4 +1,3 @@
-
 import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,10 +14,10 @@ class AuthenticationBloc
         emit(FirstOpeningState());
       } else {
         User? _user = await FirebaseAuth.instance.currentUser;
-        huser = _user;
         if (_user == null) {
           emit(LoggedOutState());
         } else {
+          huser = await FirebaseAuth.instance.currentUser;
           emit(LoggedInState());
         }
       }
@@ -80,12 +79,16 @@ class AuthenticationBloc
       }
     }));
 
-    on<SigninButtonClickedEvent>((event, emit){
+    on<SigninButtonClickedEvent>((event, emit) {
       emit(NavigateToSigninPageState());
     });
 
     on<BackToLoginButtonClickedEvent>((event, emit) {
       emit(LoggedOutState());
+    });
+
+    on<ShowIntroPageTwoEvent>((event, emit) {
+      emit(ShowIntroPageTwoState());
     });
   }
 }

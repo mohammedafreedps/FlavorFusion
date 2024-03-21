@@ -26,3 +26,5 @@ class LogginWithGooogleButtonClickedEvent extends AuthenticationBlocEvent{}
 class SigninButtonClickedEvent extends AuthenticationBlocEvent{}
 
 class BackToLoginButtonClickedEvent extends AuthenticationBlocEvent{}
+
+class ShowIntroPageTwoEvent extends AuthenticationBlocEvent{}

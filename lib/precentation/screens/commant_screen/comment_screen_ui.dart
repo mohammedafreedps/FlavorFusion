@@ -8,6 +8,7 @@ import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_e
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CommentScreenUI extends StatefulWidget {
@@ -84,7 +85,7 @@ class _CommentScreenUIState extends State<CommentScreenUI> {
                                     state.comments[index].commentedBy,
                                     state.comments[index].comment,
                                     widget.docId,
-                                    state.comments[index].commentId,state.comments[index].dateTime);
+                                    state.comments[index].commentId,state.comments[index].dateTime).animate(delay: Duration(milliseconds: 100 * index), effects: [FadeEffect(), SlideEffect()]);
                               }),
                     );
                   }

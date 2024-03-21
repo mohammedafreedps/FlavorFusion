@@ -21,3 +21,5 @@ final class RegisterErrorState extends AuthenticationBlocState {
 
 final class NavigateToSigninPageState extends AuthenticationBlocState{}
 
+final class ShowIntroPageTwoState extends AuthenticationBlocState{}
+
