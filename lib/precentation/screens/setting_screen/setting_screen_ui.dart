@@ -1,8 +1,8 @@
 import 'package:flavorfusion/precentation/screens/setting_screen/bloc/setting_bloc.dart';
 import 'package:flavorfusion/precentation/screens/setting_screen/bloc/setting_state.dart';
 import 'package:flavorfusion/precentation/screens/setting_screen/functions/account_deleted.dart';
-import 'package:flavorfusion/precentation/screens/setting_screen/functions/delete_account.dart';
 import 'package:flavorfusion/precentation/screens/setting_screen/functions/navigator.dart';
+import 'package:flavorfusion/precentation/screens/setting_screen/widgets/delete_account_alert_dialog.dart';
 import 'package:flavorfusion/precentation/screens/setting_screen/widgets/setting_buttons.dart';
 import 'package:flavorfusion/precentation/screens/setting_screen/widgets/setting_detail_screen_ui.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
@@ -20,6 +20,7 @@ class SettingScreenUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
+    final _passwordController = TextEditingController();
     return Scaffold(
       appBar: appBar(title: 'Setings'),
       body: BlocListener<SettingBloc, SettingState>(
@@ -34,7 +35,7 @@ class SettingScreenUI extends StatelessWidget {
         },
         child: BlocBuilder<SettingBloc, SettingState>(
           builder: (context, state) {
-            if(state is DeletingAccountState){
+            if (state is DeletingAccountState) {
               return Center(
                 child: loadingIconAnimation(_screenSize.width),
               );
@@ -76,7 +77,8 @@ class SettingScreenUI extends StatelessWidget {
                       ),
                       settingButtons(_screenSize.width, 'Delete Account',
                           function: () {
-                        deleteAccount(context);
+                        deleteAccountAlertDialog(
+                            context, _screenSize.width, _passwordController);
                       }),
                     ],
                   ),

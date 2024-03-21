@@ -1,10 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavorfusion/constants/colors.dart';
-import 'package:flavorfusion/precentation/authentication_bloc/auth_Bloc.dart';
-import 'package:flavorfusion/precentation/authentication_bloc/auth_Event.dart';
 import 'package:flavorfusion/precentation/screens/activity_screen/activity_screen.dart';
 import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_bloc.dart';
 import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_state.dart';
+import 'package:flavorfusion/precentation/screens/profile_screen/widget/logout_alert_dialog.dart';
 import 'package:flavorfusion/precentation/screens/saved_recipies/saved_recipies_ui.dart';
 import 'package:flavorfusion/precentation/screens/setting_screen/setting_screen_ui.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
@@ -143,9 +142,7 @@ class ProfileScreenUI extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          context
-                              .read<AuthenticationBloc>()
-                              .add(LogginOutEvent());
+                         logoutAlertDialog(context, _screenSize.width);
                         },
                         child: Text(
                           'Logout',

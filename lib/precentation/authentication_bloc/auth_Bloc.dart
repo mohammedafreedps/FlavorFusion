@@ -32,7 +32,6 @@ class AuthenticationBloc
         print(e);
         emit(IncorrectCredentialState());
       }
-
       User? _user = await FirebaseAuth.instance.currentUser;
       if (_user != null) {
         emit(LoggedInState());

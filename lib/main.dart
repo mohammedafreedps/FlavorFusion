@@ -28,6 +28,7 @@ import 'package:flavorfusion/precentation/screens/setting_screen/bloc/setting_bl
 import 'package:flavorfusion/precentation/screens/splash_screen/splash_screen_ui.dart';
 import 'package:flavorfusion/precentation/screens/starting_screen/starting_screen.dart';
 import 'package:flavorfusion/constants/key.dart';
+import 'package:flavorfusion/precentation/widgets/incorrect_cred_alert_dialog.dart';
 import 'package:flavorfusion/precentation/widgets/loading_icon_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,33 +87,38 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           scaffoldBackgroundColor: primaryColor,
         ),
-        home: BlocBuilder<AuthenticationBloc, AuthenticationBlocState>(
-          builder: (context, state) {
-            print(state);
-            if (state is SplashState) {
-              return const SplashScreenUI();
+        home: BlocListener<AuthenticationBloc, AuthenticationBlocState>(
+          listener: (context, state) {
+            if (state is IncorrectCredentialState) {
+              incorrectCredAlertDialog(context);
             }
-            if (state is ShowIntroPageTwoState) {
-              return IntroPageTwoUI();
-            }
-            if (state is FirstOpeningState) {
-              return const IntroPageOneUI();
-            }
-            if (state is LoggedInState) {
-              return const StartingScreenUI();
-            }
-            if (state is LoggedOutState) {
-              return LogInScreenUI();
-            }
-            if (state is NavigateToSigninPageState) {
-              return CreateAccountUI();
-            }
-            return Scaffold(
-              body: Center(
-                child: loadingIconAnimation(null)
-              ),
-            );
           },
+          child: BlocBuilder<AuthenticationBloc, AuthenticationBlocState>(
+            builder: (context, state) {
+              print(state);
+              if (state is SplashState) {
+                return const SplashScreenUI();
+              }
+              if (state is ShowIntroPageTwoState) {
+                return IntroPageTwoUI();
+              }
+              if (state is FirstOpeningState) {
+                return const IntroPageOneUI();
+              }
+              if (state is LoggedInState) {
+                return const StartingScreenUI();
+              }
+              if (state is LoggedOutState) {
+                return LogInScreenUI();
+              }
+              if (state is NavigateToSigninPageState) {
+                return CreateAccountUI();
+              }
+              return Scaffold(
+                body: Center(child: loadingIconAnimation(null)),
+              );
+            },
+          ),
         ),
       ),
     );

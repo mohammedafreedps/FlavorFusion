@@ -90,8 +90,8 @@ class HomeScreenUI extends StatelessWidget {
                     context
                         .read<ProfileBloc>()
                         .add(CountTotalLikeandPostEvent());
-                    return showDataWidget(hrecipies, _screenSize, huser!,
-                        'Be the First One to add');
+                    return huser != null ? showDataWidget(hrecipies, _screenSize, huser!,
+                        'Be the First One to add') : Text('');
                   }
                   if (state is SearchRecipieResultState) {
                     return showDataWidget(state.searchResults, _screenSize,

@@ -37,7 +37,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
       try {
         if (huser != null && huser!.email!.isNotEmpty) {
           AuthCredential _credential = EmailAuthProvider.credential(
-              email: huser!.email!, password: '1234567890');
+              email: huser!.email!, password: event.password.trim());
           await huser!.reauthenticateWithCredential(_credential);
         }
         await huser!.delete();
