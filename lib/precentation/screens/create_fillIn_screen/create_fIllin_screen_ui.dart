@@ -1,17 +1,19 @@
-import 'dart:async';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/data/temp_value_holder.dart';
-import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_bloc.dart';
-import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_event.dart';
 import 'package:flavorfusion/precentation/screens/create_cooking_time_screen/create_cooking_time_screen_ui.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/bloc/create_fillin_bloc.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/bloc/create_fillin_event.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/bloc/create_fillin_state.dart';
+import 'package:flavorfusion/precentation/screens/create_fillIn_screen/functions/edit_recipie_uploaded.dart';
+import 'package:flavorfusion/precentation/screens/create_fillIn_screen/functions/init_function.dart';
+import 'package:flavorfusion/precentation/screens/create_fillIn_screen/functions/recipie_uploaded.dart';
+import 'package:flavorfusion/precentation/screens/create_fillIn_screen/functions/upload_recipie.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/widgets/create_button_one.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/widgets/create_button_two.dart';
 import 'package:flavorfusion/precentation/screens/create_fillIn_screen/widgets/create_text_field.dart';
+import 'package:flavorfusion/precentation/screens/create_fillIn_screen/widgets/drop_down_item_list.dart';
 import 'package:flavorfusion/precentation/screens/create_ingredients_screen/bloc/create_ingredients_bloc.dart';
 import 'package:flavorfusion/precentation/screens/create_ingredients_screen/bloc/create_ingredients_state.dart';
 import 'package:flavorfusion/precentation/screens/create_ingredients_screen/create_ingredients_screen_UI.dart';
@@ -20,10 +22,6 @@ import 'package:flavorfusion/precentation/screens/create_instructions_screen/blo
 import 'package:flavorfusion/precentation/screens/create_instructions_screen/bloc/create_instructions_state.dart';
 import 'package:flavorfusion/precentation/screens/create_instructions_screen/create_instructions_screen_ui.dart';
 import 'package:flavorfusion/precentation/screens/create_instructions_screen/widgets/show_entered_instructions.dart';
-import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
-import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
-import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_bloc.dart';
-import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_event.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flavorfusion/precentation/widgets/bottom_sheet.dart';
@@ -52,64 +50,20 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
 
   @override
   void initState() {
-    if (widget.isEditing == true && widget.index != null) {
-      context.read<CreateFillinBloc>().add(EditPreviewImageEvent(
-          imagePath: hposterRecipes[widget.index!].imageURL));
-      _recipeTitleController.text = hposterRecipes[widget.index!].recipeTitle;
-      _additionalNotesController.text =
-          hposterRecipes[widget.index!].additionalNotes;
-      _currentSliderValue =
-          hposterRecipes[widget.index!].difficultyLevel.toDouble();
-      hcreatedIngredents = hposterRecipes[widget.index!].ingredients;
-      hcreatedQuantitys = hposterRecipes[widget.index!].quantitys;
-      hinstructionsSteps = hposterRecipes[widget.index!].instructions;
-      hprepTime = hposterRecipes[widget.index!].prepTime;
-      hcookTime = hposterRecipes[widget.index!].cookTime;
-      htotalTime = hposterRecipes[widget.index!].totalTime;
-    } else {
-      context.read<CreateFillinBloc>().add(SelectImageEvent());
-    }
+    _currentSliderValue = initFunction(
+        context,
+        widget.isEditing,
+        widget.index,
+        _currentSliderValue,
+        _recipeTitleController,
+        _additionalNotesController);
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     Size _screenSize = MediaQuery.of(context).size;
-    List<DropdownMenuItem> items = [
-      DropdownMenuItem(
-        child: Text(
-          'Other',
-          style: titleSmallTextStyle(_screenSize.width),
-        ),
-        value: 'other',
-      ),
-      DropdownMenuItem(
-          child: Text('Italian', style: titleSmallTextStyle(_screenSize.width)),
-          value: 'italian'),
-      DropdownMenuItem(
-          child: Text('Mexican', style: titleSmallTextStyle(_screenSize.width)),
-          value: 'mexican'),
-      DropdownMenuItem(
-          child:
-              Text('Japanese', style: titleSmallTextStyle(_screenSize.width)),
-          value: 'japanese'),
-      DropdownMenuItem(
-          child:
-              Text('American', style: titleSmallTextStyle(_screenSize.width)),
-          value: 'american'),
-      DropdownMenuItem(
-          child: Text('French', style: titleSmallTextStyle(_screenSize.width)),
-          value: 'french'),
-      DropdownMenuItem(
-          child: Text('Thai', style: titleSmallTextStyle(_screenSize.width)),
-          value: 'thai'),
-      DropdownMenuItem(
-          child: Text('Veg', style: titleSmallTextStyle(_screenSize.width)),
-          value: 'veg'),
-      DropdownMenuItem(
-          child: Text('Non veg', style: titleSmallTextStyle(_screenSize.width)),
-          value: 'non veg'),
-    ];
 
     return Scaffold(
       appBar: appBar(title: ''),
@@ -120,21 +74,10 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
                 _screenSize.height);
           }
           if (state is RecipieUploadedStete) {
-            bottomSheet('Recipie Uploaded Succesfully', context,
-                _screenSize.width, _screenSize.height);
-            context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
-            Timer(Duration(seconds: 1), () {
-              context.read<ActivityBloc>().add(SortAndSetValueEvent());
-              context.read<ProfileBloc>().add(CountTotalLikeandPostEvent());
-            });
+            recipieUploaded(context, _screenSize);
           }
           if (state is EditRecipieUploadedState) {
-            bottomSheet('Updated Recipie Uploaded Succesfully', context,
-                _screenSize.width, _screenSize.height);
-            context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
-            Timer(Duration(seconds: 1), () {
-              context.read<ActivityBloc>().add(SortAndSetValueEvent());
-            });
+            editRecipieUploaded(context, _screenSize);
           }
         },
         child: BlocBuilder<CreateFillinBloc, CreateFillinState>(
@@ -403,7 +346,7 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
                         DropdownButton(
                             dropdownColor: baseColor,
                             value: hselectedCategory,
-                            items: items,
+                            items: dropDownItemList(_screenSize.width),
                             onChanged: (value) {
                               setState(() {
                                 hselectedCategory = value!;
@@ -420,62 +363,13 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
                         ),
                         createButtonOne('Upload', context, _screenSize.width,
                             function: () {
-                          print(_recipeTitleController.text);
-                          if (himagePath != null &&
-                              _recipeTitleController.text.isNotEmpty &&
-                              hcreatedIngredents.isNotEmpty &&
-                              hinstructionsSteps.isNotEmpty &&
-                              hcreatedQuantitys.isNotEmpty &&
-                              hprepTime != null &&
-                              hcookTime != null &&
-                              htotalTime != null &&
-                              _currentSliderValue > 0) {
-                            String _imageName = DateTime.now().toString();
-                            if (_additionalNotesController.text.isEmpty) {
-                              _additionalNotesController.text = 'Nil';
-                            }
-                            if (widget.isEditing == true &&
-                                widget.index != null) {
-                              context.read<CreateFillinBloc>().add(
-                                  EditedRecipieUploadButtonClickedEvent(
-                                      index: widget.index!,
-                                      imagePath: himagePath!,
-                                      imageName: 'up',
-                                      recipeTitle: _recipeTitleController.text,
-                                      ingredients: hcreatedIngredents,
-                                      quantitys: hcreatedQuantitys,
-                                      instructions: hinstructionsSteps,
-                                      prepTime: hprepTime!,
-                                      cookTime: hcookTime!,
-                                      totalTime: htotalTime!,
-                                      difficultyLevel:
-                                          _currentSliderValue.round(),
-                                      additionalNotes:
-                                          _additionalNotesController.text,
-                                      category: hselectedCategory));
-                            } else {
-                              context.read<CreateFillinBloc>().add(
-                                  UploadRecipieButtonClickedEvent(
-                                      imagePath: himagePath!,
-                                      imageName: 'recipe $_imageName',
-                                      recipeTitle: _recipeTitleController.text,
-                                      ingredients: hcreatedIngredents,
-                                      instructions: hinstructionsSteps,
-                                      quantitys: hcreatedQuantitys,
-                                      prepTime: hprepTime!,
-                                      cookTime: hcookTime!,
-                                      totalTime: htotalTime!,
-                                      additionalNotes:
-                                          _additionalNotesController.text,
-                                      category: hselectedCategory,
-                                      difficultyLevel:
-                                          _currentSliderValue.round()));
-                            }
-                          } else {
-                            context
-                                .read<CreateFillinBloc>()
-                                .add(FieldFilledCheckErrorEvent());
-                          }
+                          uploadRecipie(
+                              context,
+                              widget.isEditing,
+                              widget.index,
+                              _currentSliderValue,
+                              _recipeTitleController,
+                              _additionalNotesController);
                         })
                       ],
                     ),

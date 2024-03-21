@@ -71,10 +71,8 @@ Widget activityTile(BuildContext context, double screenWidth, String src,
                         width: screenWidth * 0.06,
                       ),
                       Positioned(
-                          top: 7.9,
-                          bottom: null,
-                          left: 13,
-                          right: null,
+                          top: screenWidth * 0.025,
+                          left: screenWidth * 0.03,
                           child: Text(
                             hrecipies[index].likes.length.toString(),
                             style: titleSmallTextStyle(screenWidth).copyWith(
@@ -91,10 +89,8 @@ Widget activityTile(BuildContext context, double screenWidth, String src,
                         width: screenWidth * 0.06,
                       ),
                       Positioned(
-                          top: 3.9,
-                          bottom: null,
-                          left: 9.8,
-                          right: null,
+                          top: screenWidth * 0.014,
+                          left: screenWidth * 0.024,
                           child: Text(
                             hrecipies[index].commentCount.toString(),
                             style: titleSmallTextStyle(screenWidth).copyWith(

@@ -10,6 +10,7 @@ import 'package:flavorfusion/precentation/screens/setting_screen/setting_screen_
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileScreenUI extends StatelessWidget {
@@ -29,7 +30,7 @@ class ProfileScreenUI extends StatelessWidget {
             'Profile',
             style:
                 TextStyle(color: secondaryColor, fontWeight: FontWeight.bold),
-          ),
+          ).animate(effects: [SlideEffect(),FadeEffect()]),
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(48.0),
             child: Column(

@@ -13,6 +13,7 @@ import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_reci
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreenUI extends StatefulWidget {
@@ -82,7 +83,7 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
                   ),
                   IconButton(onPressed: (){
                     filterSelector(context, _screenSize.width);
-                  }, icon: Icon(Icons.filter_list_alt,color: secondaryColor,))
+                  }, icon: Icon(Icons.filter_list_alt,color: secondaryColor,)).animate(effects: [ScaleEffect()])
                 ],
               ),
               SizedBox(

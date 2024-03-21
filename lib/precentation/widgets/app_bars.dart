@@ -1,6 +1,7 @@
 import 'package:flavorfusion/constants/colors.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
 
 AppBar appBar(
@@ -26,12 +27,12 @@ AppBar appBar(
           if (function != null){
             function();
           }
-        }, icon: icon!):Text('')],
+        }, icon: icon!.animate(effects: [FadeEffect(), RotateEffect()])):Text('')],
         
     backgroundColor: primaryColor,
     title: Text(
       title,
       style: appBarTextStyle(),
-    ),
+    ).animate(effects: [SlideEffect(),FadeEffect()]),
   );
 }
