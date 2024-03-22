@@ -75,7 +75,7 @@ class ActivityScreenUI extends StatelessWidget {
                                 2,
                                 0,
                               ))
-                            ], delay: Duration(milliseconds: 500 * index));
+                            ], delay: Duration(milliseconds: 100 * index));
                           }));
                 } else {
                   return Center(

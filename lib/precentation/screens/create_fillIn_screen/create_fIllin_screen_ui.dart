@@ -27,6 +27,7 @@ import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart'
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flavorfusion/precentation/widgets/bottom_sheet.dart';
 import 'package:flavorfusion/precentation/widgets/image_place_holder_text.dart';
+import 'package:flavorfusion/precentation/widgets/loading_icon_animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -86,9 +87,7 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
           builder: (context, state) {
             if (state is RecipieUploadingStete) {
               return Center(
-                child: CircularProgressIndicator(
-                  color: secondaryColor,
-                ),
+                child: loadingIconAnimation(_screenSize.width)
               );
             } else {
               return Padding(

@@ -3,12 +3,11 @@ import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_state.dart';
+import 'package:flavorfusion/precentation/screens/home_screen/function/refresh.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/widgets/fileter_selecter.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/widgets/show_data_widget.dart';
 import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_bloc.dart';
 import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_event.dart';
-import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_bloc.dart';
-import 'package:flavorfusion/precentation/screens/saved_recipies/bloc/saved_recipes_event.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flavorfusion/precentation/widgets/loading_icon_animation.dart';
 import 'package:flutter/material.dart';
@@ -33,9 +32,7 @@ class HomeScreenUI extends StatelessWidget {
           ),
           needAction: true,
           function: () {
-            context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
-            context.read<SavedRecipesBloc>().add(LoadDataInSavedRecipieEvent());
-            context.read<ProfileBloc>().add(CountTotalLikeandPostEvent());
+            refresh(context);
           }),
       body: SingleChildScrollView(
         child: Padding(
@@ -90,8 +87,10 @@ class HomeScreenUI extends StatelessWidget {
                     context
                         .read<ProfileBloc>()
                         .add(CountTotalLikeandPostEvent());
-                    return huser != null ? showDataWidget(hrecipies, _screenSize, huser!,
-                        'Be the First One to add') : Text('');
+                    return huser != null
+                        ? showDataWidget(hrecipies, _screenSize, huser!,
+                            'Be the First One to add')
+                        : Text('');
                   }
                   if (state is SearchRecipieResultState) {
                     return showDataWidget(state.searchResults, _screenSize,
@@ -102,9 +101,8 @@ class HomeScreenUI extends StatelessWidget {
                         huser!, 'Item not found');
                   }
                   return Padding(
-                    padding: EdgeInsets.only(top: _screenSize.height * 0.35),
-                    child: loadingIconAnimation(_screenSize.width)
-                  );
+                      padding: EdgeInsets.only(top: _screenSize.height * 0.35),
+                      child: loadingIconAnimation(_screenSize.width));
                 },
               ),
             ],

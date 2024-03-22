@@ -1,5 +1,6 @@
-
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flavorfusion/data/repository/meal_api_model.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_event.dart';
@@ -23,8 +24,15 @@ class DiscoverBloc extends Bloc<DiscoverEvent, DiscoverState> {
           emit(DataFechFailedState(error: 'Error to fech data'));
         }
       } catch (e) {
-        emit(DataFechFailedState(
-            error: 'A exeption has occured' + e.toString()));
+        if (e is SocketException) {
+          emit(DataFechFailedState(
+              error: "Network error. Please check you internet connection"));
+        }
+        if (e is TimeoutException) {
+          emit(DataFechFailedState(
+              error: 'Request time out. Please try again later'));
+        }
+
         Exception(e);
       }
     });
@@ -42,7 +50,7 @@ class DiscoverBloc extends Bloc<DiscoverEvent, DiscoverState> {
                 .map((meals) => MealapiModel.fromJson(meals))
                 .toList();
             emit(DataFechSuccessState(mealAPIModels: meals));
-          }else{
+          } else {
             emit(DataFechFailedState(error: '!_Item Not Found_!'));
           }
         }

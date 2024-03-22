@@ -19,6 +19,9 @@ Future logoutAlertDialog(BuildContext context, double screenWidth) {
             TextButton(
                 onPressed: () {
                   context.read<AuthenticationBloc>().add(LogginOutEvent());
+                  // hrecipies.clear();
+                  // hsavedRecipes.clear();
+                  // hposterRecipes.clear();
                   Navigator.pop(context);
                 },
                 child: Text('Yes',

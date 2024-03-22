@@ -46,7 +46,7 @@ class SavedRecipesUI extends StatelessWidget {
                                 -2,
                                 0,
                               ))
-                            ], delay: Duration(milliseconds: 500 * index));
+                            ], delay: Duration(milliseconds: 100 * index));
                   });
             }
             return Center(
