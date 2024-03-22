@@ -49,15 +49,19 @@ class AuthenticationBloc
     });
 
     on<LogginWithGooogleButtonClickedEvent>((event, emit) async {
-      GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
       try {
-        AuthCredential creadential = GoogleAuthProvider.credential(
-            accessToken: googleAuth!.accessToken, idToken: googleAuth.idToken);
-        await FirebaseAuth.instance.signInWithCredential(creadential);
-        emit(LoggedInState());
+        GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+        GoogleSignInAuthentication? googleAuth =
+            await googleUser?.authentication;
+        if (googleAuth != null) {
+          AuthCredential creadential = GoogleAuthProvider.credential(
+              accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+          await FirebaseAuth.instance.signInWithCredential(creadential);
+          emit(LoggedInState());
+        }
       } on FirebaseAuthException catch (e) {
-        print(e);
+        print(e.message);
+        emit(LoginWithGoogleErrorState(message: e.message!));
       }
     });
 

@@ -23,3 +23,8 @@ final class NavigateToSigninPageState extends AuthenticationBlocState{}
 
 final class ShowIntroPageTwoState extends AuthenticationBlocState{}
 
+final class LoginWithGoogleErrorState extends AuthenticationBlocState{
+  String message;
+  LoginWithGoogleErrorState({required this.message});
+}
+

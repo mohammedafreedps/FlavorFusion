@@ -28,6 +28,7 @@ import 'package:flavorfusion/precentation/screens/setting_screen/bloc/setting_bl
 import 'package:flavorfusion/precentation/screens/splash_screen/splash_screen_ui.dart';
 import 'package:flavorfusion/precentation/screens/starting_screen/starting_screen.dart';
 import 'package:flavorfusion/constants/key.dart';
+import 'package:flavorfusion/precentation/widgets/bottom_sheet.dart';
 import 'package:flavorfusion/precentation/widgets/incorrect_cred_alert_dialog.dart';
 import 'package:flavorfusion/precentation/widgets/loading_icon_animation.dart';
 import 'package:flutter/material.dart';
@@ -91,6 +92,9 @@ class MyApp extends StatelessWidget {
           listener: (context, state) {
             if (state is IncorrectCredentialState) {
               incorrectCredAlertDialog(context);
+            }
+            if (state is LoginWithGoogleErrorState){
+              bottomSheet(state.message, context, 40, 50);
             }
           },
           child: BlocBuilder<AuthenticationBloc, AuthenticationBlocState>(
