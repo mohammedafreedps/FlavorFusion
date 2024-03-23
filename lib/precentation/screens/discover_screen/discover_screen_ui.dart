@@ -33,7 +33,7 @@ class DiscoverScreenUI extends StatelessWidget {
                     .read<DiscoverBloc>()
                     .add(SearchForRecipeEvent(searchKeywork: text.trim()));
               },
-              style: TextStyle(color: baseColor),
+              style: TextStyle(color: secondaryColor),
               decoration: InputDecoration(
                   hintText: 'Search for Dishes',
                   hintStyle: TextStyle(

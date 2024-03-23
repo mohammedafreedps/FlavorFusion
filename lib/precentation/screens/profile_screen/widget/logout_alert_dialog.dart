@@ -1,4 +1,5 @@
 import 'package:flavorfusion/constants/colors.dart';
+import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_Bloc.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_Event.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
@@ -19,9 +20,10 @@ Future logoutAlertDialog(BuildContext context, double screenWidth) {
             TextButton(
                 onPressed: () {
                   context.read<AuthenticationBloc>().add(LogginOutEvent());
-                  // hrecipies.clear();
-                  // hsavedRecipes.clear();
-                  // hposterRecipes.clear();
+                  hrecipies.clear();
+                  hsavedRecipes.clear();
+                  hposterRecipes.clear();
+                  huser = null;
                   Navigator.pop(context);
                 },
                 child: Text('Yes',

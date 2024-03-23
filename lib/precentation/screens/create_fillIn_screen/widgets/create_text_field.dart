@@ -5,7 +5,7 @@ Widget createTextField(TextEditingController controller) {
   return TextField(
     controller: controller,
     keyboardType: TextInputType.emailAddress,
-    style: TextStyle(color: baseColor),
+    style: TextStyle(color: secondaryColor),
     cursorColor: baseColor,
     decoration: InputDecoration(
         enabledBorder:

@@ -34,7 +34,7 @@ Widget ingredientsAdd(
                       ),
                       TextField(
                         controller: ingredientController,
-                        style: TextStyle(color: primaryColor),
+                        style: TextStyle(color: secondaryColor),
                         cursorColor: primaryColor,
                         decoration: InputDecoration(
                             enabledBorder: UnderlineInputBorder(
@@ -52,7 +52,7 @@ Widget ingredientsAdd(
                       ),
                       TextField(
                         controller: quantityController,
-                        style: TextStyle(color: primaryColor),
+                        style: TextStyle(color: secondaryColor),
                         cursorColor: primaryColor,
                         decoration: InputDecoration(
                             enabledBorder: UnderlineInputBorder(

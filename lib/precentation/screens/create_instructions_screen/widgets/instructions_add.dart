@@ -30,7 +30,7 @@ Widget instructionsAdd(
                   ),
                   TextField(
                     controller: instructionsController,
-                    style: TextStyle(color: primaryColor),
+                    style: TextStyle(color: secondaryColor),
                     cursorColor: primaryColor,
                     maxLines: null,
                     decoration: InputDecoration(

@@ -18,6 +18,8 @@ class AuthenticationBloc
           emit(LoggedOutState());
         } else {
           huser = await FirebaseAuth.instance.currentUser;
+          // print(huser!.email);
+          // await Future.delayed(Duration(seconds: 1));
           emit(LoggedInState());
         }
       }
@@ -34,6 +36,7 @@ class AuthenticationBloc
       }
       User? _user = await FirebaseAuth.instance.currentUser;
       if (_user != null) {
+        huser = await FirebaseAuth.instance.currentUser;
         emit(LoggedInState());
       } else {
         emit(LoggedOutState());
@@ -72,6 +75,7 @@ class AuthenticationBloc
             email: event.email, password: event.password);
         User? _user = await FirebaseAuth.instance.currentUser;
         if (_user != null) {
+          huser = await FirebaseAuth.instance.currentUser;
           emit(LoggedInState());
         } else {
           emit(LoggedOutState());

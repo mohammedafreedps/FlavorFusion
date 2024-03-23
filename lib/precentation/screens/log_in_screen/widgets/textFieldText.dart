@@ -12,7 +12,7 @@ Widget midLevelTextField(String text, double screenWidth, bool isTextObscure,
         controller: controller,
         keyboardType: TextInputType.emailAddress,
         obscureText: isTextObscure,
-        style: TextStyle(color: baseColor),
+        style: TextStyle(color: secondaryColor),
         cursorColor: baseColor,
         decoration: InputDecoration(
             enabledBorder:

@@ -56,7 +56,7 @@ class HomeScreenUI extends StatelessWidget {
                             .read<HomeScreenBloc>()
                             .add(SearchingEvent(query: _searchController.text));
                       },
-                      style: TextStyle(color: baseColor),
+                      style: TextStyle(color: secondaryColor),
                       decoration: InputDecoration(
                           hintText: 'Search for Dishes',
                           hintStyle: TextStyle(
