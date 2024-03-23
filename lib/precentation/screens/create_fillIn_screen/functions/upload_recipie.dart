@@ -39,7 +39,7 @@ void uploadRecipie(
               totalTime: htotalTime!,
               difficultyLevel: currentSliderValue.round(),
               additionalNotes: additionalNotesController.text,
-              category: hselectedCategory));
+              category: hdefaultSelectedCategory));
     } else {
       context.read<CreateFillinBloc>().add(UploadRecipieButtonClickedEvent(
           imagePath: himagePath!,
@@ -52,7 +52,7 @@ void uploadRecipie(
           cookTime: hcookTime!,
           totalTime: htotalTime!,
           additionalNotes: additionalNotesController.text,
-          category: hselectedCategory,
+          category: hdefaultSelectedCategory,
           difficultyLevel: currentSliderValue.round()));
     }
   } else {

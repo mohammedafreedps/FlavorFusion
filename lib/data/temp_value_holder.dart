@@ -17,4 +17,6 @@ List<String> hcreatedIngredents = [];
   List<SavedRecipeModel> hsavedRecipes = [];
   List<CommentModel> hcomments =  [];
   List<int> hcommentCount =[];
-  String hselectedCategory = 'other';
+  String hdefaultSelectedCategory = 'other';
+  List<String> hcategoryItemName = ['Italian','Mexican','Chainese','Indian','Japanese','American', 'French','Thai','Veg','Non veg','Other'];
+  List<bool> hcategorySelected = [false,false,false,false,false,false,false,false,false,false,false];

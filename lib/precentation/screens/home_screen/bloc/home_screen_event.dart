@@ -34,5 +34,6 @@ class SearchingEvent extends HomeScreenEvent{
 
 class CategorySearchEvent extends HomeScreenEvent{
   String query;
-  CategorySearchEvent({required this.query});
+  int index;
+  CategorySearchEvent({required this.query,required this.index});
 }

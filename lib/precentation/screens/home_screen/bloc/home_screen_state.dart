@@ -16,7 +16,7 @@ class SearchRecipieResultState extends HomeScreenState {
   SearchRecipieResultState({required this.searchResults});
 }
 
-class CategorySearchResultsState extends HomeScreenState{
+class CategorySearchResultsState extends HomeScreenState {
   List<RecipeFromFireBaseModel> searchResults;
   CategorySearchResultsState({required this.searchResults});
 }

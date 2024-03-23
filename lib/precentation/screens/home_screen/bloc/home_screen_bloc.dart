@@ -83,12 +83,24 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     });
 
     on<CategorySearchEvent>((event, emit) {
-      List<RecipeFromFireBaseModel> searchRecipieResult = hrecipies
-          .where((recip) => recip.category
-              .toLowerCase()
-              .contains(event.query.toLowerCase().trim()))
-          .toList();
-      emit(CategorySearchResultsState(searchResults: searchRecipieResult));
+      List<RecipeFromFireBaseModel> searchResults = [];
+      hcategorySelected[event.index] = !hcategorySelected[event.index];
+      if (hcategorySelected.contains(true)) {
+        for (int i = 0; i < hcategorySelected.length; i++) {
+          if (hcategorySelected[i] == true) {
+            List<RecipeFromFireBaseModel> searchRecipieResult = hrecipies
+                .where((recip) => recip.category
+                    .toLowerCase()
+                    .contains(hcategoryItemName[i].toLowerCase().trim()))
+                .toList();
+            searchResults.addAll(searchRecipieResult);
+          }
+        }
+      } else {
+        searchResults.addAll(hrecipies);
+      }
+
+      emit(CategorySearchResultsState(searchResults: searchResults));
     });
   }
 }

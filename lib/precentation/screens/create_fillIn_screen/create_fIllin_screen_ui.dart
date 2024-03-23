@@ -346,11 +346,11 @@ class _CreateFIllinScreenUIState extends State<CreateFIllinScreenUI> {
                         ),
                         DropdownButton(
                             dropdownColor: baseColor,
-                            value: hselectedCategory,
+                            value: hdefaultSelectedCategory,
                             items: dropDownItemList(_screenSize.width),
                             onChanged: (value) {
                               setState(() {
-                                hselectedCategory = value!;
+                                hdefaultSelectedCategory = value!;
                               });
                             }),
                         Column(

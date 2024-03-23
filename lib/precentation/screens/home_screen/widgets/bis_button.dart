@@ -6,29 +6,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 Widget bisButton(
-    BuildContext context, double screenWidth, String text, String query,
-    {bool? isCancelButton}) {
+  BuildContext context,
+  double screenWidth,
+  String text,
+  String query,
+  int index, {
+  bool? isCancelButton,
+  bool isSelected = false,
+}) {
   return GestureDetector(
     onTap: () {
-      if (isCancelButton != null && isCancelButton) {
-        context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
-        Navigator.pop(context);
-      } else {
-        context.read<HomeScreenBloc>().add(CategorySearchEvent(query: query));
-        Navigator.pop(context);
-      }
+      context.read<HomeScreenBloc>().add(CategorySearchEvent(query: query,index: index));
+      // context
+      //     .read<HomeScreenBloc>()
+      //     .add(SelectFilterClickedEvent(index: index));
+      // Navigator.pop(context);
     },
     child: ClipRRect(
       borderRadius: BorderRadius.circular(screenWidth * 0.5),
       child: Container(
-        color: isCancelButton == null? secondaryColor : primaryColor ,
+        color: isCancelButton == null ? secondaryColor : primaryColor,
         // height: screenWidth * 0.05,
         // width: screenWidth * 0.05,
         child: Center(
-          child: Text(
-            text,
-            style: isCancelButton ==null ? titleSmallTextStyle(screenWidth).copyWith(color: primaryColor,fontWeight: FontWeight.bold) : titleSmallTextStyle(screenWidth).copyWith(color: secondaryColor,fontWeight: FontWeight.bold)
-          ),
+          child: Text(text,
+              style: isCancelButton == null
+                  ? isSelected == false
+                      ? titleSmallTextStyle(screenWidth).copyWith(
+                          color: primaryColor, fontWeight: FontWeight.bold)
+                      : titleSmallTextStyle(screenWidth)
+                  : titleSmallTextStyle(screenWidth).copyWith(
+                      color: secondaryColor, fontWeight: FontWeight.bold)),
         ),
       ),
     ),
