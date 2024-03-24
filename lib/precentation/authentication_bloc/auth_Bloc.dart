@@ -1,25 +1,24 @@
 import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavorfusion/Constants/textes.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_Event.dart';
 import 'package:flavorfusion/precentation/authentication_bloc/auth_State.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationBlocEvent, AuthenticationBlocState> {
   AuthenticationBloc() : super(SplashState()) {
     on<CheckLoginEvent>((event, emit) async {
-      if (testing == true) {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      bool? isFirstLogin = prefs.getBool('isFirstLogin');
+      if (isFirstLogin == null) {
         emit(FirstOpeningState());
       } else {
         User? _user = await FirebaseAuth.instance.currentUser;
         if (_user == null) {
           emit(LoggedOutState());
         } else {
-          huser = await FirebaseAuth.instance.currentUser;
-          // print(huser!.email);
-          // await Future.delayed(Duration(seconds: 1));
           emit(LoggedInState());
         }
       }

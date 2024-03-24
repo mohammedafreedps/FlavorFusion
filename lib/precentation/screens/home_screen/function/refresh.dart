@@ -1,3 +1,5 @@
+import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_bloc.dart';
+import 'package:flavorfusion/precentation/screens/activity_screen/bloc/activity_event.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_bloc.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_event.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
@@ -14,4 +16,6 @@ void refresh(BuildContext context) {
   context.read<SavedRecipesBloc>().add(LoadDataInSavedRecipieEvent());
   context.read<ProfileBloc>().add(CountTotalLikeandPostEvent());
   context.read<DiscoverBloc>().add(FechDataEvent());
+  context.read<ActivityBloc>().add(SortAndSetValueEvent());
+  context.read<SavedRecipesBloc>().add(LoadDataInSavedRecipieEvent());
 }

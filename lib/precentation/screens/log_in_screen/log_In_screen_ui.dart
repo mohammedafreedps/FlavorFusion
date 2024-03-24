@@ -24,6 +24,7 @@ class LogInScreenUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size _screenSize = MediaQuery.of(context).size;
+    
     return BlocListener<AuthenticationBloc, AuthenticationBlocState>(
       listener: (context, state) {
         if (state is IncorrectCredentialState) {}

@@ -32,6 +32,7 @@ import 'package:flavorfusion/precentation/widgets/bottom_sheet.dart';
 import 'package:flavorfusion/precentation/widgets/incorrect_cred_alert_dialog.dart';
 import 'package:flavorfusion/precentation/widgets/loading_icon_animation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
@@ -43,7 +44,7 @@ void main() async {
           messagingSenderId: '827808614853',
           projectId: 'flavorfusion-74d39',
           storageBucket: 'gs://flavorfusion-74d39.appspot.com'));
-  // await Firebase.initializeApp();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MyApp());
 }
 
