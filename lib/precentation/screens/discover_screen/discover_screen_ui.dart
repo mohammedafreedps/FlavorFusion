@@ -4,6 +4,8 @@ import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_event.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/bloc/discover_state.dart';
 import 'package:flavorfusion/precentation/screens/discover_screen/widgets/discover_tile.dart';
+import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_bloc.dart';
+import 'package:flavorfusion/precentation/screens/home_screen/bloc/home_screen_event.dart';
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flavorfusion/precentation/widgets/loading_icon_animation.dart';
 import 'package:flutter/material.dart';
@@ -61,6 +63,7 @@ class DiscoverScreenUI extends StatelessWidget {
                     );
                   }
                   if (state is DataFechSuccessState) {
+                    context.read<HomeScreenBloc>().add(FechDataFromFirebaseEvent());
                     return ListView.builder(
                         itemCount: state.mealAPIModels.length,
                         itemBuilder: (BuildContext context, index) {

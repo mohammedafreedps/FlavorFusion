@@ -16,6 +16,7 @@ class AuthenticationBloc
         emit(FirstOpeningState());
       } else {
         User? _user = await FirebaseAuth.instance.currentUser;
+        huser = _user;
         if (_user == null) {
           emit(LoggedOutState());
         } else {

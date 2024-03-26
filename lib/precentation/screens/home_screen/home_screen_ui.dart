@@ -11,15 +11,20 @@ import 'package:flavorfusion/precentation/screens/profile_screen/bloc/profile_ev
 import 'package:flavorfusion/precentation/widgets/app_bars.dart';
 import 'package:flavorfusion/precentation/widgets/loading_icon_animation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreenUI extends StatelessWidget {
+class HomeScreenUI extends StatefulWidget {
   HomeScreenUI({super.key});
 
+  @override
+  State<HomeScreenUI> createState() => _HomeScreenUIState();
+}
+
+class _HomeScreenUIState extends State<HomeScreenUI> {
   final _searchController = TextEditingController();
 
+  // @override
   @override
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
