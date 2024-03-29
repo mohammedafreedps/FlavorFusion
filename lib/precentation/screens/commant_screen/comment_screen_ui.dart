@@ -51,8 +51,8 @@ class _CommentScreenUIState extends State<CommentScreenUI> {
         },
         child: Padding(
           padding: EdgeInsets.only(
-              left: _screenSize.width * 0.1,
-              right: _screenSize.width * 0.1,
+              left: _screenSize.width * 0.02,
+              right: _screenSize.width * 0.02,
               bottom: _screenSize.width * 0.05),
           child: Column(
             children: [
@@ -80,29 +80,32 @@ class _CommentScreenUIState extends State<CommentScreenUI> {
                               itemCount: state.comments.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return commentTile(
-                                    context,
-                                    index,
-                                    _screenSize.width,
-                                    state.comments[index].commentedBy,
-                                    state.comments[index].comment,
-                                    widget.docId,
-                                    state.comments[index].commentId,state.comments[index].dateTime).animate(delay: Duration(milliseconds: 100 * index), effects: [FadeEffect(), SlideEffect()]);
+                                        context,
+                                        index,
+                                        _screenSize.width,
+                                        state.comments[index].commentedBy,
+                                        state.comments[index].comment,
+                                        widget.docId,
+                                        state.comments[index].commentId,
+                                        state.comments[index].dateTime)
+                                    .animate(
+                                        delay:
+                                            Duration(milliseconds: 100 * index),
+                                        effects: [FadeEffect(), SlideEffect()]);
                               }),
                     );
                   }
-                  return Center(
-                    child: loadingIconAnimation(_screenSize.width)
-                  );
+                  return Center(child: loadingIconAnimation(_screenSize.width));
                 },
               ),
               Row(
                 children: [
                   SizedBox(
-                      width: _screenSize.width * 0.68,
+                      width: _screenSize.width * 0.83,
                       child: TextField(
                         controller: _commentController,
                         keyboardType: TextInputType.emailAddress,
-                        style: TextStyle(color: baseColor),
+                        style: TextStyle(color: secondaryColor),
                         cursorColor: baseColor,
                         decoration: InputDecoration(
                             hintText: 'Add your Comment',
@@ -117,7 +120,9 @@ class _CommentScreenUIState extends State<CommentScreenUI> {
                         context.read<CommentBloc>().add(
                             PostCommentButtonClikedEvent(
                                 docId: widget.docId,
-                                comment: _commentController.text,dateTime: DateTime.now()));
+                                comment: _commentController.text,
+                                dateTime: DateTime.now()));
+                        _commentController.clear();
                       },
                       icon: Icon(
                         Icons.check,

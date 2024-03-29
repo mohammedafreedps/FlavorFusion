@@ -42,7 +42,7 @@ class ActivityScreenUI extends StatelessWidget {
             }
           },
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.1),
+            padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.04),
             child: BlocBuilder<ActivityBloc, ActivityState>(
               builder: (context, state) {
                 if (state is DeletingPostState) {

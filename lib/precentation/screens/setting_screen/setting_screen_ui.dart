@@ -41,7 +41,7 @@ class SettingScreenUI extends StatelessWidget {
               );
             }
             return Padding(
-              padding: EdgeInsets.all(_screenSize.width * 0.1),
+              padding: EdgeInsets.symmetric(vertical: _screenSize.width * 0.04,  horizontal: _screenSize.width * 0.04,),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

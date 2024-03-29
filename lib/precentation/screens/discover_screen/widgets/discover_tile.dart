@@ -29,7 +29,7 @@ Widget discoverTile(int index, String src, String title, double screenWidth) {
                         imageUrl: src,
                         placeholder: (context, url) =>
                             imagePlaceHolderText(screenWidth),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        errorWidget: (context, url, error) => Icon(Icons.error,color: secondaryColor,),
                       )),
                 ),
               ),

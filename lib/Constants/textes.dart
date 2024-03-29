@@ -18,40 +18,40 @@ For inquiries, suggestions, or just to say hello, you can reach out to us via em
 
 We extend our sincere gratitude to all contributors and supporters who have helped make FlavorFusion possible. Together, let's embark on a journey of flavor exploration and culinary creativity!''';
 
-String privacyPolicyText = ''' Information We Collect
+  String privacyPolicyText = ''' Information We Collect
 
-Firebase Authentication: When you sign up or log in to FlavorFusion, we collect information provided by Firebase Authentication, such as your email address and unique user identifier.
+  Firebase Authentication: When you sign up or log in to FlavorFusion, we collect information provided by Firebase Authentication, such as your email address and unique user identifier.
 
-Firebase Cloud Firestore: FlavorFusion stores user-generated content, such as recipes, using Firebase Cloud Firestore. This may include personal information you choose to provide, such as your name, profile picture, or other details.
+  Firebase Cloud Firestore: FlavorFusion stores user-generated content, such as recipes, using Firebase Cloud Firestore. This may include personal information you choose to provide, such as your name, profile picture, or other details.
 
-Themealdb API: FlavorFusion uses the themealdb API to access and display recipe information. The themealdb API may collect usage data and cookies in accordance with their own privacy policy.
+  Themealdb API: FlavorFusion uses the themealdb API to access and display recipe information. The themealdb API may collect usage data and cookies in accordance with their own privacy policy.
 
-How We Use Your Information
+  How We Use Your Information
 
-Authentication: We use Firebase Authentication to authenticate users and secure their accounts.
+  Authentication: We use Firebase Authentication to authenticate users and secure their accounts.
 
-Content Personalization: We use information collected through Firebase Cloud Firestore to personalize your experience within the app, such as displaying personalized recipe recommendations.
+  Content Personalization: We use information collected through Firebase Cloud Firestore to personalize your experience within the app, such as displaying personalized recipe recommendations.
 
-Improving Our Services: We may use aggregated usage data to analyze trends and improve our app's functionality and user experience.
+  Improving Our Services: We may use aggregated usage data to analyze trends and improve our app's functionality and user experience.
 
-Data Sharing and Disclosure
+  Data Sharing and Disclosure
 
-Third-Party Services: We may share information with third-party service providers, such as Firebase and themealdb, to facilitate app functionality and deliver services to you.
+  Third-Party Services: We may share information with third-party service providers, such as Firebase and themealdb, to facilitate app functionality and deliver services to you.
 
-Legal Compliance: We may disclose information in response to legal requests, court orders, or government regulations, or as otherwise required by law.
+  Legal Compliance: We may disclose information in response to legal requests, court orders, or government regulations, or as otherwise required by law.
 
-Your Choices and Rights
+  Your Choices and Rights
 
-Access and Control: You may access, update, or delete your personal information stored within the app. You can also manage your communication preferences and opt-out of certain data processing activities.
-Security Measures
+  Access and Control: You may access, update, or delete your personal information stored within the app. You can also manage your communication preferences and opt-out of certain data processing activities.
+  Security Measures
 
-Data Security: We implement appropriate security measures to protect your information against unauthorized access, alteration, disclosure, or destruction.
-Changes to This Privacy Policy
+  Data Security: We implement appropriate security measures to protect your information against unauthorized access, alteration, disclosure, or destruction.
+  Changes to This Privacy Policy
 
-Updates: We may update this Privacy Policy from time to time to reflect changes in our data practices or legal requirements. We will notify you of any material changes by posting the updated Privacy Policy within the app.
-Contact Us
+  Updates: We may update this Privacy Policy from time to time to reflect changes in our data practices or legal requirements. We will notify you of any material changes by posting the updated Privacy Policy within the app.
+  Contact Us
 
-Questions: If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at mohammedafreedps111@gmail.com. ''';
+  Questions: If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at mohammedafreedps111@gmail.com. ''';
 
 String termsAndConditionsText = ''' Terms and Conditions for FlavorFusion
 

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavorfusion/data/repository/recipe_from_firebase_model.dart';
-import 'package:flavorfusion/data/temp_value_holder.dart';
 import 'package:flavorfusion/precentation/screens/firebase_recipe_detail_screen/firebase_recipe_detail_screen.dart';
 import 'package:flavorfusion/precentation/screens/home_screen/widgets/home_tile.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
@@ -35,7 +34,7 @@ Widget showDataWidget(List<RecipeFromFireBaseModel> recipies, Size screenSize,
                             MaterialPageRoute(
                                 builder: (context) =>
                                     FirebaseRecipeDetailScreenUI(
-                                        listOfItem: hrecipies, index: index)));
+                                        listOfItem: recipies, index: index)));
                       },
                       child: homeTile(
                           context,

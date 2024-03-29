@@ -41,13 +41,13 @@ class _HomeScreenUIState extends State<HomeScreenUI> {
           }),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.1),
+          padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.04),
           child: Column(
             children: [
               Row(
                 children: [
                   SizedBox(
-                    width: _screenSize.width * 0.68,
+                    width: _screenSize.width * 0.78,
                     child: TextField(
                       controller: _searchController,
                       cursorColor: baseColor,

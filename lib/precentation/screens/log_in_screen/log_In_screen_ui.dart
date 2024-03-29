@@ -65,8 +65,8 @@ class LogInScreenUI extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           body: Padding(
             padding: EdgeInsets.only(
-                left: _screenSize.width * 0.1,
-                right: _screenSize.width * 0.1,
+                left: _screenSize.width * 0.04,
+                right: _screenSize.width * 0.04,
                 bottom: _screenSize.width * 0.03),
             child: Center(
               child: Column(

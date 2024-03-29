@@ -62,8 +62,8 @@ class CreateAccountUI extends StatelessWidget {
           },
           child: Padding(
             padding: EdgeInsets.only(
-                left: screenSize.width * 0.1,
-                right: screenSize.width * 0.1,
+                left: screenSize.width * 0.04,
+                right: screenSize.width * 0.04,
                 bottom: screenSize.width * 0.03),
             child: Center(
               child: SingleChildScrollView(

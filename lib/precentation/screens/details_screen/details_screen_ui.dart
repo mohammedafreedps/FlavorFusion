@@ -20,8 +20,7 @@ class DetailsScreenUI extends StatelessWidget {
       appBar: appBar(title: ''),
       body: ListView(children: [
         Padding(
-          padding: EdgeInsets.only(
-              left: _screenSize.width * 0.08, right: _screenSize.width * 0.08),
+          padding: EdgeInsets.symmetric( horizontal: _screenSize.width * 0.04,),
           child: BlocBuilder<DiscoverBloc, DiscoverState>(
             builder: (context, state) {
               if (state is DataFechSuccessState) {

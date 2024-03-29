@@ -34,7 +34,7 @@ Widget homeTile(
     child: Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: AspectRatio(
-        aspectRatio: 1 / 0.62,
+        aspectRatio: 1 / 0.54,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(screenWidth * 0.03),
           child: Container(

@@ -21,9 +21,7 @@ class FirebaseRecipeDetailScreenUI extends StatelessWidget {
       appBar: appBar(title: ''),
       body: ListView(children: [
         Padding(
-            padding: EdgeInsets.only(
-                left: _screenSize.width * 0.08,
-                right: _screenSize.width * 0.08),
+            padding: EdgeInsets.symmetric( horizontal: _screenSize.width * 0.04,),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

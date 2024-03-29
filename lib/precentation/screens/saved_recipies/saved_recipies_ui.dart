@@ -25,7 +25,7 @@ class SavedRecipesUI extends StatelessWidget {
         }
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.1),
+        padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.04),
         child: BlocBuilder<SavedRecipesBloc, SavedRecipesState>(
           builder: (context, state) {
             if (state is SavedRecipesListState) {

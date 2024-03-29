@@ -24,9 +24,7 @@ class DiscoverScreenUI extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(
-                left: _screenSize.width * 0.08,
-                right: _screenSize.width * 0.08),
+            padding: EdgeInsets.symmetric( horizontal: _screenSize.width * 0.04,),
             child: TextField(
               controller: _searchController,
               cursorColor: baseColor,
@@ -52,9 +50,7 @@ class DiscoverScreenUI extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(
-                  left: _screenSize.width * 0.08,
-                  right: _screenSize.width * 0.08),
+              padding: EdgeInsets.symmetric( horizontal: _screenSize.width * 0.04,),
               child: BlocBuilder<DiscoverBloc, DiscoverState>(
                 builder: (context, state) {
                   if (state is PageDiscoverLodingState) {
