@@ -68,13 +68,15 @@ Widget homeTile(
                     SizedBox(
                       width: screenWidth * 0.03,
                     ),
-                    Text(
-                      overflow: TextOverflow.ellipsis,
-                      title,
-                      style: TextStyle(
-                          color: secondaryColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: screenWidth * 0.04),
+                    Expanded(
+                      child: Text(
+                        overflow: TextOverflow.ellipsis,
+                        title,
+                        style: TextStyle(
+                            color: secondaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: screenWidth * 0.04),
+                      ),
                     ),
                   ],
                 ),

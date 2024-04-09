@@ -86,7 +86,7 @@ class SettingScreenUI extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        '1.0.0',
+                        '1.1.0',
                         style: titleSmallTextStyle(_screenSize.width)
                             .copyWith(fontWeight: FontWeight.bold),
                       )

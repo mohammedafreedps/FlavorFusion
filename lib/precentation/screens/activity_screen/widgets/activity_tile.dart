@@ -7,6 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flavorfusion/precentation/screens/firebase_recipe_detail_screen/firebase_recipe_detail_screen.dart';
 import 'package:flavorfusion/precentation/style_manager/text_style_manager.dart';
 import 'package:flavorfusion/precentation/widgets/image_place_holder_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
@@ -47,11 +48,13 @@ Widget activityTile(BuildContext context, double screenWidth, String src,
                   SizedBox(
                     width: screenWidth * 0.02,
                   ),
-                  Text(
-                    overflow: TextOverflow.ellipsis,
-                    title,
-                    style: titleSmallTextStyle(screenWidth)
-                        .copyWith(fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: Text(
+                      overflow: TextOverflow.ellipsis,
+                      title,
+                      style: titleSmallTextStyle(screenWidth)
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
                   ),
                   SizedBox(
                     width: 10,

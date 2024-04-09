@@ -11,7 +11,7 @@ void uploadRecipie(
     double currentSliderValue,
     TextEditingController recipeTitleController,
     TextEditingController additionalNotesController) {
-  if (himagePath != null &&
+  if (
       recipeTitleController.text.isNotEmpty &&
       hcreatedIngredents.isNotEmpty &&
       hinstructionsSteps.isNotEmpty &&

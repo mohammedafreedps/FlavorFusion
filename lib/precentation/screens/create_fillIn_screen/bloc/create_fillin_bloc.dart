@@ -79,7 +79,7 @@ class CreateFillinBloc extends Bloc<CreateFillinEvent, CreateFillinState> {
           'totalTime': event.totalTime,
           'difficultyLevel': event.difficultyLevel,
           'additionalNotes': event.additionalNotes,
-          'category' : event.category,
+          'category': event.category,
           'likes': [],
           'wishlist': []
         });
@@ -106,7 +106,6 @@ class CreateFillinBloc extends Bloc<CreateFillinEvent, CreateFillinState> {
       emit(RecipieUploadingStete());
       final storage = FirebaseStorage.instance;
       String imgPath = hposterRecipes[event.index].imageURL;
-      // File imgFile = File(event.imagePath);
       String docId = hposterRecipes[event.index].docId;
       String imageName = DateTime.now().toString();
       final colRef =
@@ -121,14 +120,16 @@ class CreateFillinBloc extends Bloc<CreateFillinEvent, CreateFillinState> {
         );
         final tempDir = await getTemporaryDirectory();
         final tempPath = tempDir.path;
-        final String fileName = 'recipe'+ DateTime.now().toString();
+        final String fileName = 'recipe' + DateTime.now().toString();
         final tempFile = File('$tempPath/$fileName');
         await tempFile.writeAsBytes(compressedImage!);
         await storage.ref('thumbnails/$imageName').putFile(tempFile);
         String downlordURL =
             await storage.ref('thumbnails/$imageName').getDownloadURL();
         colRef.update({
-          'imageURL': downlordURL,
+          'imageURL': himagePath == null
+              ? downlordURL
+              : hposterRecipes[event.index].imageURL,
           'recipeTitle': event.recipeTitle,
           'ingredients': event.ingredients,
           'quantitys': event.quantitys,
